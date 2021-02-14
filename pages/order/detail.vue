@@ -8,7 +8,7 @@
 			</view>
 			
 			<view class="flex-fill overflow-auto">
-				<view class="order-info">
+				<view class="">
 					<list-cell padding="50rpx 40rpx">
 						<view class="w-100 d-flex align-items-center">
 							<view class="flex-fill d-flex flex-column overflow-hidden">
@@ -93,19 +93,6 @@
 	justify-content: flex-end;
 	align-items: center;
 	padding: 20rpx 0;
-
-	.service-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50rem !important;
-		font-size: $font-size-sm;
-		image {
-			width: 30rpx;
-			height: 30rpx;
-			margin-right: 20rpx;
-		}
-	}	
 }
 
 .content {
@@ -141,25 +128,8 @@
 	border-bottom: 1rpx dashed $border-color;
 }
 
-.order-info {
-	border-radius: 0 0 30rpx 30rpx;
-	box-shadow: 0 0 10rpx 0 rgba($color: #333, $alpha: 0.1);
-	margin-bottom: 30rpx;
-}
 
-.order-invoice {
-	padding: 30rpx 40rpx;
-	border-radius: 30rpx;
-	box-shadow: 0 0 10rpx 0 rgba($color: #333, $alpha: 0.1);
-	margin-bottom: 60rpx;
-	background-color: #F6F6F6;
-}
 
-.jump-icon {
-	width: 24rpx;
-	height: 48rpx;
-	margin-left: 20rpx;
-}
 
 .pro-img {
 	width: 150rpx;

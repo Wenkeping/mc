@@ -1,49 +1,48 @@
 <template>
 	<view class="container">
 		<view class="content">
-			<navigator open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
-				<list-cell arrow last class="receiver bg-white">
-						<view class="receiver-item1">
-							<label class="font-size-medium text-color-base mb-10">文珂坪</label>
-							<label class="text-color-assist font-size-extra-sm"> 1856582574</label>
-						</view>
-						<view class="receiver-item2">
-							<label class="font-size-sm">广东省深圳市龙岗区坂田街道岗头社区华创云轩B栋</label>
-						</view> 
-				</list-cell>
-			</navigator>
-			
-			<view class="flex-fill overflow-auto border-radius-lg">
-				<view class="order-info">
-					<list-cell>
-						<view class="d-flex flex-column">
-							<view class="d-flex align-items-center mt-40" v-for="(item, index) in cart" :key="index">
-								<view><image :src="item.image" class="pro-img"></image></view>
-								<view class="ml-20">
-									<view class="font-size-base mb-10">{{ item.name }}</view>
-									<view class="font-size-extra-sm text-color-assist" v-html="item.description"></view>
-								</view>
-								<view class="font-weight-bold ml-40">x{{ item.number }}</view>
-								<view class="font-weight-bold ml-40">￥{{ item.price }}</view>
-							</view>
-						</view>
-					</list-cell>
-					
+			<view class="receiver">
+				<navigator open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
 					<list-cell arrow last>
-						<navigator hover-class="none" class="flex-fill ml-80 text-truncate text-right" open-type="navigate" url="/pages/pay/remark">
-							<view class="w-100 d-flex align-items-center justify-content-between overflow-hidden">
-								<view class="flex-shrink-0">备注</view>
-								{{ remark }}
+							<view class="receiver-item1">
+								<label class="font-size-medium text-color-base mb-10">文珂坪</label>
+								<label class="text-color-assist font-size-extra-sm"> 1856582574</label>
 							</view>
-						</navigator>
+							<view class="receiver-item2">
+								<label class="font-size-sm">广东省深圳市龙岗区坂田街道岗头社区华创云轩B栋</label>
+							</view> 
 					</list-cell>
-					<list-cell last>
-						<view class="w-100 d-flex justify-content-end align-items-center">
-							<text class="font-size-sm">共{{ cartNum }}件商品，小计</text>
-							<text class="font-size-lg font-weight-bold">￥{{ cartAmount }}</text>
+				</navigator>
+			</view>
+			<view class="flex-fill overflow-auto border-radius-lg mt-20">
+				<list-cell>
+					<view class="d-flex flex-column">
+						<view class="d-flex align-items-center mt-40" v-for="(item, index) in cart" :key="index">
+							<view><image :src="item.image" class="pro-img"></image></view>
+							<view class="ml-20">
+								<view class="font-size-base mb-10">{{ item.name }}</view>
+								<view class="font-size-extra-sm text-color-assist" v-html="item.description"></view>
+							</view>
+							<view class="font-weight-bold ml-40">x{{ item.number }}</view>
+							<view class="font-weight-bold ml-40">￥{{ item.price }}</view>
 						</view>
-					</list-cell>
-				</view>
+					</view>
+				</list-cell>
+				
+				<list-cell arrow last>
+					<navigator hover-class="none" class="flex-fill ml-80 text-truncate text-right" open-type="navigate" url="/pages/pay/remark">
+						<view class="w-100 d-flex align-items-center justify-content-between overflow-hidden">
+							<view class="flex-shrink-0">备注</view>
+							{{ remark }}
+						</view>
+					</navigator>
+				</list-cell>
+				<list-cell last>
+					<view class="w-100 d-flex justify-content-end align-items-center">
+						<text class="font-size-sm">共{{ cartNum }}件商品，小计</text>
+						<text class="font-size-lg font-weight-bold">￥{{ cartAmount }}</text>
+					</view>
+				</list-cell>
 			</view>
 			
 			<view class="footer">
@@ -84,7 +83,7 @@
 
 <style lang="scss" scoped>
 	.container {
-		padding: 0 40rpx;
+		padding:40rpx;
 		background-color: #f6f6f6;
 	}
 	
@@ -95,9 +94,8 @@
 	}
 	
 	.receiver{
-		margin-bottom: 40rpx;
-		margin-top: 40rpx;
-		border-radius: 18rpx;;
+		border-radius: $border-radius-lg;
+		overflow: auto;
 		.receiver-item1 {
 			flex: 1;
 			display: flex;
@@ -117,7 +115,6 @@
 		.order-box {
 			display: flex;
 			flex-direction: column;
-			background-color: $bg-color-white;
 			flex-shrink: 0;
 		}
 	}

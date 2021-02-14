@@ -801,7 +801,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1858,9 +1858,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!*****************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/store/index.js ***!
-  \*****************************************************/
+/*!*************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/store/index.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3029,41 +3029,21 @@ var index = {
 /***/ }),
 
 /***/ 13:
-/*!***************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/index.js ***!
-  \***************************************************/
+/*!***********************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/api/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _categories = _interopRequireDefault(__webpack_require__(/*! ./categories.js */ 14));
 var _orders = _interopRequireDefault(__webpack_require__(/*! ./orders.js */ 15));
-var _storeOrders = _interopRequireDefault(__webpack_require__(/*! ./storeOrders.js */ 16));
-var _boardcast = _interopRequireDefault(__webpack_require__(/*! ./boardcast.js */ 17));
-var _mart = _interopRequireDefault(__webpack_require__(/*! ./mart.js */ 18));
-var _productList = _interopRequireDefault(__webpack_require__(/*! ./productList.js */ 19));
-var _productDetail = _interopRequireDefault(__webpack_require__(/*! ./productDetail.js */ 20));
-var _scores = _interopRequireDefault(__webpack_require__(/*! ./scores.js */ 21));
-var _martDetail = _interopRequireDefault(__webpack_require__(/*! ./martDetail.js */ 22));
-var _hotSearch = _interopRequireDefault(__webpack_require__(/*! ./hotSearch.js */ 23));
-var _historySearch = _interopRequireDefault(__webpack_require__(/*! ./historySearch.js */ 24));
-var _orderDetail = _interopRequireDefault(__webpack_require__(/*! ./orderDetail.js */ 25));
-var _giftCards = _interopRequireDefault(__webpack_require__(/*! ./giftCards.js */ 26));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _orderDetail = _interopRequireDefault(__webpack_require__(/*! ./orderDetail.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 var json = {
   categories: _categories.default,
   orders: _orders.default,
-  storeOrders: _storeOrders.default,
-  boardcast: _boardcast.default,
-  mart: _mart.default,
-  productList: _productList.default,
-  productDetail: _productDetail.default,
-  scores: _scores.default,
-  martDetail: _martDetail.default,
-  hotSearch: _hotSearch.default,
-  historySearch: _historySearch.default,
-  orderDetail: _orderDetail.default,
-  giftCards: _giftCards.default };var _default =
+  orderDetail: _orderDetail.default };var _default =
 
 
 function _default(name) {var loading = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -3082,10 +3062,45 @@ function _default(name) {var loading = arguments.length > 1 && arguments[1] !== 
 
 /***/ }),
 
+/***/ 139:
+/*!****************************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/components/uni-popup/popup.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 140));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// 定义 type 类型:弹出类型：top/bottom/center
+var config = {
+  // 顶部弹出
+  top: 'top',
+  // 底部弹出
+  bottom: 'bottom',
+  // 居中弹出
+  center: 'center',
+  // 消息提示
+  message: 'top',
+  // 对话框
+  dialog: 'center',
+  // 分享
+  share: 'bottom' };var _default =
+
+
+{
+  data: function data() {
+    return {
+      config: config };
+
+  },
+  mixins: [_message.default] };exports.default = _default;
+
+/***/ }),
+
 /***/ 14:
-/*!********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/categories.js ***!
-  \********************************************************/
+/*!****************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/api/categories.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8544,10 +8559,41 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
+/***/ 140:
+/*!******************************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/components/uni-popup/message.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  created: function created() {
+    if (this.type === 'message') {
+      // 不显示遮罩
+      this.maskShow = false;
+      // 获取子组件对象
+      this.childrenMsg = null;
+    }
+  },
+  methods: {
+    customOpen: function customOpen() {
+      if (this.childrenMsg) {
+        this.childrenMsg.open();
+      }
+    },
+    customClose: function customClose() {
+      if (this.childrenMsg) {
+        this.childrenMsg.close();
+      }
+    } } };exports.default = _default;
+
+/***/ }),
+
 /***/ 15:
-/*!****************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/orders.js ***!
-  \****************************************************/
+/*!************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/api/orders.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9275,702 +9321,324 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 16:
-/*!*********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/storeOrders.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [];exports.default = _default;
-
-/***/ }),
-
-/***/ 165:
-/*!********************************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/components/uni-popup/popup.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 166));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-// 定义 type 类型:弹出类型：top/bottom/center
-var config = {
-  // 顶部弹出
-  top: 'top',
-  // 底部弹出
-  bottom: 'bottom',
-  // 居中弹出
-  center: 'center',
-  // 消息提示
-  message: 'top',
-  // 对话框
-  dialog: 'center',
-  // 分享
-  share: 'bottom' };var _default =
-
-
-{
-  data: function data() {
-    return {
-      config: config };
-
-  },
-  mixins: [_message.default] };exports.default = _default;
-
-/***/ }),
-
-/***/ 166:
-/*!**********************************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/components/uni-popup/message.js ***!
-  \**********************************************************************/
+/*!*****************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/api/orderDetail.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  created: function created() {
-    if (this.type === 'message') {
-      // 不显示遮罩
-      this.maskShow = false;
-      // 获取子组件对象
-      this.childrenMsg = null;
-    }
-  },
-  methods: {
-    customOpen: function customOpen() {
-      if (this.childrenMsg) {
-        this.childrenMsg.open();
-      }
-    },
-    customClose: function customClose() {
-      if (this.childrenMsg) {
-        this.childrenMsg.close();
-      }
-    } } };exports.default = _default;
+  "reason": "协商一致退款",
+  "open_pickupPage_expectTime": 1,
+  "gather_feedback": false,
+  "pickup_code_qrcode": "http://go.heytea.com/orders/755015201910201229255435/puckupNo",
+  "spell_unique_id": "",
+  "delivery_fee": "0.00",
+  "prior": 0,
+  "pickup_type": "自提",
+  "total_fee": 33.00,
+  "payment": "33.00",
+  "id": 55596826,
+  "is_takeaway": false,
+  "alipay_invoice_button": true,
+  "set_items": [],
+  "refund_status": "NO_REFUND",
+  "invoice_successed": false,
+  "new_order_invoice": false,
+  "paid_at": "2019-10-20 12:29:29",
+  "currency_type": "CNY",
+  "coupon_fee": "0.00",
+  "showPaymentDetails": false,
+  "pickup_time": "2019-10-20 14:00:47",
+  "items": [{
+    "activity_name": "",
+    "images": {
+      "data": [{
+        "id": 88364,
+        "url": "https://go.cdn.heytea.com/storage/product/2019/11/12/5ad4996d0fdd4f3a85a25b8fe95a4db8.jpg" },
+
+      {
+        "id": 121233,
+        "url": "https://go.cdn.heytea.com/storage/product/2020/03/11/78ad5460e80d4587a8f07abc4baf76e9.jpg" }] },
+
+
+
+    "quantity": 1,
+    "discount_price": 0,
+    "sku_id": 1186,
+    "specifications": {
+      "data": [] },
+
+    "name_image": "",
+    "show_trademark": false,
+    "category_id": 20,
+    "materials": [{
+      "material_group_id": 3,
+      "price": "0.00",
+      "name": "加热(推荐)",
+      "material_id": 41 }],
+
+    "price": "10.00",
+    "sname": "流沙牛角",
+    "product_id": 161,
+    "total_fee": "10.00",
+    "activity_type": 0,
+    "name": "流沙牛角",
+    "attributes": {
+      "data": [] },
+
+    "id": 100194060 },
+
+  {
+    "activity_name": "",
+    "images": {
+      "data": [{
+        "id": 64565,
+        "url": "https://go.cdn.heytea.com/product/2019/08/02/tmp/a5a9bdd8b9db4b37a6d20df8e1aedf87.jpg" },
+
+      {
+        "id": 116583,
+        "url": "https://go.cdn.heytea.com/storage/product/2020/03/03/436ce2f2b562478bae451aefed7a0c97.jpg" }] },
+
+
+
+    "quantity": 1,
+    "discount_price": 0,
+    "sku_id": 1373,
+    "specifications": {
+      "data": [] },
+
+    "name_image": "",
+    "show_trademark": false,
+    "category_id": 11,
+    "materials": [{
+      "material_group_id": 27,
+      "price": "0.00",
+      "name": "常规吸管",
+      "material_id": 409 },
+
+    {
+      "material_group_id": 12,
+      "price": "0.00",
+      "name": "有芋头颗粒(推荐)",
+      "material_id": 230 },
+
+    {
+      "material_group_id": 6,
+      "price": "0.00",
+      "name": "标准（推荐）",
+      "material_id": 149 },
+
+    {
+      "material_group_id": 5,
+      "price": "0.00",
+      "name": "冰沙（推荐）",
+      "material_id": 140 },
+
+    {
+      "material_group_id": 4,
+      "price": "0.00",
+      "name": "正常糖(推荐)",
+      "material_id": 379 },
+
+    {
+      "material_group_id": 3,
+      "price": "0.00",
+      "name": "正常(推荐)",
+      "material_id": 558 }],
+
+
+    "price": "23.00",
+    "sname": "爆芋泥波波冰",
+    "product_id": 514,
+    "total_fee": "23.00",
+    "activity_type": 0,
+    "name": "爆芋泥波波冰",
+    "attributes": {
+      "data": [] },
+
+    "id": 100194061 }],
+
+
+  "status": "TRADE_CLOSED",
+  "no": "755015201910201229255435",
+  "hidden_invoice": false,
+  "shop": {
+    "support_jd_takeaway": 0,
+    "is_support_premade": 0,
+    "country": "中国",
+    "contact_phone": "0755-86681153",
+    "distance": 0,
+    "city": "深圳市",
+    "latitude": "22.541500",
+    "limit_cup": 10,
+    "disable_order_type": 0,
+    "city_code": "156440300",
+    "support_cash": 1,
+    "tips": "15",
+    "province": "广东省",
+    "appointable": null,
+    "location_city": null,
+    "currency": 1,
+    "id": 28,
+    "min_charge": 30,
+    "longitude": "113.955292",
+    "nearby_shop_count": 0,
+    "contact_name": "喜茶君",
+    "address": "华润万象天地SL187号商铺",
+    "is_current_city": null,
+    "estimate_time_type": 1,
+    "takeaway_limit_cup": "5",
+    "support_td_takeaway": 0,
+    "delivery_distance": 3000,
+    "country_code": "156",
+    "support_mt_takeaway": 1,
+    "support_sf_takeaway": 0,
+    "district_code": "440305",
+    "district": "南山区",
+    "name": "万象天地PINK店",
+    "scene_code": "http://go.heytea.com/storage/shop/scene_code/shop_id_28.png" },
+
+  "activity": [],
+  "box_fee": "0.00",
+  "called_at": "2019-10-20 12:51:15",
+  "created_at": "2019-10-20 12:29:25",
+  "is_can_refund": false,
+  "outer_id": null,
+  "discount_fee": "0.00",
+  "order_detail_qrcode": "https://go.heytea.com/device/755015201910201229255435/order",
+  "pickup_time_period_show": null,
+  "making_order_count": 0,
+  "is_premade": false,
+  "tax_fee": "-1",
+  "coupon_library_id": "",
+  "is_comment": 2,
+  "currency": 1,
+  "order_channel": "W",
+  "show_remind_button": 0,
+  "only_vip_show_invoice": false,
+  "delivery": null,
+  "cupboard": null,
+  "need_wait_time": 0,
+  "cancelCountdown": 0,
+  "pickup_no": "8114",
+  "takeaway_time_immediately_show": "2019-10-20 13:14:29",
+  "pickup_time_period": "",
+  "trade_type": "JSAPI",
+  "remarks": "不打包" };exports.default = _default;
 
 /***/ }),
 
 /***/ 17:
-/*!*******************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/boardcast.js ***!
-  \*******************************************************/
+/*!*************************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/common/util.js ***!
+  \*************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [
-{
-  "id": 53,
-  "postId": 48,
-  "no": "BB20200525152258",
-  "sort": 1,
-  "type": 1,
-  "contentType": 1,
-  "title": "喜茶制粽，现正预售中",
-  "subtitle": "2020喜茶制粽端午礼盒",
-  "coverPic": "https://go.cdn.heytea.com/storage/products/2020/05/25/d7f9a7e9ea3747778d301b443147cd82.png",
-  "imageTextContent": null,
-  "redirectContent": {
-    "redirectType": 1,
-    "name": null,
-    "path": "https://mp.weixin.qq.com/s/eWEMnvHNtOEup-hzE38r8Q",
-    "appId": null } },
+function formatTime(time) {
+  if (typeof time !== 'number' || time < 0) {
+    return time;
+  }
+
+  var hour = parseInt(time / 3600);
+  time = time % 3600;
+  var minute = parseInt(time / 60);
+  time = time % 60;
+  var second = time;
+
+  return [hour, minute, second].map(function (n) {
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+  }).join(':');
+}
+
+function formatDateTime(date) {var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd hh:mm:ss';
+  if (!date) {
+    return '';
+  }
+  if (typeof date === 'number') {
+    date = new Date(date * 1000);
+  }
+  var o = {
+    "M+": date.getMonth() + 1, //月份
+    "d+": date.getDate(), //日
+    "h+": date.getHours(), //小时
+    "m+": date.getMinutes(), //分
+    "s+": date.getSeconds(), //秒
+    "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+    "S": date.getMilliseconds() //毫秒
+  };
+  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+  for (var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt))
+    fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));}
+  return fmt;
+}
+
+function formatLocation(longitude, latitude) {
+  if (typeof longitude === 'string' && typeof latitude === 'string') {
+    longitude = parseFloat(longitude);
+    latitude = parseFloat(latitude);
+  }
+
+  longitude = longitude.toFixed(2);
+  latitude = latitude.toFixed(2);
+
+  return {
+    longitude: longitude.toString().split('.'),
+    latitude: latitude.toString().split('.') };
+
+}
+
+var dateUtils = {
+  UNITS: {
+    '年': 31557600000,
+    '月': 2629800000,
+    '天': 86400000,
+    '小时': 3600000,
+    '分钟': 60000,
+    '秒': 1000 },
+
+  humanize: function humanize(milliseconds) {
+    var humanize = '';
+    for (var key in this.UNITS) {
+      if (milliseconds >= this.UNITS[key]) {
+        humanize = Math.floor(milliseconds / this.UNITS[key]) + key + '前';
+        break;
+      }
+    }
+    return humanize || '刚刚';
+  },
+  format: function format(dateStr) {
+    var date = this.parse(dateStr);
+    var diff = Date.now() - date.getTime();
+    if (diff < this.UNITS['天']) {
+      return this.humanize(diff);
+    }
+    var _format = function _format(number) {
+      return number < 10 ? '0' + number : number;
+    };
+    return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDate()) + '-' +
+    _format(date.getHours()) + ':' + _format(date.getMinutes());
+  },
+  parse: function parse(str) {//将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
+    var a = str.split(/[^0-9]/);
+    return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
+  } };
 
 
-{
-  "id": 54,
-  "postId": 49,
-  "no": "BB20200525152844",
-  "sort": 2,
-  "type": 1,
-  "contentType": 1,
-  "title": "来颗布蕾QQ麻薯球",
-  "subtitle": "灵感之茶，与音乐共生",
-  "coverPic": "https://go.cdn.heytea.com/storage/products/2020/05/25/0346c403e88243eaa76aa334097ad8ec.png",
-  "imageTextContent": null,
-  "redirectContent": {
-    "redirectType": 1,
-    "name": null,
-    "path": "https://mp.weixin.qq.com/s/AaMBCLliMla5ktAVF5TGSA",
-    "appId": null } },
+var hexToRgba = function hexToRgba(hex, opacity) {//16进制颜色转rgba
+  return "rgba(" + parseInt("0x" + hex.slice(1, 3)) + "," + parseInt("0x" + hex.slice(3, 5)) + "," + parseInt("0x" + hex.slice(5, 7)) + "," + opacity + ")";
+};
 
-
-{
-  "id": 50,
-  "postId": 45,
-  "no": "BB20200508143203",
-  "sort": 3,
-  "type": 1,
-  "contentType": 1,
-  "title": "喜茶星球会员升级啦",
-  "subtitle": "点击了解升级详情",
-  "coverPic": "https://go.cdn.heytea.com/storage/products/2020/05/08/0a11147144ff42629e6eca9eeec53215.png",
-  "imageTextContent": null,
-  "redirectContent": {
-    "redirectType": 0,
-    "name": null,
-    "path": "pages/member/upgrade_publicity/index",
-    "appId": null } },
-
-
-{
-  "id": 51,
-  "postId": 46,
-  "no": "BB20200521172417",
-  "sort": 4,
-  "type": 1,
-  "contentType": 1,
-  "title": "多肉车厘回归",
-  "subtitle": "喜茶大陆门店现已有售",
-  "coverPic": "https://go.cdn.heytea.com/storage/products/2020/05/21/14b70fe3fd1d4a8eb0d079d5ac571bfb.jpeg",
-  "imageTextContent": null,
-  "redirectContent": {
-    "redirectType": 1,
-    "name": null,
-    "path": "https://mp.weixin.qq.com/s/nhnQd7zQlqJXMsjChVfCsw",
-    "appId": null } },
-
-
-{
-  "id": 52,
-  "postId": 47,
-  "no": "BB20200521172540",
-  "sort": 5,
-  "type": 1,
-  "contentType": 1,
-  "title": "一杯灵感之茶的诞生",
-  "subtitle": "新茶风，喜茶造",
-  "coverPic": "https://go.cdn.heytea.com/storage/products/2020/05/21/f4ae061b3b1d44cfa8518b8b6ec8f348.jpeg",
-  "imageTextContent": null,
-  "redirectContent": {
-    "redirectType": 1,
-    "name": null,
-    "path": "https://mp.weixin.qq.com/s/wXSC4MrE7NJlTk6uluhmDA",
-    "appId": null } }];exports.default = _default;
-
-/***/ }),
-
-/***/ 18:
-/*!**************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/mart.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/f3a26c6ce9594b1e97324c82798f6c71.png",
-  "id": 308158,
-  "itemNo": "5875254410113816001",
-  "itemStock": 629,
-  "name": "芝芝果茶系列 喜茶xCONTIGO联名芝芝/波波吸管杯",
-  "itemSalesVolume": 5734,
-  "salePrice": 14800,
-  "labelPrice": 14800 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/1f2a67c624a7451d968e9e4b03954219.png",
-  "id": 308157,
-  "itemNo": "5875248837678562001",
-  "itemStock": 52,
-  "name": "芝芝果茶系列 芝芝/波波玻璃杯",
-  "itemSalesVolume": 2784,
-  "salePrice": 3800,
-  "labelPrice": 3800 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/144c0c63c6974c31aed91115880e0f2f.png",
-  "id": 308145,
-  "itemNo": "5873948140577130001",
-  "itemStock": 36,
-  "name": "夫子来喜 茶礼盒",
-  "itemSalesVolume": 102,
-  "salePrice": 6800,
-  "labelPrice": 6800 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/33877cdc294b4f53b6d354a811b70e98.png",
-  "id": 308160,
-  "itemNo": "5889961614260412001",
-  "itemStock": 1098,
-  "name": "太妃焦糖味 爆米花 60gX3袋",
-  "itemSalesVolume": 1517,
-  "salePrice": 3600,
-  "labelPrice": 3600 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/4bf0414775c44eca829aa5242d459a05.png",
-  "id": 308159,
-  "itemNo": "5878654210726418001",
-  "itemStock": 637,
-  "name": "灵感一周茶礼盒 7款喜茶经典茗茶袋泡茶",
-  "itemSalesVolume": 1848,
-  "salePrice": 4800,
-  "labelPrice": 4800 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/d3630bd4bc854938a8169c420f3a6849.jpg",
-  "id": 308156,
-  "itemNo": "5875245257658433001",
-  "itemStock": 763,
-  "name": "混坚果3口味 2盒装 芥末味/海苔味/麻辣火锅味",
-  "itemSalesVolume": 2082,
-  "salePrice": 6000,
-  "labelPrice": 6000 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/edc8203bfaab4cb19caf01e168acecf1.png",
-  "id": 308152,
-  "itemNo": "5874582768671687001",
-  "itemStock": 77,
-  "name": "广州限定搪瓷杯",
-  "itemSalesVolume": 370,
-  "salePrice": 8400,
-  "labelPrice": 8400 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/73ef887855c74af09702b635d1464973.png",
-  "id": 308153,
-  "itemNo": "5874584305257205001",
-  "itemStock": 35,
-  "name": "广州限定帆布袋",
-  "itemSalesVolume": 311,
-  "salePrice": 5800,
-  "labelPrice": 5800 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/d58efe491b54453bb86757ad71e1a725.png",
-  "id": 308154,
-  "itemNo": "5874586879833837001",
-  "itemStock": 187,
-  "name": "广州限定皮质手机壳",
-  "itemSalesVolume": 142,
-  "salePrice": 7200,
-  "labelPrice": 7200 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/b99765b790b842fba62f087e156f6c6b.png",
-  "id": 308155,
-  "itemNo": "5874589128570809001",
-  "itemStock": 71,
-  "name": "广州限定钥匙扣",
-  "itemSalesVolume": 141,
-  "salePrice": 3800,
-  "labelPrice": 3800 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/81cf385b26fe48d7971b81bedf4a28e3.png",
-  "id": 308135,
-  "itemNo": "5871100589448027001",
-  "itemStock": 567,
-  "name": "喜茶WonderLab联名礼盒 饱腹食品代餐奶昔6瓶",
-  "itemSalesVolume": 1245,
-  "salePrice": 13900,
-  "labelPrice": 15900 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/7e8f188bef8f48eea2a208970be59153.png",
-  "id": 308142,
-  "itemNo": "5871327666758468001",
-  "itemStock": 6814,
-  "name": "喜茶饼家夹心小方",
-  "itemSalesVolume": 1797,
-  "salePrice": 4500,
-  "labelPrice": 4500 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/28a63bbd2bf6467790d39f4ed9274ec1.png",
-  "id": 308129,
-  "itemNo": "5858321915470775001",
-  "itemStock": 212,
-  "name": "灵感魔都手机壳",
-  "itemSalesVolume": 227,
-  "salePrice": 2900,
-  "labelPrice": 2900 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/ce87ab4bf1bd4dd8b2249fc4bc228baf.png",
-  "id": 308130,
-  "itemNo": "5858325640508027001",
-  "itemStock": 66,
-  "name": "灵感魔都帆布袋",
-  "itemSalesVolume": 200,
-  "salePrice": 3900,
-  "labelPrice": 3900 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/0f178944c5db4cf3a76489010c0f24d0.png",
-  "id": 308132,
-  "itemNo": "5858332808611918001",
-  "itemStock": 0,
-  "name": "灵感魔都小男巫钥匙扣",
-  "itemSalesVolume": 168,
-  "salePrice": 2900,
-  "labelPrice": 2900 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/17198929f7e7409aadf8930e492770bb.png",
-  "id": 308131,
-  "itemNo": "5858330358639234001",
-  "itemStock": 0,
-  "name": "灵感魔都冰箱贴",
-  "itemSalesVolume": 334,
-  "salePrice": 2500,
-  "labelPrice": 2500 },
-
-{
-  "thumbnail": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/db26492cad3b40afbfe819c39df5ee58.png",
-  "id": 308133,
-  "itemNo": "5858334811291675001",
-  "itemStock": 0,
-  "name": "灵感魔都AirPods Case",
-  "itemSalesVolume": 273,
-  "salePrice": 2900,
-  "labelPrice": 2900 }];exports.default = _default;
-
-/***/ }),
-
-/***/ 19:
-/*!*********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/productList.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [{
-  "id": 149,
-  "code": null,
-  "name": "外卖3元代金券",
-  "score": 300,
-  "store": 731,
-  "imageId": 145538,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/47cf654056494b3ba5556d23391c9633.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 150,
-  "code": null,
-  "name": "外卖5元代金券",
-  "score": 500,
-  "store": 646,
-  "imageId": 145539,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/31e4070fff364f98bf40b8cf6704c9c4.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 151,
-  "code": null,
-  "name": "外卖10元代金券",
-  "score": 1000,
-  "store": 411,
-  "imageId": 145540,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/4d230aaa89f3412d99b140aa0b471c09.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 152,
-  "code": null,
-  "name": "外卖20元代金券",
-  "score": 2000,
-  "store": 877,
-  "imageId": 145543,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/994d95460d41428e923d8de54840581f.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 156,
-  "code": null,
-  "name": "外卖买二赠一券",
-  "score": 2400,
-  "store": 854,
-  "imageId": 145554,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/16add8a8af2141b7bad9ebbf8c40cd84.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 153,
-  "code": null,
-  "name": "外卖25元代金券",
-  "score": 2500,
-  "store": 949,
-  "imageId": 145544,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/6376f01ea7c44d988ba21376129ff67f.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 158,
-  "code": null,
-  "name": "外卖波波家族券",
-  "score": 2800,
-  "store": 197,
-  "imageId": 145559,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/9cace2695e2d48bb86e5a38889282b0f.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 155,
-  "code": null,
-  "name": "外卖买一赠一券",
-  "score": 2800,
-  "store": 398,
-  "imageId": 145553,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/52ebe803ab554ebb823d5e83d70dab9a.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 157,
-  "code": null,
-  "name": "外卖咖啡券",
-  "score": 2900,
-  "store": 198,
-  "imageId": 145558,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/778839aab8364f72a447f584531a2bc9.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 154,
-  "code": null,
-  "name": "外卖赠饮券",
-  "score": 3600,
-  "store": 473,
-  "imageId": 145547,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 0,
-  "image_url": "/storage/products/2020/05/07/febaf8cf51934def9e2dbd1f16f40e5e.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 136,
-  "code": null,
-  "name": "HEYTEA3元代金券",
-  "score": 300,
-  "store": 806,
-  "imageId": 145427,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/5a1cc7eb16614502aba65353d84a47b7.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 159,
-  "code": null,
-  "name": "HEYTEA加料券",
-  "score": 450,
-  "store": 163,
-  "imageId": 147244,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/11/3151d4fd07e94c1e9b9b5a855e9441ce.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 137,
-  "code": null,
-  "name": "HEYTEA5元代金券",
-  "score": 500,
-  "store": 546,
-  "imageId": 145431,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/ff91db9794634af58e2b528669652586.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 138,
-  "code": null,
-  "name": "HEYTEA10元代金券",
-  "score": 1000,
-  "store": 217,
-  "imageId": 145433,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/6accb79605344dbe92ec965a0a79fd0d.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 139,
-  "code": null,
-  "name": "HEYTEA20元代金券",
-  "score": 2000,
-  "store": 664,
-  "imageId": 145434,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/b8d9c79702d84507ad9a4d62b74feafc.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 144,
-  "code": null,
-  "name": "HEYTEA买二赠一券",
-  "score": 2400,
-  "store": 0,
-  "imageId": 145443,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/a8a97fa8cad74c90aaa69eeecab07b15.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 140,
-  "code": null,
-  "name": "HEYTEA25元代金券",
-  "score": 2500,
-  "store": 753,
-  "imageId": 145435,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/1191302d792a4659859a3f3dc8272645.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 143,
-  "code": null,
-  "name": "HEYTEA买一赠一券",
-  "score": 2800,
-  "store": 301,
-  "imageId": 145440,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/5decb0e19389487a8f8edab4e8ba50c5.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 146,
-  "code": null,
-  "name": "HEYTEA波波家族券",
-  "score": 2800,
-  "store": 173,
-  "imageId": 145447,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/33e6164b1784406e90e156c30bb1d12d.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 147,
-  "code": null,
-  "name": "HEYTEA咖啡券",
-  "score": 2900,
-  "store": 188,
-  "imageId": 145448,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/60b0c4af60b0437faf7c759e4afe5b54.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 141,
-  "code": null,
-  "name": "HEYTEA优先券",
-  "score": 3000,
-  "store": 734,
-  "imageId": 145437,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/bdf20e5efcee4f30bb56d017601bed27.jpeg",
-  "http_url": "https://go.cdn.heytea.com" },
-{
-  "id": 142,
-  "code": null,
-  "name": "HEYTEA赠饮券",
-  "score": 3600,
-  "store": 843,
-  "imageId": 145438,
-  "skus": null,
-  "source": null,
-  "specification": 0,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "mall_type": 1,
-  "member_type": 1,
-  "image_url": "/storage/products/2020/05/07/8188b0d7fcc94a01bb81ab84eee4c62a.jpeg",
-  "http_url": "https://go.cdn.heytea.com" }];exports.default = _default;
+module.exports = {
+  formatTime: formatTime,
+  formatDateTime: formatDateTime,
+  formatLocation: formatLocation,
+  dateUtils: dateUtils,
+  hexToRgba: hexToRgba };
 
 /***/ }),
 
@@ -15500,7 +15168,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -15521,14 +15189,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -15614,7 +15282,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"mc","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -16021,2992 +15689,6 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 20:
-/*!***********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/productDetail.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  "id": 149,
-  "name": "外卖3元代金券",
-  "score": 300,
-  "store": 355,
-  "remark": "兑换说明：仅限在喜茶GO小程序下单时，选择“外卖配送”后可用；积分商城可兑换的喜茶券为电子券，成功兑换后可在您的喜茶券账户查看。成功兑换后的喜茶券即刻生效，不可退货。若使用过程中遇到问题，可联系喜茶客服帮您处理。",
-  "specification": [],
-  "skus": {},
-  "unit": 1,
-  "cut": "3.0元",
-  "enough": "无门槛",
-  "valen": null,
-  "buy": "null",
-  "fee": "null",
-  "discount": "null",
-  "type": "现金券",
-  "sourceId": 2616,
-  "sourceType": "App\\Models\\Coupon",
-  "cname": null,
-  "mall_type": 1,
-  "member_type": 0,
-  "http_url": "https://go.cdn.heytea.com",
-  "image_url": "/storage/products/2020/05/07/47cf654056494b3ba5556d23391c9633.jpeg",
-  "image_gallery": ["/storage/products/2020/05/07/47cf654056494b3ba5556d23391c9633.jpeg"],
-  "is_specification": 0,
-  "period_day": 1,
-  "period_end": "2020-06-29",
-  "period_start": "2020-05-29",
-  "period_type": 1,
-  "unit_time": "月",
-  "category_limit": 1,
-  "product_limit": 1,
-  "shop_limit": 1,
-  "content_text": "不可与现金券,赠饮券,买赠券,折扣券同时使用",
-  "gray_flag": 1,
-  "interval_time": "1",
-  "type_num": 0,
-  "use_limit": 2,
-  "analytic_remark": null };exports.default = _default;
-
-/***/ }),
-
-/***/ 21:
-/*!****************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/scores.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [{
-  "id": 73600008,
-  "scoreChange": 1,
-  "method": 7,
-  "description": "会员任务领取_每日签到（奖励随机翻倍）",
-  "createAt": "2020-05-30 00:41:48",
-  "sourceType": null,
-  "orderNo": null,
-  "payment": null,
-  "shopName": null,
-  "client": 1 },
-{
-  "id": 73600007,
-  "scoreChange": 10,
-  "method": 7,
-  "description": "会员任务领取_完善个人资料",
-  "createAt": "2020-05-30 00:41:45",
-  "sourceType": null,
-  "orderNo": null,
-  "payment": null,
-  "shopName": null,
-  "client": 1 },
-{
-  "id": 70873226,
-  "scoreChange": 1,
-  "method": 7,
-  "description": "会员任务领取_每日签到（奖励随机翻倍）",
-  "createAt": "2020-05-16 08:27:21",
-  "sourceType": null,
-  "orderNo": null,
-  "payment": null,
-  "shopName": null,
-  "client": 1 },
-{
-  "id": 54302375,
-  "scoreChange": 25,
-  "method": 1,
-  "description": "消费获得_微信小程序下单",
-  "createAt": "2020-01-18 18:05:53",
-  "sourceType": "App\\Models\\Order",
-  "orderNo": "755067202001181805428749",
-  "payment": "50.00",
-  "shopName": "益田假日天地GO店",
-  "client": 1 },
-{
-  "id": 42968209,
-  "scoreChange": 5,
-  "method": 1,
-  "description": "购买 流沙牛角 等1件商品",
-  "createAt": "2019-11-06 19:36:12",
-  "sourceType": "App\\Models\\Order",
-  "orderNo": "755067201911061936067634",
-  "payment": "10.00",
-  "shopName": "益田假日天地GO店",
-  "client": 1 },
-{
-  "id": 42967480,
-  "scoreChange": 14,
-  "method": 1,
-  "description": "购买 捣蛋南瓜波波冰 等1件商品",
-  "createAt": "2019-11-06 19:32:12",
-  "sourceType": "App\\Models\\Order",
-  "orderNo": "755067201911061932051220",
-  "payment": "28.00",
-  "shopName": "益田假日天地GO店",
-  "client": 1 },
-{
-  "id": 40618359,
-  "scoreChange": 2,
-  "method": 7,
-  "description": "每日签到（奖励随机翻倍）",
-  "createAt": "2019-10-21 15:16:17",
-  "sourceType": null,
-  "orderNo": null,
-  "payment": null,
-  "shopName": null,
-  "client": 1 },
-{
-  "id": 40415803,
-  "scoreChange": 16,
-  "method": 1,
-  "description": "购买 流沙牛角 等2件商品",
-  "createAt": "2019-10-20 12:29:30",
-  "sourceType": "App\\Models\\Order",
-  "orderNo": "755015201910201229255435",
-  "payment": "33.00",
-  "shopName": "万象天地PINK店",
-  "client": 1 }];exports.default = _default;
-
-/***/ }),
-
-/***/ 22:
-/*!********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/martDetail.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _storeId$storeIdList$;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default = (_storeId$storeIdList$ = {
-  "storeId": 9203,
-  "storeIdList": null,
-  "id": 308158,
-  "itemNo": "5875254410113816001" }, _defineProperty(_storeId$storeIdList$, "storeId",
-9203), _defineProperty(_storeId$storeIdList$,
-"barcode", "WD015875254410118605"), _defineProperty(_storeId$storeIdList$,
-"name", "芝芝果茶系列 喜茶xCONTIGO联名芝芝/波波吸管杯"), _defineProperty(_storeId$storeIdList$,
-"categoryId", 5008066737), _defineProperty(_storeId$storeIdList$,
-"labelId", null), _defineProperty(_storeId$storeIdList$,
-"labelName", null), _defineProperty(_storeId$storeIdList$,
-"brand", ""), _defineProperty(_storeId$storeIdList$,
-"categoryDTO", {
-  "id": 5008066737,
-  "parentId": null,
-  "category": "杯类产品",
-  "categoryImgUrl": "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/fe5bafefa36c4c07b1b4e8c8bf4cb9f8z",
-  "status": 1,
-  "seq": 28,
-  "isLeaf": 1,
-  "industryId": 3,
-  "name": null,
-  "imgUrl": null,
-  "imgUrlValue": null,
-  "childrenCategory": [],
-  "parentCategory": null,
-  "outCategoryIdList": null }), _defineProperty(_storeId$storeIdList$,
-
-"salePrice", 14800), _defineProperty(_storeId$storeIdList$,
-"labelPrice", 14800), _defineProperty(_storeId$storeIdList$,
-"memberPrice", null), _defineProperty(_storeId$storeIdList$,
-"itemSalesVolume", 5735), _defineProperty(_storeId$storeIdList$,
-"virtualSalesVolume", 0), _defineProperty(_storeId$storeIdList$,
-"isShelf", 1), _defineProperty(_storeId$storeIdList$,
-"itemStock", 626), _defineProperty(_storeId$storeIdList$,
-"itemWithholdStock", 0), _defineProperty(_storeId$storeIdList$,
-"describe", "<p><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/636beabc152f42b4a53b03e965a6256a.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/a0859178aef54178a7931cca26364577.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/70d45373965244d7aa69694cf80dcec2.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/37556ad39fbd43aaa245088017c15d44.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/bf8f0864d0854829aa82c2fd7178e2ef.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/8b40a73f6a9042a385ab4c65e053802f.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/50f7f75426b9412b95d8848fc4090069.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/80a346fac54749a1acad9c8ec115b11f.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/e2109b23aa354853a0faed67ad14e3ed.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/21dccf357bc74cc0a0faecf39c13a421.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/debb7001eaea4fe1aaa5012820d55abf.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/c3b7d74a6a0545d6857e9ed1bc26de9a.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/b5dfcec384c94d609572e88bf7fc0f54.png\" style=\"max-width: 100%;\"><img src=\"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/f1ca48c88dc9438abfefa9ca57c43dca.png\" style=\"max-width: 100%;\"></p>"), _defineProperty(_storeId$storeIdList$,
-"status", 1), _defineProperty(_storeId$storeIdList$,
-"thumbnail", "https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/f3a26c6ce9594b1e97324c82798f6c71.png"), _defineProperty(_storeId$storeIdList$,
-"tag1", 0), _defineProperty(_storeId$storeIdList$,
-"unit", "个"), _defineProperty(_storeId$storeIdList$,
-"paySubtractStock", false), _defineProperty(_storeId$storeIdList$,
-"itemOrder", 0), _defineProperty(_storeId$storeIdList$,
-"createTime", "2020-04-22 11:17:26"), _defineProperty(_storeId$storeIdList$,
-"updateTime", "2020-05-25 00:47:00"), _defineProperty(_storeId$storeIdList$,
-"costPrice", 0), _defineProperty(_storeId$storeIdList$,
-"freight", 1200), _defineProperty(_storeId$storeIdList$,
-"weight", 0), _defineProperty(_storeId$storeIdList$,
-"placeOfOrigin", ""), _defineProperty(_storeId$storeIdList$,
-"shelfLife", null), _defineProperty(_storeId$storeIdList$,
-"shelfLifeUnit", 0), _defineProperty(_storeId$storeIdList$,
-"deliveryTimeType", 1), _defineProperty(_storeId$storeIdList$,
-"deliveryTime", null), _defineProperty(_storeId$storeIdList$,
-"daysAfterBuy", 1), _defineProperty(_storeId$storeIdList$,
-"daysAfterBuyRange", "1-3"), _defineProperty(_storeId$storeIdList$,
-"preSellStartTime", null), _defineProperty(_storeId$storeIdList$,
-"preSellEndTime", null), _defineProperty(_storeId$storeIdList$,
-"freightTemplateId", 21), _defineProperty(_storeId$storeIdList$,
-"invoiceTemplateId", null), _defineProperty(_storeId$storeIdList$,
-"length", null), _defineProperty(_storeId$storeIdList$,
-"width", null), _defineProperty(_storeId$storeIdList$,
-"height", null), _defineProperty(_storeId$storeIdList$,
-"volume", null), _defineProperty(_storeId$storeIdList$,
-"subName", "仅波波吸管杯&芝芝吸管杯有货"), _defineProperty(_storeId$storeIdList$,
-"peopleLimitAmount", null), _defineProperty(_storeId$storeIdList$,
-"placeOfDispatch", "广东广州"), _defineProperty(_storeId$storeIdList$,
-"shelfTime", "2020-05-23T02:04:50.000+0000"), _defineProperty(_storeId$storeIdList$,
-"preSell", false), _defineProperty(_storeId$storeIdList$,
-"materialUrls", [
-"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/f3a26c6ce9594b1e97324c82798f6c71.png",
-"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/524757c5ea534781b18fb882cdb4f650.png",
-"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/f5bc97d7e70e4c5e9d516dde70dc9701.png",
-"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/6300ca05a21e4283869b090a0e5ffec7.png",
-"https://prod-mall-cos-1252929494.cos.ap-guangzhou.myqcloud.com/2307edb41ce8451bb5fbb20c4dad05a1.png"]), _defineProperty(_storeId$storeIdList$,
-
-"skuTreeList", [{
-  "keyId": 116,
-  "attrKeySort": 0,
-  "keyName": "款式",
-  "showImage": 0,
-  "treeValList": [{
-    "valId": 1700,
-    "attrValSort": 0,
-    "valName": "莓莓吸管杯",
-    "imageId": null,
-    "imageUrl": null },
-  {
-    "valId": 1701,
-    "attrValSort": 1,
-    "valName": "桃桃吸管杯",
-    "imageId": null,
-    "imageUrl": null },
-  {
-    "valId": 1707,
-    "attrValSort": 2,
-    "valName": "芝芝吸管杯",
-    "imageId": null,
-    "imageUrl": null },
-  {
-    "valId": 1708,
-    "attrValSort": 3,
-    "valName": "波波吸管杯",
-    "imageId": null,
-    "imageUrl": null },
-  {
-    "valId": 1709,
-    "attrValSort": 4,
-    "valName": "葡萄吸管杯",
-    "imageId": null,
-    "imageUrl": null }] }]), _defineProperty(_storeId$storeIdList$,
-
-
-"skuInfoList", [{
-  "skuId": 12410,
-  "skuBarcode": "50100830",
-  "salePrice": 14800,
-  "labelPrice": 14800,
-  "memberPrice": null,
-  "stock": 0,
-  "withholdStock": 0,
-  "skuInfoNames": [{
-    "keyId": 116,
-    "attrKeySort": 0,
-    "keyName": "款式",
-    "valId": 1700,
-    "attrValSort": null,
-    "valName": "莓莓吸管杯" }],
-
-  "itemNo": "5875254410113816001" },
-{
-  "skuId": 12411,
-  "skuBarcode": "50100832",
-  "salePrice": 14800,
-  "labelPrice": 14800,
-  "memberPrice": null,
-  "stock": 0,
-  "withholdStock": 0,
-  "skuInfoNames": [{
-    "keyId": 116,
-    "attrKeySort": 0,
-    "keyName": "款式",
-    "valId": 1701,
-    "attrValSort": null,
-    "valName": "桃桃吸管杯" }],
-
-  "itemNo": "5875254410113816001" },
-{
-  "skuId": 12416,
-  "skuBarcode": "50100833",
-  "salePrice": 14800,
-  "labelPrice": 14800,
-  "memberPrice": null,
-  "stock": 222,
-  "withholdStock": 0,
-  "skuInfoNames": [{
-    "keyId": 116,
-    "attrKeySort": 0,
-    "keyName": "款式",
-    "valId": 1707,
-    "attrValSort": null,
-    "valName": "芝芝吸管杯" }],
-
-  "itemNo": "5875254410113816001" },
-{
-  "skuId": 12417,
-  "skuBarcode": "50100831",
-  "salePrice": 14800,
-  "labelPrice": 14800,
-  "memberPrice": null,
-  "stock": 404,
-  "withholdStock": 0,
-  "skuInfoNames": [{
-    "keyId": 116,
-    "attrKeySort": 0,
-    "keyName": "款式",
-    "valId": 1708,
-    "attrValSort": null,
-    "valName": "波波吸管杯" }],
-
-  "itemNo": "5875254410113816001" },
-{
-  "skuId": 12418,
-  "skuBarcode": "50100829",
-  "salePrice": 14800,
-  "labelPrice": 14800,
-  "memberPrice": null,
-  "stock": 0,
-  "withholdStock": 0,
-  "skuInfoNames": [{
-    "keyId": 116,
-    "attrKeySort": 0,
-    "keyName": "款式",
-    "valId": 1709,
-    "attrValSort": null,
-    "valName": "葡萄吸管杯" }],
-
-  "itemNo": "5875254410113816001" }]), _storeId$storeIdList$);exports.default = _default;
-
-/***/ }),
-
-/***/ 23:
-/*!*******************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/hotSearch.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [{
-  "productName": "豆豆雪糕杯",
-  "productId": 716,
-  "type": 1,
-  "images": [{
-    "id": 156414,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/06/01/0080e20b3cca4d85ac19db53163aa138.jpg" },
-  {
-    "id": 154137,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/27/01ab97ed6518438ebdca8683c059b94c.jpg" }],
-
-  "nameImage": "",
-  "showTrademark": false },
-{
-  "productName": "芝芝莓莓 ®",
-  "productId": 932,
-  "type": 1,
-  "images": [{
-    "id": 156415,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/06/01/9cd1cc3f5c074d28b32af9e3e3a2cd14.jpg" },
-  {
-    "id": 154138,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/27/0c83954c0d5547b4b1fe1650b9b317b0.jpg" }],
-
-  "nameImage": "",
-  "showTrademark": false },
-{
-  "productName": "多肉芒芒甘露",
-  "productId": 941,
-  "type": 1,
-  "images": [{
-    "id": 155005,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/29/933b36506a8d450eb0f54f6b3c39d84f.jpg" },
-  {
-    "id": 155006,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/29/cfafc3e1a8ad45f8a1aebf70e355ce28.jpg" }],
-
-  "nameImage": "https://go.cdn.heytea.com/storage/product/2020/05/29/d3d7c45908a24863acc51893320cb177.jpg",
-  "showTrademark": false },
-{
-  "productName": "满杯红柚",
-  "productId": 944,
-  "type": 1,
-  "images": [{
-    "id": 155009,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/29/5648897812654a459ec7c70d4207acfb.jpg" },
-  {
-    "id": 155010,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/29/35abcb9cee8c4f9c907e5190f2322531.jpg" }],
-
-  "nameImage": "https://go.cdn.heytea.com/storage/product/2020/05/29/d865085468ed414e8d63b13593d2aabc.jpg",
-  "showTrademark": false },
-{
-  "productName": "多肉葡萄",
-  "productId": 931,
-  "type": 2,
-  "images": [{
-    "id": 154995,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/29/92a953a3ffaf4ce6bb29beb54efc0b5d.jpg" },
-  {
-    "id": 117059,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/03/04/132420629a0d4fe78e2a164e3f1c44b7.jpg" }],
-
-  "nameImage": "https://go.cdn.heytea.com/storage/product/2020/03/02/3aa66935a73f4b02ad78e591e1decabb.jpg",
-  "showTrademark": false },
-{
-  "productName": "多肉芒芒甘露",
-  "productId": 941,
-  "type": 2,
-  "images": [{
-    "id": 135047,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/04/15/44ed201701ef406087100b0c1690daad.jpg" },
-  {
-    "id": 117036,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/03/04/de106edd904148f185f6273835be0baf.jpg" }],
-
-  "nameImage": "",
-  "showTrademark": false },
-{
-  "productName": "多肉芒芒甘露",
-  "productId": 901,
-  "type": 2,
-  "images": [{
-    "id": 154996,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/29/fdd842483f664d73bcc04105a7b412a5.jpg" },
-  {
-    "id": 143249,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/03/d6715484323c404086058c662ce3c8c8.jpg" }],
-
-  "nameImage": "https://go.cdn.heytea.com/storage/product/2020/05/03/7c8d55f76d1240a196983d216d86e7ca.jpg",
-  "showTrademark": false }];exports.default = _default;
-
-/***/ }),
-
-/***/ 24:
-/*!***********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/historySearch.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [{
-  "productName": "芝芝莓莓 ®",
-  "productId": 932,
-  "type": 1,
-  "images": [{
-    "id": 156414,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/06/01/0080e20b3cca4d85ac19db53163aa138.jpg" },
-  {
-    "id": 154137,
-    "url": "https://go.cdn.heytea.com/storage/product/2020/05/27/01ab97ed6518438ebdca8683c059b94c.jpg" }],
-
-  "nameImage": "",
-  "showTrademark": false }];exports.default = _default;
-
-/***/ }),
-
-/***/ 25:
-/*!*********************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/orderDetail.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  "reason": "协商一致退款",
-  "open_pickupPage_expectTime": 1,
-  "gather_feedback": false,
-  "pickup_code_qrcode": "http://go.heytea.com/orders/755015201910201229255435/puckupNo",
-  "spell_unique_id": "",
-  "delivery_fee": "0.00",
-  "prior": 0,
-  "pickup_type": "自提",
-  "total_fee": 33.00,
-  "payment": "33.00",
-  "id": 55596826,
-  "is_takeaway": false,
-  "alipay_invoice_button": true,
-  "set_items": [],
-  "refund_status": "NO_REFUND",
-  "invoice_successed": false,
-  "new_order_invoice": false,
-  "paid_at": "2019-10-20 12:29:29",
-  "currency_type": "CNY",
-  "coupon_fee": "0.00",
-  "showPaymentDetails": false,
-  "pickup_time": "2019-10-20 14:00:47",
-  "items": [{
-    "activity_name": "",
-    "images": {
-      "data": [{
-        "id": 88364,
-        "url": "https://go.cdn.heytea.com/storage/product/2019/11/12/5ad4996d0fdd4f3a85a25b8fe95a4db8.jpg" },
-
-      {
-        "id": 121233,
-        "url": "https://go.cdn.heytea.com/storage/product/2020/03/11/78ad5460e80d4587a8f07abc4baf76e9.jpg" }] },
-
-
-
-    "quantity": 1,
-    "discount_price": 0,
-    "sku_id": 1186,
-    "specifications": {
-      "data": [] },
-
-    "name_image": "",
-    "show_trademark": false,
-    "category_id": 20,
-    "materials": [{
-      "material_group_id": 3,
-      "price": "0.00",
-      "name": "加热(推荐)",
-      "material_id": 41 }],
-
-    "price": "10.00",
-    "sname": "流沙牛角",
-    "product_id": 161,
-    "total_fee": "10.00",
-    "activity_type": 0,
-    "name": "流沙牛角",
-    "attributes": {
-      "data": [] },
-
-    "id": 100194060 },
-
-  {
-    "activity_name": "",
-    "images": {
-      "data": [{
-        "id": 64565,
-        "url": "https://go.cdn.heytea.com/product/2019/08/02/tmp/a5a9bdd8b9db4b37a6d20df8e1aedf87.jpg" },
-
-      {
-        "id": 116583,
-        "url": "https://go.cdn.heytea.com/storage/product/2020/03/03/436ce2f2b562478bae451aefed7a0c97.jpg" }] },
-
-
-
-    "quantity": 1,
-    "discount_price": 0,
-    "sku_id": 1373,
-    "specifications": {
-      "data": [] },
-
-    "name_image": "",
-    "show_trademark": false,
-    "category_id": 11,
-    "materials": [{
-      "material_group_id": 27,
-      "price": "0.00",
-      "name": "常规吸管",
-      "material_id": 409 },
-
-    {
-      "material_group_id": 12,
-      "price": "0.00",
-      "name": "有芋头颗粒(推荐)",
-      "material_id": 230 },
-
-    {
-      "material_group_id": 6,
-      "price": "0.00",
-      "name": "标准（推荐）",
-      "material_id": 149 },
-
-    {
-      "material_group_id": 5,
-      "price": "0.00",
-      "name": "冰沙（推荐）",
-      "material_id": 140 },
-
-    {
-      "material_group_id": 4,
-      "price": "0.00",
-      "name": "正常糖(推荐)",
-      "material_id": 379 },
-
-    {
-      "material_group_id": 3,
-      "price": "0.00",
-      "name": "正常(推荐)",
-      "material_id": 558 }],
-
-
-    "price": "23.00",
-    "sname": "爆芋泥波波冰",
-    "product_id": 514,
-    "total_fee": "23.00",
-    "activity_type": 0,
-    "name": "爆芋泥波波冰",
-    "attributes": {
-      "data": [] },
-
-    "id": 100194061 }],
-
-
-  "status": "TRADE_CLOSED",
-  "no": "755015201910201229255435",
-  "hidden_invoice": false,
-  "shop": {
-    "support_jd_takeaway": 0,
-    "is_support_premade": 0,
-    "country": "中国",
-    "contact_phone": "0755-86681153",
-    "distance": 0,
-    "city": "深圳市",
-    "latitude": "22.541500",
-    "limit_cup": 10,
-    "disable_order_type": 0,
-    "city_code": "156440300",
-    "support_cash": 1,
-    "tips": "15",
-    "province": "广东省",
-    "appointable": null,
-    "location_city": null,
-    "currency": 1,
-    "id": 28,
-    "min_charge": 30,
-    "longitude": "113.955292",
-    "nearby_shop_count": 0,
-    "contact_name": "喜茶君",
-    "address": "华润万象天地SL187号商铺",
-    "is_current_city": null,
-    "estimate_time_type": 1,
-    "takeaway_limit_cup": "5",
-    "support_td_takeaway": 0,
-    "delivery_distance": 3000,
-    "country_code": "156",
-    "support_mt_takeaway": 1,
-    "support_sf_takeaway": 0,
-    "district_code": "440305",
-    "district": "南山区",
-    "name": "万象天地PINK店",
-    "scene_code": "http://go.heytea.com/storage/shop/scene_code/shop_id_28.png" },
-
-  "activity": [],
-  "box_fee": "0.00",
-  "called_at": "2019-10-20 12:51:15",
-  "created_at": "2019-10-20 12:29:25",
-  "is_can_refund": false,
-  "outer_id": null,
-  "discount_fee": "0.00",
-  "order_detail_qrcode": "https://go.heytea.com/device/755015201910201229255435/order",
-  "pickup_time_period_show": null,
-  "making_order_count": 0,
-  "is_premade": false,
-  "tax_fee": "-1",
-  "coupon_library_id": "",
-  "is_comment": 2,
-  "currency": 1,
-  "order_channel": "W",
-  "show_remind_button": 0,
-  "only_vip_show_invoice": false,
-  "delivery": null,
-  "cupboard": null,
-  "need_wait_time": 0,
-  "cancelCountdown": 0,
-  "pickup_no": "8114",
-  "takeaway_time_immediately_show": "2019-10-20 13:14:29",
-  "pickup_time_period": "",
-  "trade_type": "JSAPI",
-  "remarks": "不打包" };exports.default = _default;
-
-/***/ }),
-
-/***/ 26:
-/*!*******************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/api/giftCards.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = [
-{
-  "id": 39,
-  "name": "阿喜经典卡",
-  "sort": 1,
-  "product_list": [
-  {
-    "id": 1063,
-    "name": "灵感之茶",
-    "no": "2005092118946063",
-    "category_id": 39,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/27/cc5aad062acf4fa7bf6d8a1db480e643.jpg",
-    "sku_list": [
-    {
-      "id": 2400,
-      "no": "39010184",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998881,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2401,
-      "no": "39010185",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999917,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2402,
-      "no": "39010186",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999967,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2403,
-      "no": "39010187",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999984,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2404,
-      "no": "39010188",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999995,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2405,
-      "no": "39010189",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999982,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "阿喜有礼，送礼选阿喜",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1062,
-    "name": "喜欢有你",
-    "no": "2005098240053332",
-    "category_id": 39,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/27/310774b20acf4ddfb83e42f4370ab5ee.jpg",
-    "sku_list": [
-    {
-      "id": 2394,
-      "no": "39010178",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999522,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2395,
-      "no": "39010179",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999851,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2396,
-      "no": "39010180",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999964,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2397,
-      "no": "39010181",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999974,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2398,
-      "no": "39010182",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999997,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2399,
-      "no": "39010183",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999993,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "阿喜有礼，送TA杯灵感",
-    "label": "",
-    "sort": 2 },
-
-  {
-    "id": 859,
-    "name": "阿喜有礼卡",
-    "no": "2001090317042579",
-    "category_id": 39,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/05/25f97758ccd446bfa622fbb56ee43117.jpg",
-    "sku_list": [
-    {
-      "id": 2048,
-      "no": "39010030",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 996147,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 1997,
-      "no": "39010005",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999031,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 1998,
-      "no": "39010006",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999679,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 1999,
-      "no": "39010007",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999830,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2000,
-      "no": "39010008",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999977,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2001,
-      "no": "39010009",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999956,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "喜从天降，喜欢有礼。",
-    "label": "",
-    "sort": 3 }] },
-
-
-
-{
-  "id": 77,
-  "name": "阿喜大儿童",
-  "sort": 2,
-  "product_list": [
-  {
-    "id": 1078,
-    "name": "祖国的花朵",
-    "no": "2005262287599615",
-    "category_id": 77,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/30/f47f3466a76b446094dee15bdd3ae93f.jpg",
-    "sku_list": [
-    {
-      "id": 2468,
-      "no": "39010226",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999429,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2469,
-      "no": "39010227",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999834,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2470,
-      "no": "39010228",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999954,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2471,
-      "no": "39010229",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999978,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2472,
-      "no": "39010230",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999998,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2473,
-      "no": "39010231",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999965,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "给茁壮成长的祖国花朵浇浇水。",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1077,
-    "name": "喜茶大儿童",
-    "no": "2005269101380978",
-    "category_id": 77,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/30/b023a6edb8a947eabed64f0abe166d00.jpg",
-    "sku_list": [
-    {
-      "id": 2462,
-      "no": "39010220",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999652,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2463,
-      "no": "39010221",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999925,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2464,
-      "no": "39010222",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999971,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2465,
-      "no": "39010223",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999994,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2466,
-      "no": "39010224",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "祝我的大儿童早日成为喝喜茶第一名。",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 38,
-  "name": "多肉车厘卡",
-  "sort": 3,
-  "product_list": [
-  {
-    "id": 1073,
-    "name": "多肉车厘",
-    "no": "2005206676227386",
-    "category_id": 38,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/21/a1eb5412c77645e181af5513ab9cd2c8.jpg",
-    "sku_list": [
-    {
-      "id": 2447,
-      "no": "39010208",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999368,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2448,
-      "no": "39010209",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999925,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2449,
-      "no": "39010210",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999978,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2450,
-      "no": "39010211",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999975,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2451,
-      "no": "39010212",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999998,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2452,
-      "no": "39010213",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999988,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "多肉锦“厘”请你喝",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1072,
-    "name": "Cherry blossoms",
-    "no": "2005205125872416",
-    "category_id": 38,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/21/e69aa5f59de24a68a9925bc869c8805e.jpg",
-    "sku_list": [
-    {
-      "id": 2453,
-      "no": "39010214",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999845,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2454,
-      "no": "39010215",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999969,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2455,
-      "no": "39010216",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999993,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2456,
-      "no": "39010217",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999997,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2457,
-      "no": "39010218",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999999,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2458,
-      "no": "39010219",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999997,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "饮杯锦“厘”，开启今日好运",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 72,
-  "name": "阿喜表白卡",
-  "sort": 4,
-  "product_list": [
-  {
-    "id": 1067,
-    "name": "喜欢你",
-    "no": "2005181449891751",
-    "category_id": 72,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/20/dfdf778485484bd5bbbaa158eebdb4db.jpg",
-    "sku_list": [
-    {
-      "id": 2412,
-      "no": "39010193",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999807,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2409,
-      "no": "39010190",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999789,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2410,
-      "no": "39010191",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999905,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2411,
-      "no": "39010192",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999978,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2413,
-      "no": "39010194",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999999,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2414,
-      "no": "39010195",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999992,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "输入520，解锁我爱你",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1069,
-    "name": "LOVE",
-    "no": "2005184770357582",
-    "category_id": 72,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/20/5138a1bc8dce4bc5b0f95456d21168ee.jpg",
-    "sku_list": [
-    {
-      "id": 2430,
-      "no": "39010205",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999943,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2427,
-      "no": "39010202",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999934,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2428,
-      "no": "39010203",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999967,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2429,
-      "no": "39010204",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999986,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2431,
-      "no": "39010206",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999999,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2432,
-      "no": "39010207",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "想你是怦然心动",
-    "label": "",
-    "sort": 2 },
-
-  {
-    "id": 1068,
-    "name": "520",
-    "no": "2005184661872021",
-    "category_id": 72,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/05/20/690d2ca7f017423684a4a5bc2f910c9c.jpg",
-    "sku_list": [
-    {
-      "id": 2424,
-      "no": "39010199",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999955,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2421,
-      "no": "39010196",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999914,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2422,
-      "no": "39010197",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999961,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2423,
-      "no": "39010198",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2425,
-      "no": "39010200",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999999,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2426,
-      "no": "39010201",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999999,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "You are my cup of tea",
-    "label": "",
-    "sort": 3 }] },
-
-
-
-{
-  "id": 75,
-  "name": "阿喜桃桃卡",
-  "sort": 5,
-  "product_list": [
-  {
-    "id": 1034,
-    "name": "“桃”我喜欢",
-    "no": "2004226548252596",
-    "category_id": 75,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/30/c7feb90b2d294cffaa7a9d1d58f328da.jpg",
-    "sku_list": [
-    {
-      "id": 2337,
-      "no": "39010148",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998240,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2338,
-      "no": "39010149",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999471,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2339,
-      "no": "39010150",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999828,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2340,
-      "no": "39010151",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999952,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2341,
-      "no": "39010152",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999991,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2342,
-      "no": "39010153",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999979,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "美有不同，“桃”我喜欢",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1035,
-    "name": "桃桃回归",
-    "no": "2004228013138656",
-    "category_id": 75,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/30/83ad7944bbe6461ebbb9a77940fc2f44.jpg",
-    "sku_list": [
-    {
-      "id": 2343,
-      "no": "39010154",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999400,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2344,
-      "no": "39010155",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999848,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2345,
-      "no": "39010156",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999954,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2346,
-      "no": "39010157",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999982,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2347,
-      "no": "39010158",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999998,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2348,
-      "no": "39010159",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "今天也要桃气满满",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 76,
-  "name": "阿喜杨梅卡",
-  "sort": 6,
-  "product_list": [
-  {
-    "id": 1040,
-    "name": "五月杨梅已满林",
-    "no": "2004247712836414",
-    "category_id": 76,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/27/b10c6a77f07e4ffbb864c1a86412835b.jpg",
-    "sku_list": [
-    {
-      "id": 2353,
-      "no": "39010160",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998473,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2354,
-      "no": "39010161",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999688,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2355,
-      "no": "39010162",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999864,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2356,
-      "no": "39010163",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999957,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2357,
-      "no": "39010164",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2358,
-      "no": "39010165",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999993,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "五月杨梅熟，邀君共享。",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1041,
-    "name": "杨梅宝珠请君尝",
-    "no": "2004245596407508",
-    "category_id": 76,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/27/52e9fb6761e3460d92b4aa9118631c59.jpg",
-    "sku_list": [
-    {
-      "id": 2359,
-      "no": "39010166",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999352,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2360,
-      "no": "39010167",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999875,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2361,
-      "no": "39010168",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999944,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2362,
-      "no": "39010169",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999990,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2363,
-      "no": "39010170",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999998,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2364,
-      "no": "39010171",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "浓夏杨梅鲜，待君品尝。",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 74,
-  "name": "超芒战士卡",
-  "sort": 7,
-  "product_list": [
-  {
-    "id": 1029,
-    "name": "莓莓超芒",
-    "no": "2004187201975558",
-    "category_id": 74,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/19/a61849b549064d22be88bb4b52a496bc.jpg",
-    "sku_list": [
-    {
-      "id": 2322,
-      "no": "39010136",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 997792,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2323,
-      "no": "39010137",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999839,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2324,
-      "no": "39010138",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999945,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2325,
-      "no": "39010139",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999979,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2326,
-      "no": "39010140",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2327,
-      "no": "39010141",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999995,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "灵感进化，芒芒x莓莓",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 1030,
-    "name": "超芒MAX",
-    "no": "2004187781021510",
-    "category_id": 74,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/19/895da2330e474e4ab82d3b37c050a11f.jpg",
-    "sku_list": [
-    {
-      "id": 2328,
-      "no": "39010142",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 999198,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2329,
-      "no": "39010143",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999909,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2330,
-      "no": "39010144",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999967,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2331,
-      "no": "39010145",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999980,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2332,
-      "no": "39010146",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999999,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2333,
-      "no": "39010147",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999997,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "超芒进化，果肉MAX",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 71,
-  "name": "阿喜咖啡卡",
-  "sort": 8,
-  "product_list": [
-  {
-    "id": 999,
-    "name": "灵感咖啡",
-    "no": "2003316012787503",
-    "category_id": 71,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/01/b2e07204268d48dba450306f37a15e98.jpg",
-    "sku_list": [
-    {
-      "id": 2248,
-      "no": "39010101",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998070,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2249,
-      "no": "39010102",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999914,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2250,
-      "no": "39010103",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999966,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2251,
-      "no": "39010104",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999979,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2252,
-      "no": "39010105",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999998,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2253,
-      "no": "39010106",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999996,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "你总给我带来惊喜…",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 997,
-    "name": "喜茶咖啡",
-    "no": "2003313975733445",
-    "category_id": 71,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/04/01/906b1dd4bc2840e7a6543e136cebddc3.jpg",
-    "sku_list": [
-    {
-      "id": 2236,
-      "no": "39010095",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998124,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2237,
-      "no": "39010096",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999908,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2238,
-      "no": "39010097",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999979,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2239,
-      "no": "39010098",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999979,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2240,
-      "no": "39010099",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999994,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2241,
-      "no": "39010100",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999992,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "如果有多一杯咖啡…",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 69,
-  "name": "喜欢有她卡",
-  "sort": 9,
-  "product_list": [
-  {
-    "id": 962,
-    "name": "女子力不承让，站上舞台就有光芒",
-    "no": "2003059965973496",
-    "category_id": 69,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/07/e7a3a03e1aa347109429df7322a895d6.jpg",
-    "sku_list": [
-    {
-      "id": 2178,
-      "no": "39010059",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 997879,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2179,
-      "no": "39010060",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999499,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2180,
-      "no": "39010061",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999872,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2181,
-      "no": "39010062",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999891,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2182,
-      "no": "39010063",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999993,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2183,
-      "no": "39010064",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999992,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "暂无",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 961,
-    "name": "人生这场戏，我自导自演",
-    "no": "2003057407843852",
-    "category_id": 69,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/07/80f111ee1ff348dda7805cf861a97fec.jpg",
-    "sku_list": [
-    {
-      "id": 2172,
-      "no": "39010053",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 996260,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2173,
-      "no": "39010054",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999521,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2174,
-      "no": "39010055",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999832,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2175,
-      "no": "39010056",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999856,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2176,
-      "no": "39010057",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999991,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2177,
-      "no": "39010058",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999975,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "暂无",
-    "label": "",
-    "sort": 2 }] },
-
-
-
-{
-  "id": 55,
-  "name": "阿喜好运卡",
-  "sort": 10,
-  "product_list": [
-  {
-    "id": 855,
-    "name": "喜来运转",
-    "no": "2001097929452420",
-    "category_id": 55,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/05/5f3025b8a2294b58b50301e485e4f7b5.jpg",
-    "sku_list": [
-    {
-      "id": 2051,
-      "no": "39010033",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 996564,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2014,
-      "no": "39010020",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 998789,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2015,
-      "no": "39010021",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999631,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2016,
-      "no": "39010022",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999830,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2017,
-      "no": "39010023",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999971,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2018,
-      "no": "39010024",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999977,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "运来你家，喜满天下。",
-    "label": "",
-    "sort": 1 },
-
-  {
-    "id": 858,
-    "name": "恭喜发财",
-    "no": "2001095918650083",
-    "category_id": 55,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/05/7f2171d9ba184012933e609bf9a7e85c.jpg",
-    "sku_list": [
-    {
-      "id": 2049,
-      "no": "39010031",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998484,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2003,
-      "no": "39010010",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999530,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2004,
-      "no": "39010011",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999879,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2005,
-      "no": "39010012",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999942,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2006,
-      "no": "39010013",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999989,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2007,
-      "no": "39010014",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999981,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "好运入利是，财运装满袋。",
-    "label": "",
-    "sort": 2 },
-
-  {
-    "id": 856,
-    "name": "桃花满面",
-    "no": "2001092723675562",
-    "category_id": 55,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/05/8475b66ccd1f48d1892518f224ee1b21.jpg",
-    "sku_list": [
-    {
-      "id": 2052,
-      "no": "39010032",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998105,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2008,
-      "no": "39010015",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999458,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2009,
-      "no": "39010016",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999844,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2010,
-      "no": "39010017",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999910,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2011,
-      "no": "39010018",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999985,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2012,
-      "no": "39010019",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999980,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "春风拂面精神爽，满面桃花邂佳人。",
-    "label": "",
-    "sort": 3 },
-
-  {
-    "id": 854,
-    "name": "岁岁如意",
-    "no": "2001094701734270",
-    "category_id": 55,
-    "is_enable": 1,
-    "image_url": "https://go.cdn.heytea.com/storage/product/2020/03/05/13e0d54b9af145c2bd102b92b35ff27d.jpg",
-    "sku_list": [
-    {
-      "id": 2050,
-      "no": "39010034",
-      "price": "60",
-      "is_enabled": 1,
-      "left_stock": 998746,
-      "all_stock": 999999,
-      "card_amount": "60.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2020,
-      "no": "39010025",
-      "price": "100",
-      "is_enabled": 1,
-      "left_stock": 999584,
-      "all_stock": 999999,
-      "card_amount": "100.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2021,
-      "no": "39010026",
-      "price": "300",
-      "is_enabled": 1,
-      "left_stock": 999870,
-      "all_stock": 999999,
-      "card_amount": "300.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2022,
-      "no": "39010027",
-      "price": "520",
-      "is_enabled": 1,
-      "left_stock": 999944,
-      "all_stock": 999999,
-      "card_amount": "520.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2023,
-      "no": "39010028",
-      "price": "666",
-      "is_enabled": 1,
-      "left_stock": 999987,
-      "all_stock": 999999,
-      "card_amount": "666.00",
-      "card_discount_amount": "0.00" },
-
-    {
-      "id": 2024,
-      "no": "39010029",
-      "price": "999",
-      "is_enabled": 1,
-      "left_stock": 999984,
-      "all_stock": 999999,
-      "card_amount": "999.00",
-      "card_discount_amount": "0.00" }],
-
-
-    "apply_shop": "仅限中国大陆地区（不含港澳台）指定喜茶门店使用",
-    "available_period": "全天",
-    "use_need_knows": [
-    "1、本卡为阿喜有礼电子卡；",
-    "2、阿喜有礼电子卡的激活有效期为购买之日起1年内，成功激活后有3年的使用有效期；",
-    "3、成功激活后，您可以在喜茶GO小程序或中国大陆喜茶门店（不含港澳台）使用阿喜有礼电子卡购买指定出售的商品；",
-    "4、阿喜有礼卡电子卡可自用可赠送好友；",
-    "5、成功购买阿喜有礼电子卡后，每个账户可激活使用的卡数至多为15张；",
-    "6、成功购买阿喜有礼电子卡后，可在【我的】-【阿喜有礼】-【购买历史】-【查看详情】-【申请开票】申请预付卡发票；若使用阿喜有礼电子卡支付单笔订单时，该笔订单不再开具消费发票；",
-    "7、购买阿喜有礼电子卡不累计积分与经验值，当您使用阿喜有礼电子卡进行消费时，根据实际消费金额累积积分与经验值；",
-    "8、阿喜有礼电子卡可多次使用，不可兑换成现金、不找零；",
-    "9、阿喜有礼可支持至多15张卡同时使用，支持与所在平台绑定的银行卡或平台账户余额进行组合支付使用；",
-    "10、建议购买阿喜有礼电子卡后使用喜茶GO小程序点单自取或门店POS扫喜茶GO小程序会员码付款；阿喜有礼电子卡不支持第三方外卖使用；",
-    "11、更多使用说明与须知详情请见《使用须知》及《喜茶单用途商业预付卡章程》。"],
-
-    "description": "辞旧迎新之际，祝你岁岁皆如意。",
-    "label": "",
-    "sort": 4 }] }];exports.default = _default;
-
-/***/ }),
-
-/***/ 27:
-/*!*****************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/common/util.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function formatTime(time) {
-  if (typeof time !== 'number' || time < 0) {
-    return time;
-  }
-
-  var hour = parseInt(time / 3600);
-  time = time % 3600;
-  var minute = parseInt(time / 60);
-  time = time % 60;
-  var second = time;
-
-  return [hour, minute, second].map(function (n) {
-    n = n.toString();
-    return n[1] ? n : '0' + n;
-  }).join(':');
-}
-
-function formatDateTime(date) {var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd hh:mm:ss';
-  if (!date) {
-    return '';
-  }
-  if (typeof date === 'number') {
-    date = new Date(date * 1000);
-  }
-  var o = {
-    "M+": date.getMonth() + 1, //月份
-    "d+": date.getDate(), //日
-    "h+": date.getHours(), //小时
-    "m+": date.getMinutes(), //分
-    "s+": date.getSeconds(), //秒
-    "q+": Math.floor((date.getMonth() + 3) / 3), //季度
-    "S": date.getMilliseconds() //毫秒
-  };
-  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-  for (var k in o) {
-    if (new RegExp("(" + k + ")").test(fmt))
-    fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));}
-  return fmt;
-}
-
-function formatLocation(longitude, latitude) {
-  if (typeof longitude === 'string' && typeof latitude === 'string') {
-    longitude = parseFloat(longitude);
-    latitude = parseFloat(latitude);
-  }
-
-  longitude = longitude.toFixed(2);
-  latitude = latitude.toFixed(2);
-
-  return {
-    longitude: longitude.toString().split('.'),
-    latitude: latitude.toString().split('.') };
-
-}
-
-var dateUtils = {
-  UNITS: {
-    '年': 31557600000,
-    '月': 2629800000,
-    '天': 86400000,
-    '小时': 3600000,
-    '分钟': 60000,
-    '秒': 1000 },
-
-  humanize: function humanize(milliseconds) {
-    var humanize = '';
-    for (var key in this.UNITS) {
-      if (milliseconds >= this.UNITS[key]) {
-        humanize = Math.floor(milliseconds / this.UNITS[key]) + key + '前';
-        break;
-      }
-    }
-    return humanize || '刚刚';
-  },
-  format: function format(dateStr) {
-    var date = this.parse(dateStr);
-    var diff = Date.now() - date.getTime();
-    if (diff < this.UNITS['天']) {
-      return this.humanize(diff);
-    }
-    var _format = function _format(number) {
-      return number < 10 ? '0' + number : number;
-    };
-    return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDate()) + '-' +
-    _format(date.getHours()) + ':' + _format(date.getMinutes());
-  },
-  parse: function parse(str) {//将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
-    var a = str.split(/[^0-9]/);
-    return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
-  } };
-
-
-var hexToRgba = function hexToRgba(hex, opacity) {//16进制颜色转rgba
-  return "rgba(" + parseInt("0x" + hex.slice(1, 3)) + "," + parseInt("0x" + hex.slice(3, 5)) + "," + parseInt("0x" + hex.slice(5, 7)) + "," + opacity + ")";
-};
-
-module.exports = {
-  formatTime: formatTime,
-  formatDateTime: formatDateTime,
-  formatLocation: formatLocation,
-  dateUtils: dateUtils,
-  hexToRgba: hexToRgba };
-
-/***/ }),
-
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -19038,29 +15720,18 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 4:
-/*!*************************************************!*\
-  !*** D:/wkp/workSpace/code/QD/xc/mc/pages.json ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ 42:
+/***/ 32:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 43);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 33);
 
 /***/ }),
 
-/***/ 43:
+/***/ 33:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -19091,7 +15762,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 44);
+module.exports = __webpack_require__(/*! ./runtime */ 34);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -19108,7 +15779,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 44:
+/***/ 34:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -19836,6 +16507,17 @@ if (hadRuntime) {
     return this || (typeof self === "object" && self);
   })() || Function("return this")()
 );
+
+
+/***/ }),
+
+/***/ 4:
+/*!*********************************************************!*\
+  !*** D:/wkp/workSpace/code/QD/Github_App/mc/pages.json ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 
 
 /***/ })

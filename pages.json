@@ -7,8 +7,7 @@
 	}, {
 		"path": "pages/order/order",
 		"style": {
-			"navigationStyle": "custom",
-			"disableScroll": true
+			"navigationBarTitleText": " "
 		}
 	}, {
 		"path": "pages/index/index",

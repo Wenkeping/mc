@@ -128,8 +128,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 400rpx;
-		padding: 0 30rpx;
+		height: 300rpx;
+		padding:30rpx;
 		
 		button {
 			width: 100%;

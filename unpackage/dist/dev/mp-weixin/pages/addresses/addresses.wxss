@@ -103,8 +103,8 @@
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  height: 400rpx;
-  padding: 0 30rpx;
+  height: 300rpx;
+  padding: 30rpx;
 }
 .footer button.data-v-723f2fe8 {
   width: 100%;
