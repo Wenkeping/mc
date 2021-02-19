@@ -1,14 +1,11 @@
 <template>
 	<modal :show="visible" custom padding="0" width="90%" radius="18rpx">
 		<view class="header">
-			<image src="/static/images/index/menupopup_btn_share_normal.png"></image>
 			<image src="/static/images/index/round_close_btn.png" @tap="$emit('cancel')"></image>
 		</view>
-		<swiper :duration="1000" indicator-dots class="swiper" autoplay :interval="3000">
-			<swiper-item v-for="(image, index) in productData.images" :key="index" class="swiper-item">
-				<image :src="image.url" class="w-100 h-100"></image>
-			</swiper-item>
-		</swiper>
+		<view class="swiper">
+			<image :src="productData.product_img" class="w-100 h-100"></image>
+		</view>
 		<scroll-view scroll-y class="content">
 			<view class="wrapper">
 				<view class="title">{{ productData.name }}</view>

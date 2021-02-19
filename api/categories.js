@@ -1,6 +1,6 @@
 export default [
   {
-    "id": 20,
+    "id_category": 20,
     "name": "鸡",
     "sort": 1,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/23/f77f2e333a34410384c21da48e138599.jpg",
@@ -8,27 +8,22 @@ export default [
       {
         "id": 932,
         "name": "老姜炒鸡",
-        "no": "2002285591289050",
-        "description": "成本：鸡150g5元，配料2元，帮厨费3元",
-        "category_id": 67,
+        "description": "成本5元，帮厨费3元",
+        "category_id": 20,
         "sort": 5,
         "images": [
           {
             "id": 150527,
             "url": "https://go.cdn.heytea.com/storage/product/2020/05/18/fbcdfbd39c6548b185c1d0eef790808d.jpg"
-          },
-          {
-            "id": 117035,
-            "url": "https://go.cdn.heytea.com/storage/product/2020/03/04/66a64d27c2504838851ce69f2a901326.jpg"
           }
         ],
-        "price": "10"
+        "price": 8
       },
       {
         "id": 1061,
         "name": "未来肉芝士堡",
         "no": "2005095380168625",
-        "description": "成本：鸡150g5元，配料2元，帮厨费3元",
+        "description": "成本：鸡150g5元，配料2元，打包费1元，帮厨费3元",
         "label": "",
         "category_id": 20,
         "is_single": true,
@@ -1418,7 +1413,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 12,
+    "id_category": 12,
     "name": "鸭",
     "sort": 2,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/05/02/c9d862a735af48d280ab8b21a2315514.jpg",
@@ -1832,7 +1827,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 67,
+    "id_category": 67,
     "name": "鱼",
     "sort": 3,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/23/3b52e3d18fae4290b0a668a776b21645.jpg",
@@ -2487,7 +2482,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 17,
+    "id_category": 17,
     "name": "猪",
     "sort": 4,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/ef7b2a24507a4e20b50355eccc3261db.jpg",
@@ -2701,7 +2696,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 3,
+    "id_category": 3,
     "name": "牛",
     "sort": 5,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/23/ac7a2ff85b6944fe83df06a79cc19834.jpg",
@@ -3017,7 +3012,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 1,
+    "id_category": 1,
     "name": "羊",
     "sort": 6,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/3de570175dbb4c74a6291e1b6df4eb6a.jpg",
@@ -3214,7 +3209,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 15,
+    "id_category": 15,
     "name": "煲",
     "sort": 8,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/23/50609654ded746f28ea60485a7e715b5.jpg",
@@ -3493,7 +3488,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 7,
+    "id_category": 7,
     "name": "汤",
     "sort": 9,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/23/72b2d1e753464b5a837618e24bc857c3.jpg",
@@ -3902,7 +3897,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 6,
+    "id_category": 6,
     "name": "时蔬",
     "sort": 10,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/43c745f3ead64208830401107c44eef2.jpg",
@@ -4243,7 +4238,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 9,
+    "id_category": 9,
     "name": "卤味",
     "sort": 11,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/19047118303443b09ba73f82c54e4f03.jpg",
@@ -4432,7 +4427,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 59,
+    "id_category": 59,
     "name": "小吃",
     "sort": 12,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/529845ef52584ca1adca3af88ebf1c66.jpg",
@@ -4597,7 +4592,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 8,
+    "id_category": 8,
     "name": "酒水",
     "sort": 13,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/6d5e68f5b2bd4fa2bb50f94e6ac0a512.jpg",
@@ -5113,7 +5108,7 @@ export default [
     "categoryAds": []
   },
   {
-    "id": 11,
+    "id_category": 11,
     "name": "麻辣香锅",
     "sort": 7,
     "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/0dd0e6e55c4b4f119fadda81b0a7b3f8.jpg",

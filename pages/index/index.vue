@@ -28,8 +28,8 @@
 			<!-- 左侧菜单 begin -->
 			<scroll-view class="menu-bar" scroll-y scroll-with-animation>
 				<view class="wrapper">
-					<view class="menu-item" @tap="handleMenuSelected(category.id)" 
-						  :class="{active: currentCategoryId == category.id}" v-for="(category, index) in categories" :key="index">
+					<view class="menu-item" @tap="handleMenuSelected(category.id_category)" 
+						  :class="{active: currentCategoryId == category.id_category}" v-for="(category, index) in categories" :key="index">
 						<image :src="category.category_image_url" class="image" mode="widthFix"></image>
 						<view class="title">{{ category.name }}</view>
 					</view>
@@ -51,12 +51,12 @@
 					</view>
 					
 					<!-- 商品 begin -->
-					<view class="products-list" v-for="(category, index) in categories" :key="index" :id="`products-${category.id}`">
+					<view class="products-list" v-for="(category, index) in categories" :key="index" :id="`products-${category.id_category}`">
 						<view class="category-name">{{ category.name }}</view>
 						<view class="products">
 							<view class="product" v-for="(product, key) in category.products" :key="key" 
 								@tap="showProductDetailModal(product)">
-								<image :src="product.images[0].url" mode="widthFix" class="image"></image>
+								<image :src="product.product_img" mode="widthFix" class="image"></image>
 								<view class="content">
 									<view class="name">{{ product.name }}</view>
 									<view class="labels">
@@ -64,10 +64,10 @@
 										:style="{color: label.label_color, background: $util.hexToRgba(label.label_color, 0.2)}"
 										 v-for="label in product.labels" :key="label.id">{{ label.name }}</view>
 									</view>
-									<view class="description" v-html="product.description"></view>
+									<view class="description">{{product.description}}</view>
 									<view class="price">
 										<view>￥{{ product.price }}</view>
-										<actions :number="productCartNum(product.id)"
+										<actions :number="productCartNum(product.id_product)"
 												@add="handleAddToCart(product)" 
 												@minus="handleMinusFromCart(product)" />
 									</view>
@@ -119,7 +119,6 @@
 				cart: [],
 				product: {},
 				currentCategoryId: 0,
-				notices: [],
 				ads1: [
 					"https://go.cdn.heytea.com/storage/ad/2020/05/28/752a5519e89541bd8417614c599cf8c3.jpg",
 					"https://go.cdn.heytea.com/storage/ad/2020/05/24/38b7f686cf10449c85b0f5489d5d958e.jpg",
@@ -133,19 +132,25 @@
 		},
 		computed: {
 			...mapState(['orderType', 'address']),
-			productCartNum() {	//计算单个饮品添加到购物车的数量
-				return id => this.cart.reduce((acc, cur) => {
-						if(cur.id === id) {
+			productCartNum() {
+				//计算单个饮品添加到购物车的数量
+				return id_product => this.cart.reduce((acc, cur) => {
+						if(cur.id_product === id_product) {
 							return acc += cur.number
 						}
 						return acc
 					}, 0)
 			}
 		},
-		async onLoad() {
-			this.categories = await this.$api('categories')
-			this.currentCategoryId = this.categories.length && this.categories[0].id
-			this.$nextTick(() => this.calcSize())
+		 async onLoad() {
+			uniCloud.callFunction({
+				name:'getCategories',
+				success:(e) =>{
+					this.categories = e.result.data
+					this.currentCategoryId = this.categories.length && this.categories[0].id_category
+					this.$nextTick(() => this.calcSize())
+				}
+			})
 		},
 		methods: {
 			...mapMutations(['SET_ORDER_TYPE']),
@@ -158,27 +163,25 @@
 			},
 			handleAddToCart(product) {	//添加到购物车
 				const index = this.cart.findIndex(item => {
-					return item.id === product.id
+					return item.id_product === product.id_product
 				})
 				
 				if(index > -1) {
 					this.cart[index].number += (product.number || 1)
 					return
 				}
-				
 				this.cart.push({
-					id: product.id,
+					id_product: product.id_product,
 					cate_id: product.category_id,
 					name: product.name,
 					price: product.price,
 					number: product.number || 1,
-					image: product.images[0].url,
+					image: product.product_img,
 					description:product.description
 				})
 			},
 			handleMinusFromCart(product) { //从购物车减商品
-				let index = this.cart.findIndex(item => item.id == product.id)
-				
+				let index = this.cart.findIndex(item => item.id_product == product.id_product)
 				this.cart[index].number -= 1
 				if(this.cart[index].number <= 0) {
 					this.cart.splice(index, 1)
@@ -202,15 +205,15 @@
 			clearCart() {
 				this.cart = []
 			},
-			handleMenuSelected(id) {
-				this.productsScrollTop = this.categories.find(item => item.id == id).top
-				this.$nextTick(() => this.currentCategoryId = id)
+			handleMenuSelected(id_category) {
+				this.productsScrollTop = this.categories.find(item => item.id_category == id_category).top
+				this.$nextTick(() => this.currentCategoryId = id_category)
 			},
 			productsScroll({detail}) {
 				const {scrollTop} = detail
 				let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
 				if(tabs.length > 0){
-					this.currentCategoryId = tabs[0].id
+					this.currentCategoryId = tabs[0].id_category
 				}
 			},
 			calcSize() {
@@ -223,7 +226,7 @@
 				}).exec()
 				
 				this.categories.forEach(item => {
-					let view = uni.createSelectorQuery().select(`#products-${item.id}`)
+					let view = uni.createSelectorQuery().select(`#products-${item.id_category}`)
 					view.fields({
 						size: true
 					}, data => {
@@ -241,6 +244,8 @@
 			}
 		}
 	}
+	
+	
 </script>
 
 <style lang="scss">
