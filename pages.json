@@ -40,24 +40,6 @@
         "style": {
             "navigationBarTitleText": "填写备注"
         }
-    }, {
-        "path": "pages/db-category/add",
-        "style": {
-            "navigationBarTitleText": "新增"
-        }
-    }, {
-        "path": "pages/db-category/edit",
-        "style": {
-            "navigationBarTitleText": "修改"
-        }
-    }, {
-        "path": "pages/db-category/list",
-        "style": {
-            "navigationBarTitleText": ""
-        }
-    }, {
-        "path": "pages/db-category/detail",
-        "style": {}
     }],
     "tabBar": {
         "color": "#999999",

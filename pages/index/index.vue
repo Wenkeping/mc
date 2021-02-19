@@ -120,7 +120,7 @@
 				product: {},
 				currentCategoryId: 0,
 				ads1: [
-					"https://go.cdn.heytea.com/storage/ad/2020/05/28/752a5519e89541bd8417614c599cf8c3.jpg",
+					"https://7463-tcb-9kf1c766c6ytlhcfff934-29a7ad-1304995994.tcb.qcloud.la/微信图片_20210219131024.jpg",
 					"https://go.cdn.heytea.com/storage/ad/2020/05/24/38b7f686cf10449c85b0f5489d5d958e.jpg",
 					"https://go.cdn.heytea.com/storage/ad/2020/05/21/2315beb5105944e8b795c5c0084ec99f.jpg",
 					"https://go.cdn.heytea.com/storage/ad/2020/05/21/b88c6780a73249b0b0166784917a5046.jpg"
