@@ -4,7 +4,7 @@
         "style": {
             "navigationStyle": "custom"
         }
-    }, {
+    },{
         "path": "pages/order/order",
         "style": {
             "navigationBarTitleText": " "
@@ -39,6 +39,11 @@
         "path": "pages/pay/remark",
         "style": {
             "navigationBarTitleText": "填写备注"
+        }
+    },{
+        "path": "pages/login/login",
+        "style": {
+            "navigationBarTitleText": "登录"
         }
     }],
     "tabBar": {
