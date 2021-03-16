@@ -8,34 +8,22 @@
 		
 		<view class="content">
 			<view class="section-1">
-				<navigator class="item" open-type="switchTab" url="/pages/index/index" hover-class="none">
+				<view class="item" @tap="lunch" hover-class="none">
 					<image src="/static/images/home/home_icon_ziqu1.png" mode="widthFix"></image>
-					<view class="wenyue-font">中餐</view>
-					<view class="text-color-assist">次日 9:30-11:00 送达</view>
-				</navigator>
-				<navigator class="item" open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
+					<view class="wenyue-font">门店</view>
+				</view>
+				<view class="item" @tap="dinner" hover-class="none">
 					<image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
-					<view class="wenyue-font">晚餐</view>
-					<view class="text-color-assist">次日 15:30-17:00 送达</view>
-				</navigator>
-			</view>
-			
-			<view class="section-2">
-				<view class="integrals">
-					<view>服务说明</view>
-				</view>
-				<view>
-					本服务需提前一天预定中餐或晚餐<br>
-					当日可下单时间：7:00-22:00 <br>
-					中餐：次日 8:00-9:00 现做食材, 9:30-11:00 送达<br>
-					晚餐：次日 14:00-15:00 现做食材, 15:30-17:00 送达<br>
+					<view class="wenyue-font">外卖</view>
 				</view>
 			</view>
+	
 		</view>
 	</view>
 </template>
 
 <script>
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -46,6 +34,36 @@
 					"https://go.cdn.heytea.com/storage/ad/2020/04/27/db60b797c1cd4afabe9666e7df958ffd.jpg",
 					"https://go.cdn.heytea.com/storage/ad/2020/05/21/4ba53dda599345bdaf28a08420dd1b6f.jpg"
 				]
+			}
+		},
+		 onLoad() {
+			 
+		},
+		computed: {
+			...mapState(['isLogin','orderType','userInfo','chooseStore'])
+		},
+		methods: {
+			lunch() {
+				let mcToken = uni.getStorageSync('mc_token')
+				if(!this.isLogin) {
+					uni.navigateTo({url: '/pages/login/login'})
+					
+				}else{
+					this.$store.commit('SET_ORDERTYPE',' lunch');
+					uni.switchTab({
+						url:'../index/index'
+					})
+				}
+			},
+			dinner() {
+				if(!this.isLogin) {
+					uni.navigateTo({url: '/pages/login/login'})
+				}else{
+					this.$store.commit('SET_ORDERTYPE','dinner');
+					uni.switchTab({
+						url:'../index/index'
+					})
+				}
 			}
 		}
 	}

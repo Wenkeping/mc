@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<view class="content">
+		<view>
 			<view class="receiver">
 				<navigator open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
 					<list-cell arrow last>
@@ -17,13 +17,13 @@
 			<view class="flex-fill overflow-auto border-radius-lg mt-20">
 				<list-cell>
 					<view class="d-flex flex-column">
-						<view class="d-flex align-items-center mt-40" v-for="(item, index) in cart" :key="index">
+						<view class="d-flex align-items-center mt-20" v-for="(item, index) in cart" :key="index">
 							<view><image :src="item.image" class="pro-img"></image></view>
 							<view class="ml-20">
 								<view class="font-size-base mb-10">{{ item.name }}</view>
 								<view class="font-size-extra-sm text-color-assist" v-html="item.description"></view>
 							</view>
-							<view class="font-weight-bold ml-40">x{{ item.number }}</view>
+							<view class="font-weight-bold ml-100">x{{ item.number }}</view>
 							<view class="font-weight-bold ml-40">￥{{ item.price }}</view>
 						</view>
 					</view>
@@ -90,7 +90,7 @@
 	.pro-img {
 		width: 150rpx;
 		height: 120rpx;
-		margin-left: -20rpx;
+		margin-left: -50rpx;
 	}
 	
 	.receiver{
@@ -107,17 +107,9 @@
 		}
 	}
 	
-	.content {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
+
 		
-		.order-box {
-			display: flex;
-			flex-direction: column;
-			flex-shrink: 0;
-		}
-	}
+		
 	
 	
 	.footer {
