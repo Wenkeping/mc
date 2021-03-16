@@ -53,21 +53,9 @@ exports.main = async (event, context) => {
 	},
 	{
 	  "id_category": 27,
-	  "name": "卤味",
+	  "name": "小吃",
 	  "sort": 9,
 	  "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/19047118303443b09ba73f82c54e4f03.jpg"
-	},
-	{
-	  "id_category": 30,
-	  "name": "小吃",
-	  "sort": 10,
-	  "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/529845ef52584ca1adca3af88ebf1c66.jpg"
-	},
-	{
-	  "id_category": 33,
-	  "name": "酒水",
-	  "sort": 11,
-	  "category_image_url": "https://go.cdn.heytea.com/storage/category/2020/04/21/6d5e68f5b2bd4fa2bb50f94e6ac0a512.jpg"
 	}];
 	
 	let ret = await categoryDB.add(categoryArry);
