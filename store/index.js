@@ -1,47 +1,48 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
-
-//为了方便测试，此处用vuex做全局数据
 const store = new Vuex.Store({
-	state: {
-		userInfo: {},
-		isLogin: false,
-		orderType: 'takein',
-		addresses: [{
-			"id": 1,
-			"user_id": 1,
-			"name": "梁先生",
-			"phone": "18666610100",
-			"gender": 0,
-			"address": "有间大厦",
-			"complete_address": "广东省深圳市宝安区福海大道118号",
-			"description": "ABC1234",
-			"latitude": "",
-			"longitude": "",
-			"is_default": 1
-		}],
-		address: {},
-		remark: '不打包'
+    state: {
+		isLogin:false,
+		orderType: '',
+		userInfo:{},
+		choseAddress:{},
+		choseStore:{},
+		orderCurrent:{}
 	},
-	mutations: {
-		SET_ORDER_TYPE(state, orderType) {
-			state.orderType = orderType
+    mutations: {
+		//登录
+		Login(state,res) {
+			state.isLogin = true
+			state.userInfo = res
+			uni.setStorage({
+			        key: 'userInfo',
+			        data: res
+			      })
 		},
-		SET_ADDRESS(state, address) {
-			state.address = address
+	
+		SET_ORDERTYPE(state,type) {
+			state.orderType = type
 		},
-		SET_REMARK(state, remark) {
-			state.remark = remark
+		
+			
+		SET_ADDRESS(state,address) {
+			state.choseAddress = address
 		},
-		SET_USERINFO(state, userInfo) {
-			state.userInfo = userInfo
+		
+		SET_STORE(state,store) {
+			state.choseStore =store
 		},
-		SET_ISLOGIN(state, isLogin) {
-			state.isLogin = isLogin
+		SET_ORDERCURRENT(state,current) {
+			state.orderCurrent = current
+		},
+		CHEAR_CURRENT(state) {
+			state.orderCurrent = {}
+		},
+		SET_ORDERCURRENTSTATUS(state,status) {
+			state.orderCurrent.status = status
 		}
-	}
+	},
+    actions: {}
 })
-
 export default store
