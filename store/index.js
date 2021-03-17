@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
-		isLogin:false,
 		orderType: '',
 		userInfo:{},
 		choseAddress:{},
@@ -13,10 +12,9 @@ const store = new Vuex.Store({
     mutations: {
 		//登录
 		Login(state,res) {
-			state.isLogin = true
 			state.userInfo = res
-			uni.setStorage({
-			        key: 'userInfo',
+			uni.setStorageSync({
+			        key: 'mc_userInfo',
 			        data: res
 			      })
 		},
