@@ -45,7 +45,7 @@
 		methods: {
 			lunch() {
 				let mcToken = uni.getStorageSync('mc_token')
-				if(!this.isLogin) {
+				if(!mcToken) {
 					uni.navigateTo({url: '/pages/login/login'})
 					
 				}else{
@@ -56,7 +56,8 @@
 				}
 			},
 			dinner() {
-				if(!this.isLogin) {
+				let mcToken = uni.getStorageSync('mc_token')
+				if(!mcToken) {
 					uni.navigateTo({url: '/pages/login/login'})
 				}else{
 					this.$store.commit('SET_ORDERTYPE','dinner');
