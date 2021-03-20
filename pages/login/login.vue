@@ -65,11 +65,10 @@
 					if (res.result.code === 0) {
 						that.Login(userInfo)
 						uni.setStorageSync('mc_token', res.result.token)
-						
-						uni.switchTab({
-							url:'../index/index'
-						})
+					}else{
+						return Promise.reject(new Error(res.result.msg))
 					}
+					uni.navigateBack()
 				}).catch((e) => {
 					console.error(e)
 					uni.hideLoading()
