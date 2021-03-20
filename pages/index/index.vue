@@ -207,8 +207,6 @@
 			},
 			productsScroll({detail}) {
 				const {scrollTop} = detail
-				console.log(scrollTop)
-				console.log(this.lastProduct.top)
 				this.lastProduct = this.categories[this.categories.length-1]
 				let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
 				if(tabs.length > 0){
@@ -219,7 +217,7 @@
 						this.productsLeftScrollTop = 0
 					}
 					
-					if(scrollTop >= this.lastProduct.top-100){
+					if(scrollTop >= this.lastProduct.top-200){
 						this.currentCategoryId = this.lastProduct.id_category
 					}
 				}
