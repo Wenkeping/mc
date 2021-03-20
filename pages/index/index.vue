@@ -123,7 +123,7 @@
 				cartPopupShow: false,
 				productsScrollTop: 0,
 				productsLeftScrollTop: 0,
-				maxScrollTop:0
+				lastProduct:{}
 			}
 		},
 		computed: {
@@ -207,14 +207,20 @@
 			},
 			productsScroll({detail}) {
 				const {scrollTop} = detail
-				this.maxScrollTop = this.categories[this.categories.length-1].top
+				console.log(scrollTop)
+				console.log(this.lastProduct.top)
+				this.lastProduct = this.categories[this.categories.length-1]
 				let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
 				if(tabs.length > 0){
 					this.currentCategoryId = tabs[0].id_category
 					if(tabs.length > this.categories.length/2){
-						this.productsLeftScrollTop = this.maxScrollTop
+						this.productsLeftScrollTop = this.lastProduct.top
 					}else{
 						this.productsLeftScrollTop = 0
+					}
+					
+					if(scrollTop >= this.lastProduct.top-100){
+						this.currentCategoryId = this.lastProduct.id_category
 					}
 				}
 			},
