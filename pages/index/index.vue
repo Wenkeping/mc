@@ -26,10 +26,9 @@
 		
 		<view class="main">
 			<!-- 左侧菜单 begin -->
-			<scroll-view class="menu-bar" scroll-y scroll-with-animation>
+			<scroll-view class="menu-bar" scroll-y scroll-with-animation :scroll-top="productsLeftScrollTop">
 				<view class="wrapper">
-					<view class="menu-item" @tap="handleMenuSelected(category.id_category)" 
-						  :class="{active: currentCategoryId == category.id_category}" v-for="(category, index) in categories" :key="index">
+					<view class="menu-item" @tap="handleMenuSelected(category.id_category)" :class="{active: currentCategoryId == category.id_category}" v-for="(category, index) in categories" :key="index">
 						<image :src="category.category_image_url" class="image" mode="widthFix"></image>
 						<view class="title">{{ category.name }}</view>
 					</view>
@@ -59,11 +58,6 @@
 								<image :src="product.product_img" mode="widthFix" class="image"></image>
 								<view class="content">
 									<view class="name">{{ product.name }}</view>
-									<view class="labels">
-										<view class="label" 
-										:style="{color: label.label_color, background: $util.hexToRgba(label.label_color, 0.2)}"
-										 v-for="label in product.labels" :key="label.id">{{ label.name }}</view>
-									</view>
 									<view class="description">{{product.description}}</view>
 									<view class="price">
 										<view>￥{{ product.price }}</view>
@@ -127,7 +121,9 @@
 				],
 				productModalVisible: false,
 				cartPopupShow: false,
-				productsScrollTop: 0
+				productsScrollTop: 0,
+				productsLeftScrollTop: 0,
+				maxScrollTop:0
 			}
 		},
 		computed: {
@@ -147,7 +143,7 @@
 				name:'getCategories',
 				success:(e) =>{
 					this.categories = e.result.data
-					this.currentCategoryId = this.categories.length && this.categories[0].id_category
+					this.currentCategoryId =this.categories.length && this.categories[0].id_category
 					this.$nextTick(() => this.calcSize())
 				}
 			})
@@ -211,9 +207,15 @@
 			},
 			productsScroll({detail}) {
 				const {scrollTop} = detail
+				this.maxScrollTop = this.categories[this.categories.length-1].top
 				let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
 				if(tabs.length > 0){
 					this.currentCategoryId = tabs[0].id_category
+					if(tabs.length > this.categories.length/2){
+						this.productsLeftScrollTop = this.maxScrollTop
+					}else{
+						this.productsLeftScrollTop = 0
+					}
 				}
 			},
 			calcSize() {
