@@ -33,8 +33,15 @@ exports.main = async (event) => {
 			{
 				res = await uniID.loginByWeixin({
 					code
-				})
+				});
+				break;
 			}
+		default:
+			res = {
+				code: 403,
+				msg: '非法访问'
+			}
+			break;
 	}
 	return res
 };
