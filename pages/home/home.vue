@@ -49,7 +49,7 @@
 					uni.navigateTo({url: '/pages/login/login'})
 					
 				}else{
-					this.$store.commit('SET_ORDERTYPE',' lunch');
+					this.$store.commit('SET_ORDERTYPE',' Lunch');
 					uni.switchTab({
 						url:'../index/index'
 					})
@@ -60,7 +60,7 @@
 				if(!mcToken) {
 					uni.navigateTo({url: '/pages/login/login'})
 				}else{
-					this.$store.commit('SET_ORDERTYPE','dinner');
+					this.$store.commit('SET_ORDERTYPE','Dinner');
 					uni.switchTab({
 						url:'../index/index'
 					})
