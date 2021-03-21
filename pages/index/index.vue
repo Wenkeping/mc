@@ -210,15 +210,16 @@
 				this.lastProduct = this.categories[this.categories.length-1]
 				let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
 				if(tabs.length > 0){
-					this.currentCategoryId = tabs[0].id_category
+					if(scrollTop >= this.lastProduct.top-200){
+						this.currentCategoryId = this.lastProduct.id_category
+					}else{
+						this.currentCategoryId = tabs[0].id_category
+					}
+					
 					if(tabs.length > this.categories.length/2){
 						this.productsLeftScrollTop = this.lastProduct.top
 					}else{
 						this.productsLeftScrollTop = 0
-					}
-					
-					if(scrollTop >= this.lastProduct.top-200){
-						this.currentCategoryId = this.lastProduct.id_category
 					}
 				}
 			},
