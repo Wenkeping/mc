@@ -140,7 +140,7 @@
 		},
 		 async onLoad() {
 			uniCloud.callFunction({
-				name:'getCategories',
+				name:'get-categories',
 				success:(e) =>{
 					this.categories = e.result.data
 					this.currentCategoryId =this.categories.length && this.categories[0].id_category
