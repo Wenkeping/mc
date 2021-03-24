@@ -450,6 +450,9 @@ uni-modal .uni-modal {
 .ml-40 {
   margin-left: 40rpx;
 }
+.ml-100 {
+  margin-left: 100rpx;
+}
 .mr-10 {
   margin-right: 10rpx;
 }
@@ -464,6 +467,9 @@ uni-modal .uni-modal {
 }
 .pl-30 {
   padding-left: 30rpx;
+}
+.pl-100 {
+  padding-left: 100rpx;
 }
 .pt-30 {
   padding-top: 30rpx;
