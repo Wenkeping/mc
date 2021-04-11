@@ -32,7 +32,7 @@
 				<list-cell arrow last>
 					<navigator hover-class="none" class="flex-fill ml-80 text-truncate text-right" open-type="navigate" url="/pages/pay/remark">
 						<view class="w-100 d-flex align-items-center justify-content-between overflow-hidden">
-							<view class="flex-shrink-0">备注</view>
+							<view  class="mr-10">备注</view>
 							{{ remark }}
 						</view>
 					</navigator>
@@ -49,7 +49,7 @@
 				<view class="mr-30">
 					合计：<text class="font-size-lg font-weight-bold">￥{{ cartAmount }}</text>
 				</view>
-				<button type="primary">支付</button>
+				<button type="primary" @tap="pay">支付</button>
 			</view>
 		</view>
 	</view>
@@ -76,6 +76,82 @@
 			},
 			remark() {
 				return this.$store.state.remark
+			}
+		},
+		methods: {
+			pay(){
+				uni.showLoading({
+					title: '数据加载中...'
+				})
+				
+				return uniCloud.callFunction({
+					name: 'user-center',
+					data: {
+						action: 'validateToken',
+						params: {
+							mcToken: uni.getStorageSync('mc_token')
+						}
+					}
+				}).then(res => {
+					uni.hideLoading();
+					console.log(res)
+					 if (res.result.code === 0) {
+					 	return uniCloud.callFunction({
+							name: 'pay',
+					 		data: {
+					 			provider: 'wxpay',
+					 			openId: res.result.openId
+								//order_id: //this.order_id,
+					 			//remark: //this.form.remark
+							}
+						})
+						.then(res => {
+							if (res.result.orderInfo) {
+								return new Promise((resolve, reject) => {
+									uni.requestPayment({
+										...res.result.orderInfo,
+
+										complete() {
+											resolve(res.result.order_id);
+										}
+									});
+								});
+							} else {
+								throw new Error(res.result.msg);
+							}
+						})
+						//.then(order_id => {
+					// 		// 订单查询
+					// 		return uniCloud.callFunction({
+					// 			name: 'order',
+					// 			data: {
+					// 				action: 'getOrder',
+					// 				order_id: order_id
+					// 			}
+					// 		});
+					// 	}).then(res => {
+					// 		let resData = res.result.data[0];
+					// 		if (resData.status === 2) {
+					// 			uni.showModal({
+					// 				content: '订单已支付',
+					// 				showCancel: false
+					// 			});
+					// 			uni.hideLoading();
+					// 			uni.removeStorageSync('cart');
+					// 			uni.reLaunch({
+					// 				url: '/pages/take-foods/take-foods?order_id=' + resData.order_id
+					// 			});
+					// 		} else {
+					// 			uni.showModal({
+					// 				content: '订单未支付',
+					// 				showCancel: false
+					// 			});
+					// 		}
+					// 	});
+					 }else{
+						uni.navigateTo({url: '/pages/login/login'})
+					}
+				});
 			}
 		}
 	}

@@ -10,12 +10,12 @@
 					</view>
 					<view class="buttons">
 						<button type="default" class="button" 
-								:class="{active: orderType == 'takein'}" plain 
+								:class="{active: orderType == 'lunch'}" plain 
 								hover-class="none" @tap="switchOrderType">
 							中餐
 						</button>
 						<button type="default" class="button" 
-								:class="{active: orderType == 'takeout'}" plain 
+								:class="{active: orderType == 'dinner'}" plain 
 								hover-class="none" @tap="switchOrderType">
 							晚餐
 						</button>
@@ -149,12 +149,12 @@
 			})
 		},
 		methods: {
-			...mapMutations(['SET_ORDER_TYPE']),
+			...mapMutations(['SET_ORDERTYPE']),
 			switchOrderType() {
-				if(this.orderType === 'takein') {
-					this.SET_ORDER_TYPE('takeout')
+				if(this.orderType === 'lunch') {
+					this.SET_ORDERTYPE('dinner')
 				} else {
-					this.SET_ORDER_TYPE('takein')
+					this.SET_ORDERTYPE('lunch')
 				}
 			},
 			handleAddToCart(product) {	//添加到购物车
@@ -244,9 +244,39 @@
 				})
 			},
 			pay() {
-				uni.setStorageSync('cart', this.cart)
-				uni.navigateTo({
-					url: '/pages/pay/pay'
+				return uniCloud.callFunction({
+					name: 'user-center',
+					data: {
+						action: 'validateToken',
+						params: {
+							mcToken: uni.getStorageSync('mc_token')
+						}
+					}
+				}).then(res => {
+					console.log(res)
+					if (res.result.code === 0) {
+						let data = {
+							openId: res.result.openId,
+							orderType: this.orderType,
+							goodsInOrder: this.cart
+						}
+						
+						return uniCloud.callFunction({
+							name: 'order',
+							data: {
+								action: 'submitOrder',
+								data: data
+							}
+						})
+						
+					 }else{
+						uni.navigateTo({url: '/pages/login/login'})
+					}
+				}).then(resData =>{
+					uni.setStorageSync('cart', this.cart)
+					uni.navigateTo({
+						url:'../pay/pay?order_id=' + resData.result.order_id
+					})
 				})
 			}
 		}

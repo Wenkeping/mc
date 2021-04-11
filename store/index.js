@@ -6,8 +6,8 @@ const store = new Vuex.Store({
 		orderType: '',
 		userInfo:{},
 		choseAddress:{},
-		choseStore:{},
-		orderCurrent:{}
+		orderCurrent:{},
+		remark:''
 	},
     mutations: {
 		//登录
@@ -28,8 +28,8 @@ const store = new Vuex.Store({
 			state.choseAddress = address
 		},
 		
-		SET_STORE(state,store) {
-			state.choseStore =store
+		SET_REMARK(state,store) {
+			state.remark =store
 		},
 		SET_ORDERCURRENT(state,current) {
 			state.orderCurrent = current

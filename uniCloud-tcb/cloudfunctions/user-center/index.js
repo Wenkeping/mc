@@ -9,11 +9,12 @@ exports.main = async (event) => {
 	 */
 	let params = event.params || {}
 	let payload = {}
+	let res = {}
 	let noCheckAction = [ 'loginByWeixin']
 
 	const {code,mcToken} = params
 	
-	if (noCheckAction.indexOf('loginByWeixin') === -1) {
+	if (noCheckAction.indexOf(event.action) === -1) {
 		if (!mcToken) {
 			return {
 				code: 403,
@@ -27,13 +28,18 @@ exports.main = async (event) => {
 		}
 	}
 	
-	let res = {}
+	
 	switch (event.action) {
 		case 'loginByWeixin':
 			{
 				res = await uniID.loginByWeixin({
 					code
 				});
+				break;
+			}
+		case 'validateToken':
+			{
+				res = payload;
 				break;
 			}
 		default:

@@ -37,34 +37,35 @@
 			}
 		},
 		 onLoad() {
-			 
+			 return uniCloud.callFunction({
+			 	name: 'user-center',
+			 	data: {
+			 		action: 'validateToken',
+			 		params: {
+			 			mcToken: uni.getStorageSync('mc_token')
+			 		}
+			 	}
+			 }).then(res => {
+			 	if (res.result.code != 0) {
+			 	 	uni.navigateTo({url: '/pages/login/login'})
+			 	 }
+			 })
 		},
 		computed: {
 			...mapState(['isLogin','orderType','userInfo','chooseStore'])
 		},
 		methods: {
 			lunch() {
-				let mcToken = uni.getStorageSync('mc_token')
-				if(!mcToken) {
-					uni.navigateTo({url: '/pages/login/login'})
-					
-				}else{
-					this.$store.commit('SET_ORDERTYPE',' Lunch');
-					uni.switchTab({
-						url:'../index/index'
-					})
-				}
+				this.$store.commit('SET_ORDERTYPE','lunch');
+				uni.switchTab({
+					url:'../index/index'
+				})
 			},
 			dinner() {
-				let mcToken = uni.getStorageSync('mc_token')
-				if(!mcToken) {
-					uni.navigateTo({url: '/pages/login/login'})
-				}else{
-					this.$store.commit('SET_ORDERTYPE','Dinner');
-					uni.switchTab({
-						url:'../index/index'
-					})
-				}
+				this.$store.commit('SET_ORDERTYPE','dinner');
+				uni.switchTab({
+					url:'../index/index'
+				})
 			}
 		}
 	}
