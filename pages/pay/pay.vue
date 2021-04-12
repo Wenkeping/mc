@@ -94,62 +94,25 @@
 					}
 				}).then(res => {
 					uni.hideLoading();
-					console.log(res)
-					 if (res.result.code === 0) {
-					 	return uniCloud.callFunction({
-							name: 'pay',
-					 		data: {
-					 			provider: 'wxpay',
-					 			openId: res.result.openId
-								//order_id: //this.order_id,
-					 			//remark: //this.form.remark
+					if (res.result.code === 0) {
+						let payData = uni.getStorageSync('payData');
+							payData.openId = res.result.openId
+										
+						return uniCloud.callFunction({
+							name: 'order',
+							data: {
+								action: 'submitOrder',
+								data: payData
 							}
 						})
-						.then(res => {
-							if (res.result.orderInfo) {
-								return new Promise((resolve, reject) => {
-									uni.requestPayment({
-										...res.result.orderInfo,
-
-										complete() {
-											resolve(res.result.order_id);
-										}
-									});
-								});
-							} else {
-								throw new Error(res.result.msg);
-							}
-						})
-						//.then(order_id => {
-					// 		// 订单查询
-					// 		return uniCloud.callFunction({
-					// 			name: 'order',
-					// 			data: {
-					// 				action: 'getOrder',
-					// 				order_id: order_id
-					// 			}
-					// 		});
-					// 	}).then(res => {
-					// 		let resData = res.result.data[0];
-					// 		if (resData.status === 2) {
-					// 			uni.showModal({
-					// 				content: '订单已支付',
-					// 				showCancel: false
-					// 			});
-					// 			uni.hideLoading();
-					// 			uni.removeStorageSync('cart');
-					// 			uni.reLaunch({
-					// 				url: '/pages/take-foods/take-foods?order_id=' + resData.order_id
-					// 			});
-					// 		} else {
-					// 			uni.showModal({
-					// 				content: '订单未支付',
-					// 				showCancel: false
-					// 			});
-					// 		}
-					// 	});
-					 }else{
+					}else{
 						uni.navigateTo({url: '/pages/login/login'})
+					}
+				}).then(resData =>{
+					if(resData.result.orderId){
+						console.log(resData.result.orderId)
+					}else{
+						console.log('支付失败');
 					}
 				});
 			}

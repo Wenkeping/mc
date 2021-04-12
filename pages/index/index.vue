@@ -244,39 +244,14 @@
 				})
 			},
 			pay() {
-				return uniCloud.callFunction({
-					name: 'user-center',
-					data: {
-						action: 'validateToken',
-						params: {
-							mcToken: uni.getStorageSync('mc_token')
-						}
-					}
-				}).then(res => {
-					console.log(res)
-					if (res.result.code === 0) {
-						let data = {
-							openId: res.result.openId,
-							orderType: this.orderType,
-							goodsInOrder: this.cart
-						}
-						
-						return uniCloud.callFunction({
-							name: 'order',
-							data: {
-								action: 'submitOrder',
-								data: data
-							}
-						})
-						
-					 }else{
-						uni.navigateTo({url: '/pages/login/login'})
-					}
-				}).then(resData =>{
-					uni.setStorageSync('cart', this.cart)
-					uni.navigateTo({
-						url:'../pay/pay?order_id=' + resData.result.order_id
-					})
+				let payData = {
+					orderType: this.orderType,
+					goodsInOrder: this.cart
+				}
+				uni.setStorageSync('cart', this.cart)
+				uni.setStorageSync('payData', payData)
+				uni.navigateTo({
+					url:'../pay/pay'
 				})
 			}
 		}

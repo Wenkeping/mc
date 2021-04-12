@@ -1,5 +1,4 @@
 'use strict';
-
 const uniID = require('uni-id');
 exports.main = async (event) => {
 	/* 如果你通过云函数Url访问

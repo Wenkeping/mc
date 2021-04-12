@@ -22,12 +22,9 @@ const store = new Vuex.Store({
 		SET_ORDERTYPE(state,type) {
 			state.orderType = type
 		},
-		
-			
 		SET_ADDRESS(state,address) {
 			state.choseAddress = address
 		},
-		
 		SET_REMARK(state,store) {
 			state.remark =store
 		},

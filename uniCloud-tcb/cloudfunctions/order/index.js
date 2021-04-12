@@ -1,5 +1,4 @@
 'use strict';
-const crypto = require('crypto');
 const db = uniCloud.database();
 exports.main = async (event, context) => {
 	// 判定 order 行为
@@ -23,6 +22,9 @@ exports.main = async (event, context) => {
 		// 订单状态
 		const status = 1
 		
+		// 当前时间
+		const time = new Date().toLocaleDateString() +" "+ new Date().toLocaleTimeString()
+		
 		// 生成订单
 		const orderResult = await db.collection('db-order').add({
 			uId,           // 用户openid
@@ -31,7 +33,8 @@ exports.main = async (event, context) => {
 			goodsInOrder,  // 购物车列表
 			totalFee,      // 订单总价
 			chooseStore,   // 选择的门店
-			status         // 1-为未支付,2-为已经支付
+			status,         // 1-为未支付,2-为已经支付
+			time
 		})
 		
 		if(!orderResult.id) {
