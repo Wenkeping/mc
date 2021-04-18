@@ -14,21 +14,26 @@
 					</list-cell>
 				</navigator>
 			</view>
-			<view class="flex-fill overflow-auto border-radius-lg mt-20">
-				<list-cell>
-					<view class="d-flex flex-column">
-						<view class="d-flex align-items-center mt-20" v-for="(item, index) in cart" :key="index">
+			<view class="flex-fill overflow-auto border-radius-lg mt-20 mb-150">
+				<list-cell padding="0 40rpx">
+					<view class="w-100 d-flex flex-column">
+						<view class="d-flex align-items-center mt-40" v-for="(item, index) in cart" :key="index">
 							<view><image :src="item.image" class="pro-img"></image></view>
-							<view class="ml-20">
+							<view class="flex-fill d-flex flex-column ml-30">
 								<view class="font-size-base mb-10">{{ item.name }}</view>
-								<view class="font-size-extra-sm text-color-assist" v-html="item.description"></view>
+								<view class="font-size-extra-sm text-color-assist">
+									{{ item.description }}
+								</view>
 							</view>
-							<view class="font-weight-bold ml-100">x{{ item.number }}</view>
-							<view class="font-weight-bold ml-40">￥{{ item.price }}</view>
+							<view class="flex-shrink-0 font-weight-bold ml-40">x{{ item.number }}</view>
+							<view class="flex-shrink-0 font-weight-bold ml-40">￥{{ item.price }}</view>
 						</view>
+						
+						<view class="d-flex justify-content-between align-items-center mt-40 pb-30 border-dashed"></view>
+						
 					</view>
 				</list-cell>
-				
+
 				<list-cell arrow last>
 					<navigator hover-class="none" class="flex-fill ml-80 text-truncate text-right" open-type="navigate" url="/pages/pay/remark">
 						<view class="w-100 d-flex align-items-center justify-content-between overflow-hidden">
@@ -97,7 +102,8 @@
 					if (res.result.code === 0) {
 						let payData = uni.getStorageSync('payData');
 							payData.openId = res.result.openId
-										
+							payData.chooseStore = '华为店'
+							payData.remark = this.remark			
 						return uniCloud.callFunction({
 							name: 'order',
 							data: {
