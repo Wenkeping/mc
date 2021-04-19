@@ -5,7 +5,7 @@ exports.main = async (event, context) => {
 	if(event.action == 'submitOrder') {
 		
 		// 获取 openId 和 carts
-		const {openId,orderType,goodsInOrder} = event.data
+		const {openId,orderType,goodsInOrder,chooseStore,remark} = event.data
 		const uId = openId
 		
 		// 生成订单号
@@ -16,8 +16,6 @@ exports.main = async (event, context) => {
 		const totalFee = goodsInOrder.reduce((acc, cur) => acc + cur.number * cur.price, 0)
 		console.log(totalFee)
 		
-		// 门店位置
-		const chooseStore = ''
 		
 		// 订单状态
 		const status = 1
@@ -34,6 +32,7 @@ exports.main = async (event, context) => {
 			totalFee,      // 订单总价
 			chooseStore,   // 选择的门店
 			status,         // 1-为未支付,2-为已经支付
+			remark,
 			time
 		})
 		
