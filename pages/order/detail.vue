@@ -37,7 +37,7 @@
 								<view class="flex-shrink-0  mt-20 ml-70 font-size-extra-sm text-color-assist">x{{ item.quantity }}</view>
 							</view>
 						</view>
-						<view class="d-flex justify-content-between align-items-center font-size-lg font-weight-bold mt-30 mb-40">
+						<view class="d-flex justify-content-between align-items-center font-size-lg font-weight-bold mt-50 mb-40">
 							<view>合计</view>
 							<view>￥{{ order.total_fee }}</view>
 						</view>
