@@ -227,6 +227,7 @@ page {
 		background-color: $bg-color-white;
 		padding: 30rpx 40rpx;
 		margin-bottom: 18rpx;
+		border-radius: 30rpx;
 		
 		.header {
 			display: flex;
@@ -265,8 +266,8 @@ page {
 				flex: 1;
 				display: flex;
 				flex-direction: column;
-				font-size: $font-size-base;
-				color: $text-color-grey;
+				font-size: $font-size-extra-sm;
+				color: $text-color-assist;;
 			}
 			
 			.right {
