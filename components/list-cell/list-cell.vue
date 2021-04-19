@@ -1,14 +1,15 @@
 <template>
 	<view
 		class="tui-cell-class tui-list-cell"
-		:class="{'tui-cell-last': last, 'tui-line-left': lineLeft, 'tui-line-right': lineRight, 'tui-radius': radius }"
+		:class="{ 'tui-cell-arrow': arrow, 'tui-cell-last': last, 'tui-line-left': lineLeft, 'tui-line-right': lineRight, 'tui-radius': radius }"
 		:hover-class="hover ? 'tui-cell-hover' : ''"
 		:style="{ background: bgcolor, fontSize: size + 'rpx', color: color, padding: padding}"
 		:hover-stay-time="150"
 		@tap="handleClick"
 	>
 		<slot></slot>
-		<image src="/static/images/common/icon_jump_black3.png" class="arrow" v-if="arrow"></image>
+		<image src="/static/images/navigator-1.png" class="arrow" v-if="arrow"></image>
+		<!-- <view class="iconfont iconarrow-right arrow" v-if="arrow"></view> -->
 	</view>
 </template>
 
@@ -24,19 +25,21 @@ export default {
 		//是否有点击效果
 		hover: {
 			type: Boolean,
-			default: false
-		},
-		lineLeft:{
-			type: Boolean,
 			default: true
 		},
+		//left 30rpx
+		lineLeft:{
+			type: Boolean,
+			default: false
+		},
+		//right 30rpx
 		lineRight:{
 			type: Boolean,
 			default: false
 		},
 		padding:{
 			type:String,
-			default:"30rpx"
+			default:"26rpx 30rpx"
 		},
 		last: {
 			type: Boolean,
@@ -56,7 +59,7 @@ export default {
 		},
 		color: {
 			type: String,
-			default: "#343434" //字体颜色
+			default: "#5A5B5C" //字体颜色
 		},
 		index: {
 			type: Number,
@@ -94,12 +97,13 @@ export default {
 .tui-list-cell::after {
 	content: '';
 	position: absolute;
-	border-bottom: 1rpx solid rgba($color: $border-color, $alpha: 0.3);
+	border-bottom: 2rpx solid #eee;
+	-webkit-transform: scaleY(0.8);
+	transform: scaleY(0.8);
 	bottom: 0;
 	right: 0;
 	left: 0;
 }
-
 .tui-line-left::after {
 	left: 30rpx !important;
 }
@@ -113,10 +117,10 @@ export default {
 }
 
 .arrow {
-	width: 20rpx;
-	height: 32rpx;
+	width: 50rpx;
+	height: 50rpx;
 	position: relative;
+	margin-right: -10rpx;
 	flex-shrink: 0;
-	margin-left: 10rpx;
 }
 </style>
