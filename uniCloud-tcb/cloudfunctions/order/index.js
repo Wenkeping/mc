@@ -6,7 +6,6 @@ exports.main = async (event, context) => {
 		
 		// 获取 openId 和 carts
 		const {openId,orderType,goodsInOrder,chooseStore,remark} = event.data
-		const uId = openId
 		
 		// 生成订单号
 		const orderId = parseInt(Date.now() / 1000)
@@ -25,7 +24,7 @@ exports.main = async (event, context) => {
 		
 		// 生成订单
 		const orderResult = await db.collection('db-order').add({
-			uId,           // 用户openid
+			openId,           // 用户openid
 			orderId,       // 用户和时间编译的订单号
 			orderType,     // lunch-为中餐,dinner-为晚餐
 			goodsInOrder,  // 购物车列表
