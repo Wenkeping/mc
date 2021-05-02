@@ -8,7 +8,7 @@
 		@tap="handleClick"
 	>
 		<slot></slot>
-		<image src="/static/images/navigator-1.png" class="arrow" v-if="arrow"></image>
+		<image src="/static/images/common/navigator-1.png" class="arrow" v-if="arrow"></image>
 		<!-- <view class="iconfont iconarrow-right arrow" v-if="arrow"></view> -->
 	</view>
 </template>
