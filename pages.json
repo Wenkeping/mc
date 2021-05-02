@@ -41,6 +41,11 @@
             "navigationBarTitleText": "填写备注"
         }
     },{
+        "path": "pages/pay/addresses",
+        "style": {
+            "navigationBarTitleText": "收货地址"
+        }
+    },{
         "path": "pages/login/login",
         "style": {
             "navigationBarTitleText": "登录"
