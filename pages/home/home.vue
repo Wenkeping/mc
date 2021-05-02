@@ -5,7 +5,6 @@
 				<image :src="item"></image>
 			</swiper-item>
 		</swiper>
-		
 		<view class="content">
 			<view class="section-1">
 				<view class="item" @tap="lunch" hover-class="none">
@@ -17,7 +16,6 @@
 					<view class="wenyue-font">外卖</view>
 				</view>
 			</view>
-	
 		</view>
 	</view>
 </template>
@@ -37,6 +35,7 @@
 			}
 		},
 		 onLoad() {
+			 this.$store.commit('SET_ORDERTYPE','lunch');
 			 return uniCloud.callFunction({
 			 	name: 'user-center',
 			 	data: {

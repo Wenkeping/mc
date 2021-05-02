@@ -2,7 +2,7 @@
 	<view class="container">
 		<view>
 			<view class="receiver">
-				<navigator open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
+				<navigator open-type="navigate" url="/pages/pay/addresses" hover-class="none">
 					<list-cell arrow last>
 							<view class="receiver-item1">
 								<label class="font-size-medium text-color-base mb-10">文珂坪</label>
@@ -101,7 +101,7 @@
 					uni.hideLoading();
 					if (res.result.code === 0) {
 						let payData = uni.getStorageSync('payData');
-							payData.openId = res.result.openId
+							payData.openId = res.result.userInfo.wx_openid.mp-weixin
 							payData.chooseStore = '华为店'
 							payData.remark = this.remark			
 						return uniCloud.callFunction({

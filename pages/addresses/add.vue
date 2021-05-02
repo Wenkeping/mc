@@ -4,7 +4,7 @@
 			<list-cell padding="30rpx">
 				<view class="form-item">
 					<view class="label">联系人</view>
-					<input type="text" v-model="form.name" placeholder="请填写收货人的姓名" placeholder-class="placeholder"/>
+					<input type="text" v-model="form.userName" placeholder="请填写收货人的姓名" placeholder-class="placeholder"/>
 				</view>
 			</list-cell>
 			<list-cell padding="30rpx">
@@ -23,7 +23,7 @@
 			<list-cell padding="30rpx">
 				<view class="form-item">
 					<view class="label">手机号</view>
-					<input type="text" v-model="form.phone" placeholder="请填写收货手机号码" placeholder-class="placeholder"/>
+					<input type="text" v-model="form.telNumber" placeholder="请填写收货手机号码" placeholder-class="placeholder"/>
 				</view>
 			</list-cell>
 			<list-cell padding="30rpx">
@@ -36,7 +36,7 @@
 			<list-cell padding="30rpx">
 				<view class="form-item">
 					<view class="label">门牌号</view>
-					<input type="text" v-model="form.description" placeholder="例:B座6楼606室" placeholder-class="placeholder"/>
+					<input type="text" v-model="form.detailInfo" placeholder="例:B座6楼606室" placeholder-class="placeholder"/>
 				</view>
 			</list-cell>
 			
@@ -51,7 +51,7 @@
 		</view>
 		
 		<view class="save-btn">
-			<button type="info">保存</button>
+			<button type="info" @tap="save">保存</button>
 		</view>
 	</view>
 </template>
@@ -66,15 +66,14 @@
 		data() {
 			return {
 				form: {
-					name: '',
+					userName: '',
 					gender: 0,
-					phone: '',
-					description: '',
-					is_default: 0,
-					complete_address: '',
+					telNumber: '',
 					address: '',
+					detailInfo: '',
 					latitude: '',
 					longitude: '',
+					is_default: 0
 				}
 			}
 		},
@@ -87,14 +86,54 @@
 			chooseLocation() {
 				uni.chooseLocation({
 					success: res => {
-						const {errMsg, address, latitude, longitude, name} = res
-						if(errMsg === "chooseLocation:ok") {
-							this.form = Object.assign(
-								this.form, 
-								{complete_address: address, latitude, longitude, address: name},
-							)
+						if(res.errMsg === "chooseLocation:ok") {
+							console.log(res)
+							this.form.address = res.address
+							this.form.latitude = res.latitude
+							this.form.longitude = res.longitude
 						}
 					}
+				})
+			},
+			save() {
+				return uniCloud.callFunction({
+					name: 'user-center',
+					data: {
+						action: 'validateToken',
+						params: {
+							mcToken: uni.getStorageSync('mc_token')
+						}
+					}
+				}).then(res => {
+					if (res.result.code === 0) {
+					 	let data = this.form
+						return uniCloud.callFunction({
+							name:'address',
+							data:{
+								token:uni.getStorageSync('mc_token'),
+								data:data,
+								action:'addAddress'
+							}
+						}).then((res)=>{
+							if(res.result.status === 0) {
+								uni.showToast({
+									title:'添加成功'
+								})
+								uni.navigateBack({
+									
+								})
+							} else {
+								uni.showModal({
+									content:res.result.msg,
+									showCancel:false
+								})
+							}
+							
+						})
+						
+					 }else{
+						 uni.navigateTo({url: '/pages/login/login'})
+					 }
 				})
 			}
 		}
@@ -143,6 +182,7 @@
 	button {
 		width: 100%;
 		font-size: $font-size-extra-lg;
+		border-radius: $border-radius-lg;
 	}
 }
 </style>
