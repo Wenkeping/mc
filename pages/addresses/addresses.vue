@@ -7,14 +7,14 @@
 						<view class="address">
 							<view class="info">
 								<view class="address-row">
-									<view class="is-default">默认地址</view>
+									<view v-if="address.is_default == 1" class="is-default">默认地址</view>
 									<view class="address">{{ `${address.address} ${address.detailInfo}` }}</view>
 								</view>
 								<view class="user-row">
 									{{ `${address.userName} ( ${address.gender ? '女士' : '先生'} ) ${address.telNumber}` }}
 								</view>
 							</view>
-							<image src="/static/images/common/edit.png" @tap.stop="edit(address._id)" class="edit-btn"></image>
+							<image src="/static/images/common/edit.png" @tap.stop="edit(address)" class="edit-btn"></image>
 						</view>
 					</list-cell>
 				</uni-swipe-action-item>
@@ -54,7 +54,7 @@
 			}
 		},
 		computed: {
-			...mapState(['addresses'])
+			...mapState(['choseAddress'])
 		},
 		onLoad() {
 			this.getAddress()
@@ -63,7 +63,7 @@
 			this.getAddress()
 		},
 		methods: {
-			...mapMutations(['SET_ADDRESS', 'SET_ORDER_TYPE']),
+			...mapMutations(['SET_ADDRESS']),
 			// 获取地址列表
 			getAddress() {
 				uni.showLoading({
@@ -102,8 +102,9 @@
 					 data.address = res.provinceName + res.cityName + res.countyName
 					 data.detailInfo = res.detailInfo
 					 data.telNumber = res.telNumber
-				     data.latitude = res.latitude
-				     data.longitude = res.longitude
+				     //data.latitude = res.latitude
+				     //data.longitude = res.longitude
+					 data.is_default = false
 					 
 					 return uniCloud.callFunction({
 					 	name:'address',
@@ -135,14 +136,14 @@
 					url: '/pages/addresses/add'
 				})
 			},
-			edit(id) {
+			edit(address) {
+				this.SET_ADDRESS(address)
 				uni.navigateTo({
-					url: '/pages/addresses/add?id=' + id
+					url:'/pages/addresses/edit'
 				})
 			},
 			// 删除地址
 			handleSwipeClick(id) {
-				console.log(id)
 				uni.showModal({
 					title: '提示',
 					content: '确定要删除？',
@@ -171,7 +172,6 @@
 			},
 			choose(address) {
 				this.SET_ADDRESS(address)
-				this.SET_ORDER_TYPE('takeout')
 				uni.switchTab({
 					url: '/pages/index/index'
 				})
