@@ -26,6 +26,11 @@
             "navigationBarTitleText": "添加地址"
         }
     }, {
+        "path": "pages/addresses/edit",
+        "style": {
+            "navigationBarTitleText": "编辑地址"
+        }
+    }, {
         "path": "pages/pay/pay",
         "style": {
             "navigationBarTitleText": "订单结算"
