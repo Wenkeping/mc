@@ -27,7 +27,6 @@ exports.main = async (event, context) => {
 		// 删除地址
 		let _id = event.id
 		const res = await db.collection('db-addresses').where({_id}).remove()
-		 console.log(res)
 		if(res.requestId){
 			  return {
 				  status:0,
@@ -45,7 +44,7 @@ exports.main = async (event, context) => {
 		data.openId = openId
 		
 		const detailInfo = event.data.detailInfo
-		const addressDB = await db.collection('db-addresses').where({openId},{detailInfo}).get()
+		const addressDB = await db.collection('db-addresses').where({openId:openId,detailInfo:detailInfo}).get()
 		if(addressDB.data.length === 0){
 			  const res = await db.collection('db-addresses').add(data)
 			  return {
@@ -59,6 +58,13 @@ exports.main = async (event, context) => {
 		}
 		
 	}else if(event.action == 'editAddress') {
+		if(event.data.is_default == true){
+			let isDefault = {
+				  is_default: false
+			}
+			await db.collection('db-addresses').where({openId}).update({...isDefault})
+		}
+		
 		// 编辑地址
 		let _id = event.data._id
 		let fields = {
