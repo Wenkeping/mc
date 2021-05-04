@@ -1,19 +1,23 @@
 <template>
 	<view class="container">
 		<view>
-			<view class="receiver">
-				<navigator open-type="navigate" url="/pages/pay/addresses" hover-class="none">
-					<list-cell arrow last>
-							<view class="receiver-item1">
-								<label class="font-size-medium text-color-base mb-10">文珂坪</label>
-								<label class="text-color-assist font-size-extra-sm"> 1856582574</label>
+			<navigator open-type="navigate" url="/pages/pay/addresses" hover-class="none">
+				<list-cell arrow last>
+						<view class="address">
+							<view class="info"  v-if="address.userName == undefined">
+								请填写地址
 							</view>
-							<view class="receiver-item2">
-								<label class="font-size-sm">广东省深圳市龙岗区坂田街道岗头社区华创云轩B栋</label>
-							</view> 
-					</list-cell>
-				</navigator>
-			</view>
+							<view class="info" v-else>
+								<view class="address-row">
+									<view class="address">{{ `${address.address} ${address.detailInfo}` }}</view>
+								</view>
+								<view class="user-row">
+									{{ `${address.userName} ( ${address.gender ? '女士' : '先生'} ) ${address.telNumber}` }}
+								</view>
+							</view>
+						</view>
+				</list-cell>
+			</navigator>
 			<view class="flex-fill overflow-auto border-radius-lg mt-20 mb-150">
 				<list-cell padding="0 40rpx">
 					<view class="w-100 d-flex flex-column">
@@ -62,17 +66,14 @@
 
 <script>
 	import listCell from '@/components/list-cell/list-cell.vue'
+	import {mapState, mapMutations} from 'vuex'
 	
 	export default {
 		components: {
 			listCell
 		},
-		data() {
-			return {
-				cart: uni.getStorageSync('cart'),
-			}
-		},
 		computed: {
+			...mapState(['choseAddress']),
 			cartNum() {
 				return this.cart.reduce((acc, cur) => acc + cur.number, 0)
 			},
@@ -83,7 +84,66 @@
 				return this.$store.state.remark
 			}
 		},
+		data() {
+			return {
+				cart: uni.getStorageSync('cart'),
+				address: {
+					userName: '',
+					telNumber: '',
+					address: '',
+					detailInfo: ''
+				}
+			}
+		},
+		onLoad() {
+			this.getOneAddress(1)
+		},
+		onShow() {
+			this.getOneAddress(2)
+		},
 		methods: {
+			...mapMutations(['SET_ADDRESS']),
+			// 获取地址列表
+			getOneAddress(type) {
+				return uniCloud.callFunction({
+					name:'address',
+					data:{
+						token:uni.getStorageSync('mc_token'),
+						action:'getOneAddress'
+					}
+				}).then((res)=>{
+					if(res.result.status === 0) {
+						let resData = res.result.data[0]
+						this.SET_ADDRESS(resData)
+						
+						if(type === 1){
+							if(res.result.data.length === 0){
+								uni.navigateTo({url: '/pages/pay/addresses'})
+							}else{
+								this.address = resData
+							}
+						}else{
+							this.address = this.choseAddress
+						}
+						if(res.result.data.length === 0){
+							this.SET_ADDRESS(resData)
+							uni.navigateTo({url: '/pages/pay/addresses'})
+						}else{
+							if(type === 1){
+								this.address = resData
+								this.SET_ADDRESS(resData)
+							}else{
+								this.address = this.choseAddress
+							}
+						}
+					}else {
+						uni.showModal({
+							content:res.result.msg,
+							showCancel:false
+						})
+					}
+				})
+			},
 			pay(){
 				uni.showLoading({
 					title: '数据加载中...'
@@ -152,9 +212,48 @@
 		}
 	}
 	
-
+	.address {
+		border-radius: $border-radius-lg;
+		width: 100%;
+		display: flex;
+		align-items: center;
 		
-		
+		.info {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			margin-right: 20rpx;
+			overflow: hidden;
+			
+			.user-row {
+				font-size: $font-size-sm;
+				margin-bottom: 10rpx;
+				color: $text-color-assist;
+				margin-top: 10rpx;
+			}
+			
+			.address-row {
+				display: flex;
+				align-items: center;
+				
+				.is-default {
+					background-color: #faf5ef;
+					font-size: 16rpx;
+					color: $color-primary;
+					padding: 4rpx;
+					flex-shrink: 0;
+					margin: 10rpx;
+				}
+				
+				.address {
+					font-size: $font-size-base;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
 	
 	
 	.footer {
