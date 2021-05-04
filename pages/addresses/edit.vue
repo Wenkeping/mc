@@ -71,13 +71,13 @@
 			return {
 				form: {
 					userName: '',
-					gender: 0,
+					gender: false,
 					telNumber: '',
 					address: '',
 					detailInfo: '',
 					latitude: '',
 					longitude: '',
-					is_default: 0
+					is_default: false
 				}
 			}
 		},

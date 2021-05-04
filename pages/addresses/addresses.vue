@@ -4,7 +4,7 @@
 			<uni-swipe-action>
 				<uni-swipe-action-item :right-options="swipeOption" @click="handleSwipeClick(address._id)" v-for="(address, index) in addressList" :key="index">
 					<list-cell>
-						<view class="address">
+						<view class="address" @tap="tapAddress(address)">
 							<view class="info">
 								<view class="address-row">
 									<view v-if="address.is_default == 1" class="is-default">默认地址</view>
@@ -170,11 +170,9 @@
 					}
 				})
 			},
-			choose(address) {
+			tapAddress(address) {
 				this.SET_ADDRESS(address)
-				uni.switchTab({
-					url: '/pages/index/index'
-				})
+				uni.navigateBack()
 			}
 		}
 	}
