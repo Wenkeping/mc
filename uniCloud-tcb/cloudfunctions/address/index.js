@@ -85,11 +85,15 @@ exports.main = async (event, context) => {
 			}
 		}
 		
-	} else if (event.action == 'getOne') {
+	} else if (event.action == 'getOneAddress') {
 		// 获取选中的地址
-		const _id = event.id
-		const res = await db.collection('db-addresses').where({_id}).limit(1).get()
-		const resData = res.data
+		let res = await db.collection('db-addresses').where({openId:openId,is_default:true}).get()
+		console.log(res)
+		if(res.data.length === 0){
+			res = await db.collection('db-addresses').where({openId:openId}).limit(1).get()
+		}
+		let resData = res.data.length === 0 ? [] : res.data
+		
 		return {
 			status:0,
 			data:resData
