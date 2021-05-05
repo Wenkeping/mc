@@ -6,7 +6,7 @@
 					<view class="title">
 						<image src="/static/images/order/order_icon_address.png" 
 								class="left-icon" />
-						<view class="address">中心城店</view>
+						<view class="">深圳坂田长龙MALL店</view>
 					</view>
 					<view class="buttons">
 						<button type="default" class="button" 
