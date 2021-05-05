@@ -118,9 +118,8 @@
 					 		uni.showToast({
 					 			title:'添加成功'
 					 		})
-					 		uni.navigateBack({
-					 			
-					 		})
+							
+					 		
 					 	} else {
 					 		uni.showModal({
 					 			content:res.result.msg,
@@ -128,6 +127,7 @@
 					 		})
 					 	}
 					 })
+					 this.getAddress()
 				   }
 				})
 			},

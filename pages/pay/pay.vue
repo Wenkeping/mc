@@ -1,7 +1,27 @@
 <template>
 	<view class="container">
 		<view>
-			<navigator open-type="navigate" url="/pages/pay/addresses" hover-class="none">
+			<view class="payment bg-white">
+				<view class="w-100 d-flex align-items-center justify-content-between">
+					<view class="font-size-lg">送达时间</view>
+					<view class="buttons">
+						<button type="default" class="button" 
+								:class="{active: orderType == 'lunch'}" plain 
+								hover-class="none" @tap="switchOrderType">
+							中餐
+						</button>
+						<button type="default" class="button" 
+								:class="{active: orderType == 'dinner'}" plain 
+								hover-class="none" @tap="switchOrderType">
+							晚餐
+						</button>
+					</view>
+				</view>
+				<view v-if="orderType == 'lunch'" class="mt-30">成功下单后，次日 8:00-9:00 现做， 9:30-11:00 送达</view>
+				<view v-else class="mt-30">成功下单后，次日 14:00-15:00 现做, 15:30-17:00 送达</view>
+			</view>
+			
+			<navigator class="mt-20" open-type="navigate" url="/pages/pay/addresses" hover-class="none">
 				<list-cell arrow last>
 						<view class="address">
 							<view class="info"  v-if="address.userName == undefined">
@@ -12,29 +32,29 @@
 									<view class="address">{{ `${address.address} ${address.detailInfo}` }}</view>
 								</view>
 								<view class="user-row">
-									{{ `${address.userName} ( ${address.gender ? '女士' : '先生'} ) ${address.telNumber}` }}
+									{{ `${address.userName} ${address.telNumber}` }}
 								</view>
 							</view>
 						</view>
 				</list-cell>
 			</navigator>
-			<view class="flex-fill overflow-auto border-radius-lg mt-20 mb-150">
+			<view class="flex-fill overflow-auto border-radius-lg mt-20">
 				<list-cell padding="0 40rpx">
 					<view class="w-100 d-flex flex-column">
 						<view class="d-flex align-items-center mt-40" v-for="(item, index) in cart" :key="index">
 							<view><image :src="item.image" class="pro-img"></image></view>
-							<view class="flex-fill d-flex flex-column ml-30">
+							<view class="flex-fill ml-30 w-100">
 								<view class="font-size-base mb-10">{{ item.name }}</view>
 								<view class="font-size-extra-sm text-color-assist">
-									{{ item.description }}
+									<!-- {{ item.description }} -->啊嘎嘎哈哈风格和，色高山上的成功
 								</view>
 							</view>
-							<view class="flex-shrink-0 font-weight-bold ml-40">x{{ item.number }}</view>
-							<view class="flex-shrink-0 font-weight-bold ml-40">￥{{ item.price }}</view>
+							<view class="flex-fill ml-30 w-25">
+								<view class="flex-shrink-0  mt-20 ml-70 font-weight-bold">￥{{ item.price }}</view>
+								<view class="flex-shrink-0  mt-20 ml-85 font-size-extra-sm text-color-assist">x{{ item.number }}</view>
+							</view>
 						</view>
-						
 						<view class="d-flex justify-content-between align-items-center mt-40 pb-30 border-dashed"></view>
-						
 					</view>
 				</list-cell>
 
@@ -52,6 +72,14 @@
 						<text class="font-size-lg font-weight-bold">￥{{ cartAmount }}</text>
 					</view>
 				</list-cell>
+			</view>
+			
+			<view class="payment mt-20 mb-150 bg-white w-100 d-flex align-items-center justify-content-between">
+				<view>支付方式</view>
+				<view class="d-flex align-items-around">
+					<image src="../../static/images/pay/weichat-pay.png" class="image"></image>
+					<view class="ml-20">微信支付</view>
+				</view>
 			</view>
 			
 			<view class="footer">
@@ -73,7 +101,7 @@
 			listCell
 		},
 		computed: {
-			...mapState(['choseAddress']),
+			...mapState(['orderType','choseAddress']),
 			cartNum() {
 				return this.cart.reduce((acc, cur) => acc + cur.number, 0)
 			},
@@ -86,6 +114,8 @@
 		},
 		data() {
 			return {
+				man:'先生',
+				women:'女士',
 				cart: uni.getStorageSync('cart'),
 				address: {
 					userName: '',
@@ -102,7 +132,7 @@
 			this.getOneAddress(2)
 		},
 		methods: {
-			...mapMutations(['SET_ADDRESS']),
+			...mapMutations(['SET_ORDERTYPE','SET_ADDRESS']),
 			// 获取地址列表
 			getOneAddress(type) {
 				return uniCloud.callFunction({
@@ -113,25 +143,20 @@
 					}
 				}).then((res)=>{
 					if(res.result.status === 0) {
-						let resData = res.result.data[0]
-						this.SET_ADDRESS(resData)
+						let resData = res.result.data
 						
 						if(type === 1){
-							if(res.result.data.length === 0){
+							if(resData.length === 0){
+								this.SET_ADDRESS(resData)
 								uni.navigateTo({url: '/pages/pay/addresses'})
 							}else{
-								this.address = resData
+								this.SET_ADDRESS(resData[0])
+								this.address = resData[0]
 							}
 						}else{
-							this.address = this.choseAddress
-						}
-						if(res.result.data.length === 0){
-							this.SET_ADDRESS(resData)
-							uni.navigateTo({url: '/pages/pay/addresses'})
-						}else{
-							if(type === 1){
-								this.address = resData
+							if(resData.length === 0){
 								this.SET_ADDRESS(resData)
+								this.address = this.choseAddress
 							}else{
 								this.address = this.choseAddress
 							}
@@ -143,6 +168,13 @@
 						})
 					}
 				})
+			},
+			switchOrderType() {
+				if(this.orderType === 'lunch') {
+					this.SET_ORDERTYPE('dinner')
+				} else {
+					this.SET_ORDERTYPE('lunch')
+				}
 			},
 			pay(){
 				uni.showLoading({
@@ -188,8 +220,32 @@
 
 <style lang="scss" scoped>
 	.container {
-		padding:40rpx;
+		padding:30rpx;
 		background-color: #f6f6f6;
+	}
+	
+	.buttons {
+		display: flex;
+		align-items: stretch;
+		background-color: #f6f6f6;
+		border-radius: 50rem !important;
+		padding: 4rpx;
+		border: 2rpx solid #eaeaea;
+	
+		.button {
+			height: 100%;
+			width: 50%;
+			border-radius: 50rem !important;
+			border: 0 !important;
+			font-size: $font-size-sm !important;
+			line-height: 2.4 !important;
+	
+			&.active {
+				background-color: #343434;
+				color: #ffffff !important;
+				transition: all 0.3s;
+			}
+		}
 	}
 	
 	.pro-img {
@@ -255,6 +311,16 @@
 		}
 	}
 	
+	
+	.payment {
+		padding: 30rpx;
+		border-radius: $border-radius-lg;
+		
+		.image {
+			width: 40rpx;
+			height: 40rpx;
+		}
+	}
 	
 	.footer {
 		background-color: #FFFFFF;
