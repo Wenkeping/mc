@@ -33,7 +33,8 @@
     }, {
         "path": "pages/pay/pay",
         "style": {
-            "navigationBarTitleText": "订单结算"
+            "navigationBarTitleText": "订单结算",
+			"disableScroll": true
         }
     }, {
         "path": "pages/order/detail",
