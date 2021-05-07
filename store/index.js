@@ -31,9 +31,6 @@ const store = new Vuex.Store({
 		SET_ORDERCURRENT(state,current) {
 			state.orderCurrent = current
 		},
-		CHEAR_CURRENT(state) {
-			state.orderCurrent = {}
-		},
 		SET_ORDERCURRENTSTATUS(state,status) {
 			state.orderCurrent.status = status
 		}
