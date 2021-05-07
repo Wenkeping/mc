@@ -7,7 +7,7 @@
 		<swiper :current="tabIndex" :duration="300" class="swiper" :show-scrollbar="false">
 			<!-- 当前订单 begin -->
 			<swiper-item @touchmove.stop="handleSwiperItemChange">
-				<view class="no-order-content">
+				<view class="no-order-content" v-if="currentOrders.length == 0">
 					<image src="https://go.cdn.heytea.com/storage/ad/2020/05/20/0bdb360866d94aa4a4404c0b676a1982.jpg"></image>
 					<view class="tips">
 						<view>您今天还没有下单</view>
@@ -15,20 +15,16 @@
 					</view>
 					<button type="primary" class="font-size-lg" hover-class="none">去下单</button>
 				</view>
-			</swiper-item>
-			<!-- 当前订单 end -->
-			<!-- 历史订单 begin -->
-			<swiper-item @touchmove.stop="handleSwiperItemChange">
-				<view class="history-order">
+				<view class="history-order" v-else>
 					<swiper :current="orderMenuIndex" :duration="300" :show-scrollbar="false" class="history-order-swiper">
 						<!-- 门店订单 begin -->
 						<swiper-item @touchmove.stop="handleSwiperItemChange">
 							<scroll-view scroll-y="true" class="orders-scroll">
 								<view class="wrapper">
 									<view class="order-list">
-										<navigator class="order" v-for="(order, index) in orders" :key="index" open-type="navigate" :url="'/pages/order/detail?id=' + order.id">
+										<navigator class="order" v-for="(order, index) in currentOrders" :key="index" open-type="navigate" :url="'/pages/order/detail'" @tap="tapOrder(order)">
 											<view class="header">
-												<view class="flex-fill font-size-medium">{{ order.shop.name }}</view>
+												<view class="flex-fill font-size-medium">{{ order.chooseStore }}</view>
 												<view class="status">
 													<view>已完成</view>
 													<image src="/static/images/common/black_arrow_right.png"></image>
@@ -36,16 +32,65 @@
 											</view>
 											<scroll-view scroll-x>
 												<view class="images">
-													<image :src="item.image" v-for="(item, index) in order.items" :key="index"></image>
+													<image :src="item.image" v-for="(item, index) in order.goodsInOrder" :key="index"></image>
 												</view>
 											</scroll-view>
 											<view class="info">
 												<view class="left">
-													<view>订单编号：{{ order.no }}</view>
-													<view>下单时间：{{ order.created_at }}</view>
+													<view>下单时间：{{ order.time }}</view>
+													<view class="mt-10">订单编号：{{ order.orderId }}</view>
 												</view>
 												<view class="right">
-													￥{{ order.total_fee }}
+													￥{{ order.totalFee }}
+												</view>
+											</view>
+										</navigator>
+									</view>
+								</view>
+							</scroll-view>
+						</swiper-item>
+						<!-- 门店订单 end -->
+					</swiper>
+				</view>
+			</swiper-item>
+			<!-- 当前订单 end -->
+			<!-- 历史订单 begin -->
+			<swiper-item @touchmove.stop="handleSwiperItemChange">
+				<view class="no-order-content" v-if="historyOrders.length == 0">
+					<image src="https://go.cdn.heytea.com/storage/ad/2020/05/20/0bdb360866d94aa4a4404c0b676a1982.jpg"></image>
+					<view class="tips">
+						<view>您今天还没有下单</view>
+						<view>快去选择一杯喜欢的茶吧</view>
+					</view>
+					<button type="primary" class="font-size-lg" hover-class="none">去下单</button>
+				</view>
+				<view class="history-order" v-else>
+					<swiper :current="orderMenuIndex" :duration="300" :show-scrollbar="false" class="history-order-swiper">
+						<!-- 门店订单 begin -->
+						<swiper-item @touchmove.stop="handleSwiperItemChange">
+							<scroll-view scroll-y="true" class="orders-scroll">
+								<view class="wrapper">
+									<view class="order-list">
+										<navigator class="order" v-for="(order, index) in historyOrders" :key="index" open-type="navigate" :url="'/pages/order/detail'" @tap="tapOrder(order)">
+											<view class="header">
+												<view class="flex-fill font-size-medium">{{ order.chooseStore }}</view>
+												<view class="status">
+													<view>已完成</view>
+													<image src="/static/images/common/black_arrow_right.png"></image>
+												</view>
+											</view>
+											<scroll-view scroll-x>
+												<view class="images">
+													<image :src="item.image" v-for="(item, index) in order.goodsInOrder" :key="index"></image>
+												</view>
+											</scroll-view>
+											<view class="info">
+												<view class="left">
+													<view>下单时间：{{ order.time }}</view>
+													<view class="mt-10">订单编号：{{ order.orderId }}</view>
+												</view>
+												<view class="right">
+													￥{{ order.totalFee }}
 												</view>
 											</view>
 										</navigator>
@@ -63,44 +108,63 @@
 </template>
 
 <script>
+import {mapState, mapMutations} from 'vuex'
+	
 export default {
 	data() {
 		return {
 			tabIndex: 0,
 			orderMenuIndex: 0,
-			orders: [],
-			storeOrders: []
+			currentOrders: [],
+			historyOrders: []
 		}
-	},
-	async onLoad() {
 	},
 	computed: {
-		batchInvoiceVisible() {
-			return (!this.orderMenuIndex && this.orders.length) || (this.orderMenuIndex && this.storeOrders.length)
-		}
+		...mapState(['orderCurrent'])
+	},
+	onLoad() {
+		this.getOrders()
 	},
 	methods: {
-		async switchTab(index) {
-			if(this.tabIndex === index) return
-			this.tabIndex = index
-			if(this.tabIndex) {
-				await this.getOrders()
-			}
+		...mapMutations(['SET_ORDERCURRENT']),
+		switchTab(index) {
+			 this.tabIndex = index
 		},
 		handleSwiperItemChange() {	//禁止手动滑动
 			return true
 		},
-		async switchMenuTab(index) {
-			if(this.orderMenuIndex === index) return
-			this.orderMenuIndex = index
-			await this.getOrders()
+		 getOrders() {
+			uni.showLoading({
+				title:'数据加载中...'
+			});
+			return uniCloud.callFunction({
+				name: 'user-center',
+				data: {
+					action: 'validateToken',
+					params: {
+						mcToken: uni.getStorageSync('mc_token')
+					}
+				}
+			}).then((res)=>{
+				uni.hideLoading()
+				if(res.result.code === 0) {
+					return uniCloud.callFunction({
+						name:'order',
+						data:{
+							token:uni.getStorageSync('mc_token'),
+							action:'getOrder'
+						}
+					})
+				} else {
+					uni.navigateTo({url: '/pages/login/login'})
+				}
+			}).then((resData) =>{
+				this.currentOrders = resData.result.data.currentOrder
+				this.historyOrders = resData.result.data.historyOrder
+			})
 		},
-		async getOrders() {
-			if(!this.orderMenuIndex) {
-				this.orders = await this.$api('orders')
-			} else {
-				this.storeOrders = await this.$api('storeOrders')
-			}
+		tapOrder(order) {
+			this.SET_ORDERCURRENT(order)
 		}
 	}
 };
@@ -136,9 +200,9 @@ page {
 
 .swiper {
 	width: 100%;
-	height: calc(100vh - 4px - var(--status-bar-height) - 110rpx);
+	height: calc(100vh - 4px - var(--status-bar-height) - 10rpx);
 	/* #ifdef H5 */
-	height: calc(100vh - 4px - var(--status-bar-height) - 110rpx - 100rpx);
+	height: calc(100vh - 4px - var(--status-bar-height) - 10rpx - 100rpx);
 	/* #endif */
 }
 
@@ -250,6 +314,7 @@ page {
 		.images {
 			display: flex;
 			padding: 30rpx 0;
+			margin-left: -50rpx;
 			image {
 				flex-shrink: 0;
 				width: 150rpx;

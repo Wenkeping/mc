@@ -11,8 +11,7 @@
 				<list-cell :hover="false" padding="50rpx 40rpx">
 					<view class="w-100 d-flex align-items-center">
 						<view class="flex-fill d-flex flex-column overflow-hidden">
-							<view class="font-size-lg mb-10">{{ order.shop.name }}</view>
-							<view class="font-size-extra-sm text-color-assist text-truncate">{{ order.shop.address }}</view>
+							<view class="font-size-lg mb-10">{{ order.chooseStore }}</view>
 						</view>
 						<view class="d-flex align-items-center ml-20">
 							<image src="/static/images/order/icon_phone.png" class="phone-icon"></image>
@@ -24,22 +23,22 @@
 			<view class="section">
 				<list-cell :hover="false" padding="0 40rpx">
 					<view class="w-100 d-flex flex-column">
-						<view class="d-flex align-items-around mt-40" v-for="(item, index) in order.items" :key="index">
-							<view><image :src="item.images.data[index].url" class="pro-img"></image></view>
+						<view class="d-flex align-items-around mt-40" v-for="(item, index) in order.goodsInOrder" :key="index">
+							<view><image :src="item.image" class="pro-img"></image></view>
 							<view class="flex-fill ml-30 w-100">
-								<view class="font-size-base mb-10">{{ item.sname }}</view>
+								<view class="font-size-base mb-10">{{ item.name }}</view>
 								<view class="font-size-extra-sm text-color-assist">
-									{{ materialsText(item.materials) }}
+									<!-- {{ item.description }} -->啊嘎嘎哈哈风格和，色高山上的成功
 								</view>
 							</view>
 							<view class="flex-fill ml-30 w-25">
-								<view class="flex-shrink-0 font-weight-bold">￥{{ item.price }}</view>
-								<view class="flex-shrink-0  mt-20 ml-70 font-size-extra-sm text-color-assist">x{{ item.quantity }}</view>
+								<view class="flex-shrink-0  mt-20 ml-70 font-weight-bold">￥{{ item.price }}</view>
+								<view class="flex-shrink-0  mt-20 ml-85 font-size-extra-sm text-color-assist">x{{ item.number }}</view>
 							</view>
 						</view>
 						<view class="d-flex justify-content-between align-items-center font-size-lg font-weight-bold mt-50 mb-40">
 							<view>合计</view>
-							<view>￥{{ order.total_fee }}</view>
+							<view>￥{{ order.totalFee }}</view>
 						</view>
 					</view>
 				</list-cell>
@@ -47,9 +46,9 @@
 			
 			<list-cell :hover="false" padding="50rpx 30rpx 20rpx" last>
 				<view class="w-100 d-flex flex-column font-size-extra-sm text-color-assist">
-					<view class="mb-10">下单时间：{{ order.paid_at }}</view>
-					<view class="mb-10">订单编号：{{ order.no }}</view>
-					<view class="mb-10">备注信息：{{ order.remarks }}</view>
+					<view class="mb-10">下单时间：{{ order.time }}</view>
+					<view class="mb-10">订单编号：{{ order.orderId }}</view>
+					<view class="mb-10">备注信息：{{ order.remark }}</view>
 				</view>
 			</list-cell>
 		</view>
@@ -58,6 +57,7 @@
 
 <script>
 	import listCell from '@/components/list-cell/list-cell.vue'
+	import {mapState} from 'vuex'
 	
 	export default {
 		components: {
@@ -69,17 +69,10 @@
 			}
 		},
 		computed: {
-			materialsText() {
-				return materials => {
-					let arr = []
-					materials.forEach(item => arr.push(item.name))
-					return arr.join(',')
-				}
-			}
+			...mapState(['orderCurrent'])
 		},
-		async onLoad(options) {
-			/* 为了方便测试，这里使用同一个订单数据 */
-			this.order = await this.$api('orderDetail')
+		async onLoad() {
+			this.order = await this.orderCurrent
 		}
 	}
 </script>
@@ -118,6 +111,7 @@
 .pro-img {
 	width: 150rpx;
 	height: 120rpx;
+	margin-left: -50rpx;
 }
 
 @mixin arch {
