@@ -1,27 +1,25 @@
 <template>
 	<view class="container">
 		<view class="header">
-			<view class="center">
-				<view class="store">
-					<view class="title">
-						<image src="/static/images/order/order_icon_address.png" 
-								class="left-icon" />
-						<view class="">深圳坂田长龙MALL店</view>
-					</view>
-					<view class="buttons">
-						<button type="default" class="button" 
-								:class="{active: orderType == 'lunch'}" plain 
-								hover-class="none" @tap="switchOrderType">
-							中餐
-						</button>
-						<button type="default" class="button" 
-								:class="{active: orderType == 'dinner'}" plain 
-								hover-class="none" @tap="switchOrderType">
-							晚餐
-						</button>
-					</view>
+			<view class="store">
+				<view class="buttons">
+					<button type="default" class="button" 
+							:class="{active: orderType == 'lunch'}" plain 
+							hover-class="none" @tap="switchOrderType">
+						中餐
+					</button>
+					<button type="default" class="button" 
+							:class="{active: orderType == 'dinner'}" plain 
+							hover-class="none" @tap="switchOrderType">
+						晚餐
+					</button>
 				</view>
 			</view>
+		</view>
+		<view class="title">
+			<image src="/static/images/order/order_icon_address.png" 
+					class="left-icon" />
+			<view class="address">深圳龙岗坂田长龙MALL店</view>
 		</view>
 		
 		<view class="main">
