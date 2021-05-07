@@ -101,7 +101,7 @@
 			listCell
 		},
 		computed: {
-			...mapState(['orderType','choseAddress']),
+			...mapState(['orderType','choseAddress','orderCurrent']),
 			cartNum() {
 				return this.cart.reduce((acc, cur) => acc + cur.number, 0)
 			},
@@ -130,7 +130,7 @@
 			this.getOneAddress(2)
 		},
 		methods: {
-			...mapMutations(['SET_ORDERTYPE','SET_ADDRESS']),
+			...mapMutations(['SET_ORDERTYPE','SET_ADDRESS','SET_ORDERCURRENT']),
 			// 获取地址列表
 			getOneAddress(type) {
 				return uniCloud.callFunction({
@@ -191,12 +191,12 @@
 					uni.hideLoading();
 					if (res.result.code === 0) {
 						let payData = uni.getStorageSync('payData');
-							payData.openId = res.result.userInfo.wx_openid.mp-weixin
-							payData.chooseStore = '华为店'
+							payData.chooseStore = '深圳龙岗坂田长龙MALL店'
 							payData.remark = this.remark			
 						return uniCloud.callFunction({
 							name: 'order',
 							data: {
+								token:uni.getStorageSync('mc_token'),
 								action: 'submitOrder',
 								data: payData
 							}
@@ -205,8 +205,10 @@
 						uni.navigateTo({url: '/pages/login/login'})
 					}
 				}).then(resData =>{
-					if(resData.result.orderId){
-						console.log(resData.result.orderId)
+					console.log(resData)
+					if(resData.result.length != 0){
+						this.SET_ORDERCURRENT(resData.result[0])
+						uni.navigateTo({url: '/pages/order/detail'})
 					}else{
 						console.log('支付失败');
 					}
