@@ -2,11 +2,24 @@
 	<view class="container">
 		<view class="header"></view>
 		<view v-if="Object.keys(order).length > 0">
-			<view class="order-box">
-				<view class="text-color-primary font-size-lg font-weight-bold mb-40">订单已完成</view>
-				<view class="text-color-assist font-size-sm">感谢您对喜茶的支持，欢迎再次光临</view>
+		
+			<view class="order-status" v-if="order.statusName == '已完成'">
+				<view class="order-step">
+					<uni-steps :options="[{title: '待烹饪'}, {title: '烹饪中'}, {title: '派送中'}, {title: '已完成'}]" :active="order.status" active-color="#DBA871"></uni-steps>
+				</view>
+				<view class="order-desc">
+					<view class="text-color-assist font-size-sm">感谢您对喜茶的支持，欢迎再次光临</view>
+				</view>
 			</view>
-				
+			<view class="order-status" v-else>
+				<view class="order-step">
+					<uni-steps :options="[{title: '待烹饪'}, {title: '烹饪中'}, {title: '派送中'}, {title: '已完成'}]" :active="order.status" active-color="#DBA871"></uni-steps>
+				</view>
+				<view class="order-desc">
+					<view class="text-color-assist font-size-sm" v-if="order.orderType == 'lunch'">您选择的是中餐，预计 9:30-11:00 送达</view>
+					<view class="text-color-assist font-size-sm" v-else>您选择的是晚餐，预计 15:30-17:00 送达</view>
+				</view>
+			</view>
 			<view class="section">
 				<list-cell :hover="false" padding="50rpx 40rpx">
 					<view class="w-100 d-flex align-items-center">
@@ -87,16 +100,28 @@
 	padding: 20rpx 0;
 }
 
-.order-box {
-		height: 15vh;
+.order-status{
+		margin-top: 20rpx;
+		height: 20vh;
 		border-radius: 30rpx 30rpx 0 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		background-color: $bg-color-white;
 		margin-bottom: 15rpx;
+		
+		.order-step{
+			padding-top: 50rpx;
+			
+		}
+		
+		.order-desc{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding-top: 40rpx;
+		}
 	}
+
+
 
 .phone-icon, .map-icon {
 	width: 64rpx;

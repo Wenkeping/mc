@@ -26,7 +26,7 @@
 											<view class="header">
 												<view class="flex-fill font-size-medium">{{ order.chooseStore }}</view>
 												<view class="status">
-													<view>已完成</view>
+													<view>{{ order.statusName }}</view>
 													<image src="/static/images/common/black_arrow_right.png"></image>
 												</view>
 											</view>
@@ -75,7 +75,7 @@
 											<view class="header">
 												<view class="flex-fill font-size-medium">{{ order.chooseStore }}</view>
 												<view class="status">
-													<view>已完成</view>
+													<view>{{ order.statusName }}</view>
 													<image src="/static/images/common/black_arrow_right.png"></image>
 												</view>
 											</view>
@@ -123,6 +123,9 @@ export default {
 		...mapState(['orderCurrent'])
 	},
 	onLoad() {
+		this.getOrders()
+	},
+	onShow() {
 		this.getOrders()
 	},
 	methods: {
