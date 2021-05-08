@@ -208,7 +208,10 @@
 					console.log(resData)
 					if(resData.result.length != 0){
 						this.SET_ORDERCURRENT(resData.result[0])
-						uni.navigateTo({url: '/pages/order/detail'})
+						uni.removeStorageSync('cart');
+						uni.reLaunch({
+							url: '/pages/order/detail'
+						})
 					}else{
 						console.log('支付失败');
 					}
