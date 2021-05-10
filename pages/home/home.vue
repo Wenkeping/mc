@@ -21,7 +21,6 @@
 </template>
 
 <script>
-	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -34,26 +33,55 @@
 				]
 			}
 		},
-		 onLoad() {
-			 this.$store.commit('SET_ORDERTYPE','lunch');
-			 return uniCloud.callFunction({
-			 	name: 'user-center',
-			 	data: {
-			 		action: 'validateToken',
-			 		params: {
-			 			mcToken: uni.getStorageSync('mc_token')
-			 		}
-			 	}
-			 }).then(res => {
-			 	if (res.result.code != 0) {
-			 	 	uni.navigateTo({url: '/pages/login/login'})
-			 	 }
-			 })
+		onLoad() {
+			this.validateToken(1)
+		},
+		onShow(){
+			this.validateToken(2)
 		},
 		computed: {
-			...mapState(['isLogin','orderType','userInfo','chooseStore'])
 		},
 		methods: {
+			validateToken(type){
+				this.$store.commit('SET_ORDERTYPE','lunch');
+				return uniCloud.callFunction({
+					name: 'user-center',
+					data: {
+						action: 'validateToken',
+						params: {
+							mcToken: uni.getStorageSync('mc_token')
+						}
+					}
+				}).then(res => {
+					if(type === 1){
+						if (res.result.code != 0) {
+						 	uni.navigateTo({url: '/pages/login/login'})
+						}else{
+							this.getLocation()
+						}
+					}else{
+						if (res.result.code == 0) {
+						 	this.getLocation()
+						}
+					}
+					
+				})
+			},
+			getLocation(){
+				return new Promise((resolve,reject)=>{
+					// 获取用户收货地址定位
+					uni.getLocation({
+						type:'gcj02',
+						success(resLocation) {
+							if(resLocation.latitude && resLocation.longitude) {
+								resolve(resLocation)
+							}
+						}
+					})
+				}).then(local =>{
+					this.$store.commit('SET_LOCATION',local);
+				})
+			},
 			lunch() {
 				this.$store.commit('SET_ORDERTYPE','lunch');
 				uni.switchTab({

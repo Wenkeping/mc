@@ -1,6 +1,5 @@
 <template>
 	<view class="container">
-		<view class="header"></view>
 		<view v-if="Object.keys(order).length > 0">
 		
 			<view class="order-status" v-if="order.statusName == '已完成'">
@@ -94,10 +93,6 @@
 .container {
 	background-color: #f6f6f6;
 	padding: 0 40rpx;
-}
-
-.header {
-	padding: 20rpx 0;
 }
 
 .order-status{

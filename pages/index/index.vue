@@ -16,10 +16,22 @@
 				</view>
 			</view>
 		</view>
-		<view class="title">
-			<image src="/static/images/order/order_icon_address.png" 
-					class="left-icon" />
-			<view class="address">深圳龙岗坂田长龙MALL店</view>
+			
+		<view class="title" v-if="Object.keys(currentStore).length > 0">
+			<view class="address">
+				<image src="/static/images/order/order_icon_address.png" class="left-icon" />
+				<view @tap="tapStore">{{ currentStore.storeName }} </view>
+				<view class="iconfont icon-arrow-right mt-5"></view>
+			</view>
+			<view class="dis font-size-extra-sm">距离您{{ currentStore.distance }}km</view>
+		</view>
+		<view class="title" v-else>
+			<view class="address">
+				<image src="/static/images/order/order_icon_address.png" class="left-icon" />
+				<view @tap="tapStore">抱歉，当前收获地址无匹配门店</view>
+				<view class="iconfont icon-arrow-right mt-5"></view>
+			</view>
+			<view class="dis font-size-extra-sm">距离您{{ currentStore.distance }}km</view>
 		</view>
 		
 		<view class="main">
@@ -121,11 +133,12 @@
 				cartPopupShow: false,
 				productsScrollTop: 0,
 				productsLeftScrollTop: 0,
-				lastProduct:{}
+				lastProduct:{},
+				currentStore:{}
 			}
 		},
 		computed: {
-			...mapState(['orderType', 'address']),
+			...mapState(['orderType','location']),
 			productCartNum() {
 				//计算单个饮品添加到购物车的数量
 				return id_product => this.cart.reduce((acc, cur) => {
@@ -144,10 +157,62 @@
 					this.currentCategoryId =this.categories.length && this.categories[0].id_category
 					this.$nextTick(() => this.calcSize())
 				}
-			})
+			}),
+			
+			this.getStore()
 		},
 		methods: {
-			...mapMutations(['SET_ORDERTYPE']),
+			...mapMutations(['SET_ORDERTYPE','SET_LOCATION']),
+			getStore(){
+				let la1 = this.location.latitude
+				let lo1 = this.location.longitude
+				console.log(this.location)
+				return uniCloud.callFunction({
+					name:'stores'
+				}).then(resStore =>{
+					let temp = []
+					let storeLength = resStore.result.data.length
+					if(storeLength >= 1){
+						for(let i = 0; i < storeLength; i++) {
+							let element = resStore.result.data[i]
+							let d = this.distance(element.latitude,element.longitude,la1,lo1)
+							element.distance = d
+							temp.push(element)
+						}
+						this.storeData = temp.sort(function(a,b){
+							return a.distance - b.distance
+						})
+						  return this.storeData
+					}
+				}).then(resMap => {
+					if(resMap.length > 0){
+						let storeTemp = resMap[0]
+						console.log(storeTemp)
+						if(storeTemp.distance <= 2){
+							this.currentStore = storeTemp
+						}
+					}
+					
+				})
+			},
+			// 计算距离
+			distance(la1, lo1, la2, lo2) {
+				var La1 = la1 * Math.PI / 180.0;
+				var La2 = la2 * Math.PI / 180.0;
+				var La3 = La1 - La2;
+				var Lb3 = lo1 * Math.PI / 180.0 - lo2 * Math.PI / 180.0;
+				var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+				s = s * 6378.137;//地球半径
+				s = Math.round(s * 10000) / 10000;
+				s = s.toFixed(1);
+				return s
+			},
+			// 选取门店
+			tapStore() {
+				uni.navigateTo({
+					url: '../stores/stores'
+				});
+			},
 			switchOrderType() {
 				if(this.orderType === 'lunch') {
 					this.SET_ORDERTYPE('dinner')

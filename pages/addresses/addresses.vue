@@ -8,7 +8,10 @@
 							<view class="info">
 								<view class="address-row">
 									<view v-if="address.is_default == 1" class="is-default">默认地址</view>
-									<view class="address">{{ `${address.address} ${address.detailInfo}` }}</view>
+									<view class="address">
+										{{ `${address.detailInfo}` }}
+										<view class="text-color-assist ml-20">{{ `${address.address}` }}</view>
+									</view>
 								</view>
 								<view class="user-row">
 									{{ `${address.userName} ( ${address.gender ? '女士' : '先生'} ) ${address.telNumber}` }}
@@ -218,7 +221,7 @@
 					color: $color-primary;
 					padding: 4rpx;
 					flex-shrink: 0;
-					margin: 10rpx;
+					margin-right: 20rpx;
 				}
 				
 				.address {

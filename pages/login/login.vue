@@ -40,50 +40,50 @@
 						console.log('res:',res)
 						let userInfo = res.userInfo
 						return new Promise((resolve, reject)=>{
-								uni.login({
-									provider:'weixin',
-									success(login_res) {
-										if (login_res.code) {
-											resolve(login_res.code)
-										} else {
-											reject(new Error('微信登录失败'))
-										}
-									},
-									fail(e) {
+							uni.login({
+								provider:'weixin',
+								success(login_res) {
+									if (login_res.code) {
+										resolve(login_res.code)
+									} else {
 										reject(new Error('微信登录失败'))
 									}
-								})
-								
-							}).then((code)=>{
-								console.log("code:", code)
-								return uniCloud.callFunction({
-									name: 'user-center',
-									data: {
-										action: 'loginByWeixin',
-										params: {
-											code
-										}
-									}
-								})
-							}).then((res) => {
-								console.log("token:", res.result.token)
-								uni.hideLoading()
-								if (res.result.code === 0) {
-									that.Login(userInfo)
-									uni.setStorageSync('mc_token', res.result.token)
-								}else{
-									return Promise.reject(new Error(res.result.msg))
+								},
+								fail(e) {
+									reject(new Error('微信登录失败'))
 								}
-								uni.navigateBack()
-							}).catch((e) => {
-								console.error(e)
-								uni.hideLoading()
-								uni.showModal({
-									showCancel: false,
-									content: '微信登录失败，请稍后再试'
-								})
 							})
-						
+							
+						}).then((code)=>{
+							console.log("code:", code)
+							return uniCloud.callFunction({
+								name: 'user-center',
+								data: {
+									action: 'loginByWeixin',
+									params: {
+										code
+									}
+								}
+							})
+						}).then((res) => {
+							console.log("token:", res.result.token)
+							uni.hideLoading()
+							if (res.result.code === 0) {
+								that.Login(userInfo)
+								uni.setStorageSync('mc_token', res.result.token)
+								
+							}else{
+								return Promise.reject(new Error(res.result.msg))
+							}
+							uni.navigateBack()
+						}).catch((e) => {
+							console.error(e)
+							uni.hideLoading()
+							uni.showModal({
+								showCancel: false,
+								content: '微信登录失败，请稍后再试'
+							})
+						})
 					},
 					
 					fail: res =>{
@@ -94,48 +94,46 @@
 						}
 						
 						return new Promise((resolve, reject)=>{
-								uni.login({
-									provider:'weixin',
-									success(login_res) {
-										if (login_res.code) {
-											resolve(login_res.code)
-										} else {
-											reject(new Error('微信登录失败'))
-										}
-									},
-									fail(e) {
+							uni.login({
+								provider:'weixin',
+								success(login_res) {
+									if (login_res.code) {
+										resolve(login_res.code)
+									} else {
 										reject(new Error('微信登录失败'))
 									}
-								})
-							}).then((code)=>{
-								console.log("code:", code)
-								return uniCloud.callFunction({
-									name: 'user-center',
-									data: {
-										action: 'loginByWeixin',
-										params: {
-											code
-										}
-									}
-								})
-							}).then((res)=>{
-								console.log("token:", res.result.token)
-								uni.hideLoading()
-								if (res.result.code === 0) {
-									that.Login(userInfo)
-									uni.setStorageSync('mc_token', res.result.token)
-								}else{
-									return Promise.reject(new Error(res.result.msg))
+								},
+								fail(e) {
+									reject(new Error('微信登录失败'))
 								}
-								uni.navigateBack()
-							
-							}).catch((err) => {
-								console.error(e)
-								uni.hideLoading()
-								uni.showModal({
-									showCancel: false,
-									content: '微信登录失败，请稍后再试'
-								})
+							})
+						}).then((code)=>{
+							return uniCloud.callFunction({
+								name: 'user-center',
+								data: {
+									action: 'loginByWeixin',
+									params: {
+										code
+									}
+								}
+							})
+						}).then((res)=>{
+							uni.hideLoading()
+							if (res.result.code === 0) {
+								that.Login(userInfo)
+								uni.setStorageSync('mc_token', res.result.token)
+							}else{
+								return Promise.reject(new Error(res.result.msg))
+							}
+							uni.navigateBack()
+						
+						}).catch((err) => {
+							console.error(e)
+							uni.hideLoading()
+							uni.showModal({
+								showCancel: false,
+								content: '微信登录失败，请稍后再试'
+							})
 						})
 					}
 				})
