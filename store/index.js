@@ -7,6 +7,8 @@ const store = new Vuex.Store({
 		userInfo:{},
 		choseAddress:{},
 		orderCurrent:{},
+		location:{},
+		choseStore:{},
 		remark:''
 	},
     mutations: {
@@ -19,20 +21,23 @@ const store = new Vuex.Store({
 			      })
 		},
 	
-		SET_ORDERTYPE(state,type) {
-			state.orderType = type
+		SET_ORDERTYPE(state,orderType) {
+			state.orderType = orderType
 		},
-		SET_ADDRESS(state,address) {
-			state.choseAddress = address
+		SET_ADDRESS(state,choseAddress) {
+			state.choseAddress = choseAddress
 		},
-		SET_REMARK(state,store) {
-			state.remark =store
+		SET_REMARK(state,remark) {
+			state.remark =remark
 		},
-		SET_ORDERCURRENT(state,current) {
-			state.orderCurrent = current
+		SET_ORDERCURRENT(state,orderCurrent) {
+			state.orderCurrent = orderCurrent
 		},
-		SET_ORDERCURRENTSTATUS(state,status) {
-			state.orderCurrent.status = status
+		SET_LOCATION(state,location) {
+			state.location = location
+		},
+		SET_STORE(state,choseStore) {
+			state.choseStore = choseStore
 		}
 	},
     actions: {}
