@@ -56,6 +56,11 @@
         "style": {
             "navigationBarTitleText": "登录"
         }
+    },{
+        "path": "pages/stores/stores",
+        "style": {
+            "navigationBarTitleText": "选择门店"
+        }
     }],
     "tabBar": {
         "color": "#999999",
