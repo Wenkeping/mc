@@ -33,9 +33,9 @@
 				</list-cell>
 			</view>
 			<view class="section">
-				<list-cell :hover="false" padding="0 40rpx">
+				<list-cell :hover="false">
 					<view class="w-100 d-flex flex-column">
-						<view class="d-flex align-items-around mt-40" v-for="(item, index) in order.goodsInOrder" :key="index">
+						<view class="d-flex align-items-around mt-40 mb-40" v-for="(item, index) in order.goodsInOrder" :key="index">
 							<view><image :src="item.image" class="pro-img"></image></view>
 							<view class="flex-fill ml-30 w-100">
 								<view class="font-size-base mb-10">{{ item.name }}</view>
@@ -48,19 +48,21 @@
 								<view class="flex-shrink-0  mt-20 ml-85 font-size-extra-sm text-color-assist">x{{ item.number }}</view>
 							</view>
 						</view>
-						<view class="d-flex justify-content-between align-items-center font-size-lg font-weight-bold mt-50 mb-40">
-							<view>合计</view>
-							<view>￥{{ order.totalFee }}</view>
-						</view>
 					</view>
 				</list-cell>
 			</view>
 			
 			<list-cell :hover="false" padding="50rpx 30rpx 20rpx" last>
-				<view class="w-100 d-flex flex-column font-size-extra-sm text-color-assist">
-					<view class="mb-10">下单时间：{{ order.time }}</view>
-					<view class="mb-10">订单编号：{{ order.orderId }}</view>
-					<view class="mb-10">备注信息：{{ order.remark }}</view>
+				<view class="w-100 d-flex flex-column"> 
+					<view class="mb-20 w-100 d-flex justify-content-between font-size-lg font-weight-bold ">
+						<view>合计</view>
+						<view>￥{{ order.totalFee }}</view>
+					</view>
+					<view class="w-100 d-flex flex-column font-size-extra-sm text-color-assist">
+						<view class="mb-10">下单时间：{{ order.time }}</view>
+						<view class="mb-10">订单编号：{{ order.orderId }}</view>
+						<view class="mb-10">备注信息：{{ order.remark }}</view>
+					</view>
 				</view>
 			</list-cell>
 		</view>
