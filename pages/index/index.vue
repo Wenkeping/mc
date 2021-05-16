@@ -29,9 +29,7 @@
 			<view class="address">
 				<image src="/static/images/order/order_icon_address.png" class="left-icon" />
 				<view @tap="tapStore">抱歉，当前收获地址无匹配门店</view>
-				<view class="iconfont icon-arrow-right mt-5"></view>
 			</view>
-			<view class="dis font-size-extra-sm">距离您{{ currentStore.distance }}km</view>
 		</view>
 		
 		<view class="main">
@@ -149,7 +147,7 @@
 					}, 0)
 			}
 		},
-		 async onLoad() {
+		 onLoad() {
 			uniCloud.callFunction({
 				name:'get-categories',
 				success:(e) =>{
@@ -160,6 +158,11 @@
 			}),
 			
 			this.getStore()
+		},
+		onShow() {
+			if(this.location.storeName){
+				this.currentStore = this.location
+			}
 		},
 		methods: {
 			...mapMutations(['SET_ORDERTYPE','SET_LOCATION']),
@@ -190,6 +193,7 @@
 						console.log(storeTemp)
 						if(storeTemp.distance <= 2){
 							this.currentStore = storeTemp
+							this.SET_LOCATION(storeTemp)
 						}
 					}
 					
