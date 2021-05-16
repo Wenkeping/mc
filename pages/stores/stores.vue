@@ -95,9 +95,9 @@
 							maps.id = i
 							maps.latitude = resMap[i].latitude
 							maps.longitude = resMap[i].longitude
-							maps.iconPath ='/static/images/logo.png'
-							maps.width = 30
-							maps.height = 30
+							maps.iconPath ='/static/images/order/order_icon_address.png'
+							maps.width = 20
+							maps.height = 20
 							maps.callout = {'content':resMap[i].name,'display':'ALWAYS'}
 							map.push(maps)
 						}
