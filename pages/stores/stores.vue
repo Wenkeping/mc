@@ -10,24 +10,23 @@
 			<view class="store" v-for="(store,index) in storeData" :key="index" @tap="tapStore(store)">
 				<view class="store-left">
 					<view class="store-title">
-						<view class="store-status"> 营业中</view>
 						<view class="store-name">{{store.storeName}}</view>
 					</view>
 					<view class="store-content">
-						<text class="store-text">{{store.storeName}}</text>
-						<text class="store-text">距离您 {{store.distance}}km</text>
+						<view class="d-flex justify-content-start">
+							<view class="iconfont icon-dingwei"></view>
+							<view class="store-text">{{store.storeName}}</view>
+						</view>
+						<view class="d-flex justify-content-start">
+							<view class="iconfont icon-clock"></view>
+							<view class="store-text">10:00~21:00</view>
+						</view>
+						<view class="store-status"> 营业中</view>
 					</view>
 				</view>
 				<view class="store-right">
-					<view class="look">去下单</view>
-					<view class="icon">
-						<view class="round">
-							<image src="../../static/images/store/store-tel.png" ></image>
-						</view>
-						<view class="round">
-							<image src="../../static/images/store/store-nav.png" ></image>
-						</view>
-					</view>
+					<view class="store-text">去下单</view>
+					<text class="look">距离 {{store.distance}}km</text>
 				</view>
 			</view>
 		</view>
@@ -50,7 +49,7 @@
 		},
 		
 		methods:{
-			...mapMutations(['SET_STORE']),
+			...mapMutations(['SET_LOCATION']),
 			getStoreData() {
 				return new Promise((resolve,reject)=>{
 					// 获取用户收货地址定位
@@ -123,9 +122,9 @@
 				
 			// 选取门店地址并且跳转到点餐界面
 			tapStore(store) {
-				this.SET_STORE(store)
+				this.SET_LOCATION(store)
 				uni.switchTab({
-					url:'../menu/menu'
+					url:'../index/index'
 				})
 			}
 		}
@@ -149,10 +148,11 @@
 	.store {
 		display: flex;
 		flex-wrap: nowrap;
-		margin: 10rpx 20rpx;
+		margin: 20rpx 20rpx;
 		padding: 20rpx;
 		background-color: #FFFFFF;
 		box-shadow: $box-shadow;
+		align-items: center;
 	}
 	.store-left {
 		width: 80%;
@@ -164,62 +164,53 @@
 			.store-name {
 				color: $text-color-black;
 				font-size: $font-size-lg;
-				margin-left: 20rpx;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+		
+		.store-content {
+			margin-top: 20rpx;
+			font-size: $font-size-medium;
+			display: flex;
+			flex-direction: column;
+			color: $text-color-assist;
+			.store-text {
+				margin-bottom: 10rpx;
+				margin-left: 10rpx;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: hidden;
 			}
 			.store-status {
+				margin-top: 10rpx;
+				width: 71rpx;
 				color: $color-primary;
-				font-size: $font-size-sm;
+				font-size: 20rpx;
 				padding: 5rpx;
-				border: 1rpx solid $color-primary;
+				border: 3rpx solid $color-primary;
 				white-space: nowrap;
-			}
-		}
-		
-		.store-content {
-			margin-top: 60rpx;
-			font-size: $font-size-sm;
-			display: flex;
-			flex-direction: column;
-			.store-text {
-				color: $text-color-assist;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				overflow: hidden;
+				border-radius: 10%;
 			}
 		}
 	}
 	.store-right {
+		padding-top: 30rpx;
 		width: 30%;
+		height: 150rpx;
+		padding-left: 20rpx;
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
+		align-items: center;
+		border-left: 3rpx solid $border-color;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 		.look {
 			font-size: $font-size-sm;
-			color: $color-primary;
+			color: $text-color-assist;
+			margin-top: 10rpx;
 		}
-		.icon{
-			display: flex;
-			flex-wrap: nowrap;
-			align-items: center;
-			margin-top: 60rpx;
-			justify-content: flex-end;
-			.round {
-				border-radius: 50%;
-				width: 60rpx;
-				height: 60rpx;
-				margin: 10rpx;
-				background-color: #cad43f;
-				image {
-					display: block;
-					width: 40rpx;
-					height: 40rpx;
-					margin: 10rpx;
-					align-items: center;
-				}
-			}
-		}
+
 	}
 </style>
