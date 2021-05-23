@@ -3,7 +3,7 @@
 		<uni-transition :mode-class="['slide-bottom']" :show="!!cartNum" :styles="cartBarStyles">
 			<view class="left">
 				<view class="detail-action" @tap="details">
-					<image src="/static/images/index/icon_shopping_bag.png" class="shopbag-btn"></image>
+					<image src="/static/images/index/cart.png" class="shopbag-btn"></image>
 					<view class="badge">{{ cartNum }}</view>
 				</view>
 				<view class="price">￥{{ cartPrice }}</view>
