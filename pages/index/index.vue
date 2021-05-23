@@ -23,7 +23,7 @@
 				<view @tap="tapStore">{{ currentStore.storeName }} </view>
 				<view class="iconfont icon-arrow-right mt-5"></view>
 			</view>
-			<view class="dis font-size-extra-sm">距离您{{ currentStore.distance }}km</view>
+			<view class="dis font-size-extra-sm">距离 {{ currentStore.distance }}km</view>
 		</view>
 		<view class="title" v-else>
 			<view class="address">
@@ -190,7 +190,6 @@
 				}).then(resMap => {
 					if(resMap.length > 0){
 						let storeTemp = resMap[0]
-						console.log(storeTemp)
 						if(storeTemp.distance <= 2){
 							this.currentStore = storeTemp
 							this.SET_LOCATION(storeTemp)
