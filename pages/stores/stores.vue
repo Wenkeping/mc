@@ -35,7 +35,7 @@
 						</view>
 						<view class="store-right" @tap="tapStore(v,i)">
 							<view class="store-text">去下单</view>
-							<text class="look">距离 {{v.distance}}</text>
+							<text class="look">距离 {{v.distance}} km</text>
 						</view>
 					</view>
 				</view>
@@ -126,7 +126,8 @@
 					}else{
 						this.index = 0
 					}
-					
+					this.latitude = this.location.latitude
+					this.longitude = this.location.longitude
 				})
 			},
 			// 计算距离
