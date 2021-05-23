@@ -5,28 +5,39 @@
 			<map style="width: 100%; height: 400rpx;" :latitude="latitude" :longitude="longitude"
 			:markers="markers"></map>
 		</view>
+		
 		<!-- 门店信息 -->
-		<view class="content">
-			<view class="store" v-for="(store,index) in storeData" :key="index" @tap="tapStore(store)">
-				<view class="store-left">
-					<view class="store-title">
-						<view class="store-name">{{store.storeName}}</view>
-					</view>
-					<view class="store-content">
-						<view class="d-flex justify-content-start">
-							<view class="iconfont icon-dingwei"></view>
-							<view class="store-text">{{store.storeName}}</view>
+		<view class="stores">
+			<view v-for="(v,i) in storeData" :key="i">
+				<view 
+				class="item"
+				:class="{ 
+					'active':(type=='radio' && index == i)
+				}"
+				:data-i="i"
+				@tap="change">
+					<view class="store">
+						<view class="store-left">
+							<view class="store-title">
+								<view class="store-name">{{v.storeName}}</view>
+							</view>
+							<view class="store-content">
+								<view class="d-flex justify-content-start">
+									<view class="iconfont icon-dingwei"></view>
+									<view class="store-text">{{v.storeName}}</view>
+								</view>
+								<view class="d-flex justify-content-start">
+									<view class="iconfont icon-clock"></view>
+									<view class="store-text">10:00~21:00</view>
+								</view>
+								<view class="store-status"> 营业中</view>
+							</view>
 						</view>
-						<view class="d-flex justify-content-start">
-							<view class="iconfont icon-clock"></view>
-							<view class="store-text">10:00~21:00</view>
+						<view class="store-right" @tap="tapStore(v,i)">
+							<view class="store-text">去下单</view>
+							<text class="look">距离 {{v.distance}}</text>
 						</view>
-						<view class="store-status"> 营业中</view>
 					</view>
-				</view>
-				<view class="store-right">
-					<view class="store-text">去下单</view>
-					<text class="look">距离 {{store.distance}}km</text>
 				</view>
 			</view>
 		</view>
@@ -34,25 +45,31 @@
 </template>
 
 <script>
-	import {mapMutations} from 'vuex'
+	import {mapState,mapMutations} from 'vuex'
+	
 	export default {
-		data () {
+		data() {
 			return {
 				latitude:'',
 				longitude:'',
 				markers:[],
-				storeData:[]
-			}
+				storeData:[],
+				index:-1,
+				type:'radio',
+				copyListData:'',
+				copyIndexData:-1
+			};
 		},
 		onLoad() {
 			this.getStoreData()
 		},
-		
-		methods:{
+		computed: {
+			...mapState(['location'])
+		},
+		methods: {
 			...mapMutations(['SET_LOCATION']),
 			getStoreData() {
 				return new Promise((resolve,reject)=>{
-					// 获取用户收货地址定位
 					uni.getLocation({
 						type:'gcj02',
 						success(resLocation) {
@@ -61,7 +78,6 @@
 							}
 						}
 					})
-
 				}).then(local =>{
 					let la1 = local.latitude
 					let lo1 = local.longitude
@@ -87,8 +103,8 @@
 				}).then(resMap => {
 					this.latitude = resMap[0].latitude
 					this.longitude = resMap[0].longitude
-					let map =[]
-					let len =resMap.length
+					let map = []
+					let len = resMap.length
 					if(len >= 1){
 						for(let i=0; i<len; i++) {
 							let maps = {}
@@ -103,8 +119,14 @@
 						}
 						
 						this.markers = map
-						console.log(this.markers)
 					}
+					
+					if(this.location.index){
+						this.index = this.location.index;
+					}else{
+						this.index = 0
+					}
+					
 				})
 			},
 			// 计算距离
@@ -119,39 +141,155 @@
 					s = s.toFixed(1);
 					return s
 			},
+			/* 切换 */
+			change(e){
+				let i = Number(e.currentTarget.dataset.i);
+				this.index = i;
+				this.$nextTick(()=>{
+					this.$emit("change",this.get(),this.$props.keyName);
+				})
 				
-			// 选取门店地址并且跳转到点餐界面
-			tapStore(store) {
+				this.setMarkers(i)
+			},
+			/* 设置值 */
+			set(data) {
+				this.type = 'radio';
+				this.index = data.index >= 0 ? data.index : -1;
+				this.storeData = data.storeData;
+				
+				if(data.maxSize > 0 && data.maxFn){
+					this.maxSize = data.maxSize;
+					this.maxFn = data.maxFn;					
+				}else{
+					this.maxSize = undefined;
+					this.maxFn = undefined;
+				}
+				
+				// 存储数据
+				this.copyListData = JSON.stringify(data.storeData);
+				this.copyIndexData = data.index === undefined ? -1 : data.index;
+			},
+			/* 获取值 */
+			get(){
+				if(this.index >= 0){
+					return this.storeData[this.index];
+				}else{
+					return null;
+				}
+				
+				let arr=[];
+				this.storeData.forEach((item,index)=>{
+					if(item.checked == true){
+						arr.push(item);
+					}
+				});
+				return arr.length > 0 ? arr : null;
+			},
+			tapStore(store,index) {
+				console.log("store",store.storeName)
+				store.index = index
 				this.SET_LOCATION(store)
 				uni.switchTab({
 					url:'../index/index'
 				})
+			},
+			setMarkers(i){
+				let store = this.storeData[this.index];
+				this.latitude = store.latitude
+				this.longitude = store.longitude
 			}
 		}
 	}
 </script>
 
-<style lang="scss">
-	.container {
+<style lang="scss" scoped>
+	.container{
 		width: 100%;
 		height: 100%;
 	}
-	
 	.page-map {
 		width: 100%;
 		height: 400rpx;
 	}
-	.content {
+	
+	
+	.stores{
 		width: 100%;
 		height: 100%;
+		padding: 20rpx;
+		
+		&>view{
+			padding: 10rpx;
+			box-sizing: border-box;
+		}
+
+		.item{
+			box-sizing: border-box;
+			border: #e5e5e5 solid 1px;
+			background-color: #fff;
+			color: #333;
+			position: relative;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			
+			// 未选中状态下的禁用样式
+			&.disabled{
+				background-color: #f1f1f1;
+				color: #d8d8d8;
+			}
+			
+			&.active{
+				background-color: #FFFFFF;
+				color: $color-primary;
+				border: $color-primary solid 1px;
+				
+				&::before{
+					content: '';
+					display:block;
+					width: 20px;
+					height: 20px;
+					background-color: $color-primary;
+					position: absolute;
+					right: -1px;
+					bottom: -1px;
+					z-index: 1;
+					clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+				}
+				&::after{
+					content: '';
+					display:block;
+					width: 3px;
+					height: 6px;
+					border-right: #fff solid 2px;
+					border-bottom: #fff solid 2px;
+					transform:rotate(25deg);
+					position: absolute;
+					right: 3px;
+					bottom: 3px;
+					z-index: 2;
+				}
+				
+				// 选中状态下的禁用样式
+				&.disabled{
+					background-color: #f1f1f1;
+					color: #d8d8d8;
+					border: #e5e5e5 solid 1px;
+					
+					&::before{
+						background-color: #d9d9d9;
+					}
+				}
+			}
+		}
 	}
+
 	.store {
 		display: flex;
 		flex-wrap: nowrap;
 		margin: 20rpx 20rpx;
-		padding: 20rpx;
+		padding: 10rpx;
 		background-color: #FFFFFF;
-		box-shadow: $box-shadow;
 		align-items: center;
 	}
 	.store-left {
@@ -211,6 +349,5 @@
 			color: $text-color-assist;
 			margin-top: 10rpx;
 		}
-
 	}
 </style>
