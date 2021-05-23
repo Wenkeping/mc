@@ -244,7 +244,7 @@
 			line-height: 2.4 !important;
 	
 			&.active {
-				background-color: #343434;
+				background-color: $color-primary;
 				color: #ffffff !important;
 				transition: all 0.3s;
 			}
